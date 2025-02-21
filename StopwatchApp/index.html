@@ -4,13 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Day 02 - StopWatch APP</title>
+    <!-- Tailwind CDN  -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @keyframes borderAnimation {
+        0% {
+          border-color: #f8a5c2;
+        }
+        50% {
+          border-color: #ff4757;
+        }
+        100% {
+          border-color: #f8a5c2;
+        }
+      }
+
+      .animate-border {
+        animation: borderAnimation 2s infinite;
+      }
+      button {
+        cursor: pointer;
+      }
+    </style>
   </head>
-  <body>
-    <div id="timer">00:00:00</div>
-    <div id="buttons">
-      <button id="start"></button>
-      <button id="stop"></button>
-      <button id="reset"></button>
+  <body
+    class="bg-[#f0f0f0] flex flex-col items-center min-h-screen justify-center overflow-hidden"
+  >
+    <div
+      id="timer"
+      class="text-[7rem] font-bold text-lg text-pink-400 drop-shadow-lg text-[#f92672] w-[600px] text-center mx-auto"
+    >
+      00:00:00
+    </div>
+    <div id="buttons" class="flex items-center gap-3">
+      <button
+        id="start"
+        class="px-6 py-3 rounded-full bg-[#D84040] text-white font-bold uppercase border-4 border-pink-400 animate-border"
+      >
+        Start
+      </button>
+      <button
+        id="stop"
+        class="px-6 py-3 rounded-full bg-[#D84040] text-white font-bold uppercase border-4 border-pink-400 animate-border"
+      >
+        Stop
+      </button>
+      <button
+        id="reset"
+        class="px-6 py-3 rounded-full bg-[#D84040] text-white font-bold uppercase border-4 border-pink-400 animate-border"
+      >
+        Reset
+      </button>
     </div>
 
     <script src="script.js"></script>
