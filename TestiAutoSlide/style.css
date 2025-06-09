@@ -1,0 +1,22 @@
+.container {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.testimonial-card {
+  width: 400px;
+  padding: 30px;
+  background-color: blanchedalmond;
+  border-radius: 20px;
+  position: relative;
+}
+.testimonial-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
