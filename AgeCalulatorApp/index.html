@@ -2,12 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Age Calculator</title>
-    <!-- Tailwind CDN  -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container"></div>
+    <div class="container">
+      <div class="card-box">
+        <h2>Your Pocket Age Calculator</h2>
+        <div class="form-container">
+          <h5>Enter your birth date</h5>
+          <input type="date" name="birthday" id="birthday" />
+          <button id="checkBtn">Check Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for instruction -->
+    <div class="ins-backdrop"></div>
+    <div class="ins-modal">
+      <p>Please insert the value first</p>
+      <button id="closeModal" class="close-btn">Close</button>
+    </div>
+
+    <!-- Modal for result -->
+    <div class="res-backdrop"></div>
+    <div class="res-modal">
+      <p>Your Age is: <span id="resultAge"></span></p>
+      <button id="closeModalRes" class="close-btn">Close</button>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
