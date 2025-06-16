@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Bebas Neue", sans-serif;
+}
+body {
+  font-family: "Bebas Neue", sans-serif;
+  background-color: #631717;
+  color: #333;
+  text-align: center;
+}
+h2 {
+  font-size: 3rem;
+  margin-top: 2rem;
+  color: #fff;
+}
+.dice {
+  font-size: 7rem;
+  margin: 5px;
+}
+.dice img {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin-bottom: 0.4rem;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.roll-animation {
+  animation-name: roll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite; /* Optional: remove if you want it to spin once */
+}
+
+@keyframes roll {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+button {
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #d4ba44;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.6s ease;
+}
+button:hover {
+  background-color: #bd2c13;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+li {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li span {
+  font-size: 3rem;
+  margin-right: 1rem;
+}
