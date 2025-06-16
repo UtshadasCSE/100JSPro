@@ -1,0 +1,154 @@
+/* Base reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background and centering */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 20px;
+  animation: backgroundSlide 15s infinite alternate;
+}
+
+@keyframes backgroundSlide {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+/* Card styles */
+.clockBox {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.95);
+  animation: popIn 1s ease forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Timer display */
+h3 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1.2px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button group */
+.btnBox {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Fancy button styles */
+.clockBox button {
+  min-width: 120px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+  z-index: 1;
+}
+
+.clockBox button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+  z-index: -1;
+  transition: 0.4s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+#startBtn {
+  background-color: #00c9a7;
+  color: #fff;
+}
+#startBtn::before {
+  background: #fff;
+}
+#startBtn:hover {
+  color: #00c9a7;
+}
+#startBtn:hover::before {
+  transform: scaleX(1);
+}
+
+#stopBtn {
+  background-color: #ff4b5c;
+  color: #fff;
+}
+#stopBtn::before {
+  background: #fff;
+}
+#stopBtn:hover {
+  color: #ff4b5c;
+}
+#stopBtn:hover::before {
+  transform: scaleX(1);
+}
+
+#resetBtn {
+  background-color: #f9f871;
+  color: #333;
+}
+#resetBtn::before {
+  background: #333;
+}
+#resetBtn:hover {
+  color: #f9f871;
+}
+#resetBtn:hover::before {
+  transform: scaleX(1);
+}
