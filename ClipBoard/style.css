@@ -1,0 +1,16 @@
+.pop-modal {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+#copy {
+  cursor: pointer;
+}
