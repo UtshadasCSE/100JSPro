@@ -3,7 +3,215 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 01 - Weather App</title>
+    <title>Weather App - Modal UI</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to right, #e0eafc, #cfdef3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        margin-bottom: 1.5rem;
+        color: #333;
+        font-size: 1.8rem;
+      }
+
+      form {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      input[type="text"] {
+        flex: 1 1 250px;
+        padding: 0.7rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #4a90e2;
+      }
+
+      button {
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        background-color: #4a90e2;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #357ab7;
+      }
+
+      /* Modal Styles */
+      .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(4px);
+        display: none;
+        z-index: 100;
+      }
+
+      .weather-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 90%;
+        max-width: 420px;
+        transform: translate(-50%, -50%) scale(0.95);
+        background: white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 101;
+        animation: fadeIn 0.4s ease forwards;
+      }
+
+      .weather-content {
+        text-align: center;
+        font-size: 1rem;
+        color: #444;
+        line-height: 1.6;
+      }
+
+      #close-modal {
+        margin-top: 1rem;
+        padding: 10px 20px;
+        border: none;
+        background-color: #4a90e2;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      #close-modal:hover {
+        background-color: #357ab7;
+      }
+
+      @keyframes fadeIn {
+        to {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1>⛅Weather App</h1>
+      <form id="weather-form">
+        <input type="text" id="city" placeholder="Enter city name" required />
+        <button type="submit" id="checkBtn">Check Weather</button>
+      </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="weather-modal" id="weather-modal">
+      <div class="weather-content" id="weather-content"></div>
+      <button id="close-modal">Close</button>
+    </div>
+
+    <script>
+      const form = document.getElementById("weather-form");
+      const input = document.getElementById("city");
+      const modalBackdrop = document.getElementById("modal-backdrop");
+      const modal = document.getElementById("weather-modal");
+      const modalContent = document.getElementById("weather-content");
+      const closeBtn = document.getElementById("close-modal");
+
+      // Fetch weather from API
+      async function getWeatherData(cityName) {
+        try {
+          const res = await fetch(
+            `https://api.weatherapi.com/v1/current.json?key=6777355b1ee1438a91762013250407&q=${cityName}&aqi=yes`
+          );
+          const data = await res.json();
+
+          if (data.error) {
+            modalContent.innerHTML = `<p style="color: red;">${data.error.message}</p>`;
+          } else {
+            modalContent.innerHTML = `
+              <h2>📍 ${data.location.name}, ${data.location.country}</h2>
+              <p>🌡️ <strong>${data.current.temp_c}°C</strong> - Temperature</p>
+              <p>🌥️ ${data.current.condition.text}</p>
+              <p>💧 Humidity: ${data.current.humidity}%</p>
+              <p>💨 Wind Speed: ${data.current.wind_kph} kph</p>
+            `;
+          }
+
+          // Show modal
+          modal.style.display = "block";
+          modalBackdrop.style.display = "block";
+        } catch (err) {
+          modalContent.innerHTML = `<p style="color: red;">Failed to fetch data</p>`;
+          modal.style.display = "block";
+          modalBackdrop.style.display = "block";
+        }
+      }
+
+      // Handle form submit
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const cityName = input.value.trim();
+        if (cityName) {
+          getWeatherData(cityName);
+          input.value = "";
+        }
+      });
+
+      // Close modal
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        modalBackdrop.style.display = "none";
+      });
+
+      // Close modal on backdrop click
+      modalBackdrop.addEventListener("click", () => {
+        modal.style.display = "none";
+        modalBackdrop.style.display = "none";
+      });
+    </script>
+  </body>
 </html>
