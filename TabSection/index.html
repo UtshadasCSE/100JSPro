@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Tab Section</title>
+    <style>
+      /* Reset & Base Styling */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #f8d7e3, #dbeafe);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 800px;
+        width: 100%;
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .left-content {
+        flex: 1;
+        min-width: 300px;
+        background: url("https://source.unsplash.com/featured/?nature")
+          no-repeat center;
+        background-size: cover;
+      }
+
+      .right-content {
+        flex: 1;
+        padding: 30px;
+      }
+
+      .tabs .btn-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #4f46e5;
+        background: transparent;
+        color: #4f46e5;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #4f46e5;
+        color: #fff;
+        transform: scale(1.05);
+      }
+
+      .button.active {
+        background-color: #4f46e5;
+        color: #fff;
+      }
+
+      .content {
+        display: none;
+        color: #444;
+        line-height: 1.6;
+      }
+
+      .content.active {
+        display: block;
+        animation: fadeIn 0.4s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .left-content {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-content">
+        <img src="assets/img.png" alt="" />
+      </div>
+      <div class="right-content">
+        <div class="tabs">
+          <div class="btn-container">
+            <button class="button active" data-id="step1">Step 1</button>
+            <button class="button" data-id="step2">Step 2</button>
+            <button class="button" data-id="step3">Step 3</button>
+          </div>
+          <div class="tabs-content">
+            <div class="content active" id="step1">
+              <h3>Step 1</h3>
+              <p>
+                This is the content for Step 1. Describe the process or details
+                clearly here.
+              </p>
+            </div>
+            <div class="content" id="step2">
+              <h3>Step 2</h3>
+              <p>
+                This section contains Step 2 instructions or content. Keep it
+                useful and concise.
+              </p>
+            </div>
+            <div class="content" id="step3">
+              <h3>Step 3</h3>
+              <p>
+                Finally, show results or conclusion for Step 3. Use visuals if
+                needed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll(".button");
+      const contents = document.querySelectorAll(".content");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // Remove active class from all buttons
+          buttons.forEach((b) => b.classList.remove("active"));
+          // Add active class to clicked button
+          btn.classList.add("active");
+
+          // Hide all contents
+          contents.forEach((c) => c.classList.remove("active"));
+          // Show the selected content
+          const targetId = btn.getAttribute("data-id");
+          document.getElementById(targetId).classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
