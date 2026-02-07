@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QRCode Generator</title>
+    <!-- External CSS file  -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <h1>QRCode Generator</h1>
+      <div class="card">
+        <input
+          type="text"
+          name="qrInput"
+          id="qrInput"
+          placeholder="Enter text or URL"
+        />
+        <!-- QR Genrate Button -->
+        <button id="generateBtn">Generate QR</button>
+
+        <!-- Display QR code here  -->
+        <div class="qr-wrapper">
+          <div id="qrCode"></div>
+        </div>
+
+        <!-- Download button  -->
+        <button id="downloadBtn" disabled>Download QR</button>
+      </div>
+    </main>
+
+    <!-- popup box  -->
+    <div id="popup" class="popup-overlay">
+      <div class="popup">
+        <h2>Oops</h2>
+        <p>Please enter some text or a link.</p>
+        <button id="closePopup">Got it</button>
+      </div>
+    </div>
+    <!-- External JS file  -->
+    <script src="app.js"></script>
+  </body>
+</html>
