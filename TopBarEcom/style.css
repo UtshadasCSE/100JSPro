@@ -1,0 +1,342 @@
+/* ========================= */
+/* RESET - Makes everything start from zero */
+/* ========================= */
+* {
+  /* Makes sure padding and border are included in width */
+  box-sizing: border-box;
+  /* Nice clean font that works on all devices */
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* Remove default spacing from the page */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================= */
+/* PROMO BAR - The main sale banner */
+/* ========================= */
+.promo-bar {
+  /* Stays at top when you scroll (sticky) */
+  position: sticky;
+  top: 0;
+  /* Makes sure it's on top of everything else */
+  z-index: 999;
+  /* Beautiful gradient background (orange to yellow) */
+  background: linear-gradient(135deg, #ff512f, #f09819);
+  /* Text color */
+  color: #fff;
+  /* Smooth slide down animation when page loads */
+  animation: slideDown 0.6s ease;
+  /* Small shadow to make it stand out */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================= */
+/* INNER CONTAINER - Holds all the content */
+/* ========================= */
+.promo-inner {
+  /* Maximum width so it doesn't stretch too wide on big screens */
+  max-width: 1200px;
+  /* Centers the content */
+  margin: auto;
+  /* Space inside (top/bottom 14px, left/right 20px) */
+  padding: 14px 20px;
+  /* Flexbox makes everything line up nicely */
+  display: flex;
+  /* Everything centered vertically */
+  align-items: center;
+  /* Space between items */
+  gap: 16px;
+  /* Wrap to next line on small screens */
+  flex-wrap: wrap;
+}
+
+/* ========================= */
+/* FIRE ICON - Grabs attention! */
+/* ========================= */
+.fire-icon {
+  /* Big size */
+  font-size: 24px;
+  /* Orange-red color */
+  color: #ff3d00;
+  /* Pulse animation to make it eye-catching */
+  animation: pulse 1.5s infinite;
+}
+
+/* ========================= */
+/* SALE MESSAGE - Main text */
+/* ========================= */
+.promo-text {
+  /* Bold text */
+  font-weight: 700;
+  /* Slightly bigger */
+  font-size: 16px;
+  /* Doesn't break into multiple lines */
+  white-space: nowrap;
+  /* Text shadow for better readability */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon inside promo text */
+.promo-text i {
+  /* Small space after icon */
+  margin-right: 6px;
+}
+
+/* ========================= */
+/* COUPON BOX - Where the discount code lives */
+/* ========================= */
+.coupon-box {
+  /* Lines up items horizontally */
+  display: flex;
+  /* Centers everything vertically */
+  align-items: center;
+  /* Space between items */
+  gap: 8px;
+  /* White background with slight transparency */
+  background: rgba(255, 255, 255, 0.95);
+  /* Space inside */
+  padding: 8px 14px;
+  /* Fully rounded corners */
+  border-radius: 999px;
+  /* Bold text */
+  font-weight: 600;
+  /* Black text */
+  color: #000;
+  /* Smooth shadow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* Smooth transitions for hover effects */
+  transition: transform 0.2s ease;
+}
+
+/* Makes coupon box slightly bigger when you hover over it */
+.coupon-box:hover {
+  transform: scale(1.05);
+}
+
+/* Tag icon in coupon box */
+.coupon-box i {
+  /* Yellow color */
+  color: #f09819;
+}
+
+/* ========================= */
+/* COUPON CODE - The actual discount code */
+/* ========================= */
+.coupon-code {
+  /* Black background */
+  background: #000;
+  /* White text */
+  color: #fff;
+  /* Space inside */
+  padding: 6px 14px;
+  /* Rounded corners */
+  border-radius: 6px;
+  /* Spaced out letters (looks professional) */
+  letter-spacing: 1.5px;
+  /* Bold */
+  font-weight: 700;
+  /* Slightly bigger */
+  font-size: 15px;
+  /* Dotted border for style */
+  border: 2px dashed #f09819;
+}
+
+/* ========================= */
+/* COPY BUTTON - Copies the code to clipboard */
+/* ========================= */
+.copy-btn {
+  /* Black background */
+  background: #000;
+  /* White text */
+  color: #fff;
+  /* No border */
+  border: none;
+  /* Space inside */
+  padding: 6px 16px;
+  /* Fully rounded */
+  border-radius: 999px;
+  /* Pointer finger when you hover */
+  cursor: pointer;
+  /* Bold text */
+  font-weight: 600;
+  /* Slightly bigger */
+  font-size: 14px;
+  /* Smooth color change */
+  transition: background 0.3s ease;
+}
+
+/* Changes color when you hover over the button */
+.copy-btn:hover {
+  background: #333;
+}
+
+/* Icon inside copy button */
+.copy-btn i {
+  /* Small space after icon */
+  margin-right: 4px;
+}
+
+/* ========================= */
+/* COUNTDOWN TIMER - Creates urgency! */
+/* ========================= */
+.timer {
+  /* Bold text */
+  font-weight: 700;
+  /* Bigger font */
+  font-size: 16px;
+  /* Doesn't wrap to next line */
+  white-space: nowrap;
+  /* White background with slight transparency */
+  background: rgba(255, 255, 255, 0.2);
+  /* Space inside */
+  padding: 8px 16px;
+  /* Rounded corners */
+  border-radius: 999px;
+  /* Text shadow */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  /* Attention-grabbing animation */
+  animation: timerPulse 2s infinite;
+}
+
+/* Clock icon in timer */
+.timer i {
+  /* Small space after icon */
+  margin-right: 6px;
+}
+
+/* ========================= */
+/* CLOSE BUTTON - X to hide the bar */
+/* ========================= */
+.close-btn {
+  /* Pushes to the far right */
+  margin-left: auto;
+  /* No background */
+  background: none;
+  /* No border */
+  border: none;
+  /* Bigger size */
+  font-size: 20px;
+  /* White color */
+  color: #fff;
+  /* Pointer cursor */
+  cursor: pointer;
+  /* Smooth color change */
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
+  /* Space around it */
+  padding: 4px;
+}
+
+/* Gets bigger and changes color when you hover */
+.close-btn:hover {
+  color: #000;
+  transform: scale(1.2);
+}
+
+/* ========================= */
+/* ANIMATIONS - Make things move! */
+/* ========================= */
+
+/* Slides the bar down from the top when page loads */
+@keyframes slideDown {
+  from {
+    /* Starts hidden above the screen */
+    transform: translateY(-100%);
+  }
+  to {
+    /* Ends at normal position */
+    transform: translateY(0);
+  }
+}
+
+/* Makes the fire icon pulse (get bigger and smaller) */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Makes the timer slightly pulse to draw attention */
+@keyframes timerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================= */
+/* MOBILE PHONES - Makes it look good on small screens */
+/* ========================= */
+@media (max-width: 600px) {
+  /* Centers everything */
+  .promo-inner {
+    justify-content: center;
+    text-align: center;
+    /* Less space on sides for phones */
+    padding: 12px 10px;
+    /* Smaller space between items */
+    gap: 10px;
+  }
+
+  /* Smaller text on phones */
+  .promo-text {
+    font-size: 14px;
+  }
+
+  /* Smaller coupon box on phones */
+  .coupon-box {
+    padding: 6px 10px;
+  }
+
+  /* Smaller coupon code on phones */
+  .coupon-code {
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+
+  /* Smaller timer on phones */
+  .timer {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  /* Puts close button in top right corner on phones */
+  .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+  }
+}
+
+/* ========================= */
+/* TABLET SIZE - Medium screens */
+/* ========================= */
+@media (max-width: 900px) {
+  /* Slightly smaller text */
+  .promo-text {
+    font-size: 15px;
+  }
+
+  /* Hides fire icon on tablets to save space */
+  .fire-icon {
+    display: none;
+  }
+}

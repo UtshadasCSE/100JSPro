@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Courier New", Courier, monospace;
+}
+.carousal {
+  border: 1px solid red;
+  width: 90%;
+  display: flex;
+  margin: 100px auto;
+  overflow-x: auto;
+}
+.carousal::-webkit-scrollbar {
+  display: none;
+}
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  animation: spin 5s infinite linear;
+  padding-right: 1em;
+}
+.card {
+  flex: 0 0 5em;
+  height: 5em;
+  padding: 1em;
+  background: rebeccapurple;
+  color: white;
+  border-radius: 0.4em;
+  text-align: center;
+  align-content: center;
+}
+
+@keyframes spin {
+  from {
+    translate: 0%;
+  }
+  to {
+    translate: -100%;
+  }
+}
