@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .scroll-me {
+        height: 3000px;
+        padding: 2rem;
+      }
+
+      .top-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        width: 0%;
+        z-index: 999;
+        background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff88, #ff00c8);
+        background-size: 300%;
+        animation: gradientMove 3s linear infinite;
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0%;
+        }
+        100% {
+          background-position: 300%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-loading"></div>
+
+    <!-- Fake data from testing -->
+    <div class="scroll-me">
+      <h2>Scroll Me</h2>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem quis
+      eveniet cumque eaque eius commodi temporibus hic suscipit repudiandae in
+      sed, beatae, eligendi odit consectetur laudantium fugit? Saepe, laudantium
+      quisquam.
+    </div>
+    <script>
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        document.querySelector(".top-loading").style.width =
+          scrollPercent + "%";
+      });
+    </script>
+  </body>
+</html>
