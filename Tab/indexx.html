@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopHub - Your Ultimate Shopping Destination</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .landing-container {
+        max-width: 1320px;
+        width: 100%;
+        background-color: #fff;
+        padding: 3rem;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+        border-radius: 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+
+      /* Left Side - Landing Content */
+      .landing-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .brand-logo {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+      }
+
+      .tagline {
+        font-size: 0.95rem;
+        color: #718096;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .main-heading {
+        font-size: 3.5rem;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        font-weight: 800;
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .main-description {
+        font-size: 1.2rem;
+        color: #4a5568;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+      }
+
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 1rem;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #667eea;
+        margin-bottom: 0.3rem;
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: #718096;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .cta-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn {
+        padding: 1.2rem 2.5rem;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        flex: 1;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .trust-badges {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #718096;
+        font-size: 0.9rem;
+      }
+
+      .trust-icon {
+        font-size: 1.5rem;
+      }
+
+      /* Right Side - Tab Section */
+      .tab-section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tab_box {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: 2px solid #e2e8f0;
+        margin-bottom: 2rem;
+      }
+
+      .tab_box .tab_btn {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #a0aec0;
+        background: none;
+        border: none;
+        padding: 1rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .tab_box .tab_btn:hover {
+        color: #667eea;
+      }
+
+      .tab_box .tab_btn.active {
+        color: #667eea;
+      }
+
+      .line {
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 0.7rem;
+        transition: all 0.3s ease;
+      }
+
+      .content_box {
+        flex: 1;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        overflow-y: auto;
+        max-height: 550px;
+      }
+
+      .content_box .content {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .content_box .content.active {
+        display: block;
+      }
+
+      .content_box .content h2 {
+        margin-bottom: 1.5rem;
+        color: #2d3748;
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .content_box .content h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: #4a5568;
+        font-size: 1.3rem;
+      }
+
+      .content_box .content p {
+        color: #718096;
+        line-height: 1.9;
+        margin-bottom: 1.2rem;
+        font-size: 1.05rem;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border-left: 4px solid #667eea;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .feature-card h4 {
+        color: #2d3748;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .feature-icon {
+        font-size: 1.3rem;
+      }
+
+      .feature-card p {
+        color: #718096;
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .category-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .category-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+      }
+
+      .category-emoji {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .category-name {
+        color: #2d3748;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin-top: 1.5rem;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -2.4rem;
+        top: 0.3rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #667eea;
+        border: 3px solid white;
+        box-shadow: 0 0 0 3px #edf2f7;
+      }
+
+      .timeline-item h4 {
+        color: #2d3748;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .timeline-item p {
+        color: #718096;
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 968px) {
+        .landing-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .main-heading {
+          font-size: 2.5rem;
+        }
+
+        .stats-container {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-container {
+          flex-direction: column;
+        }
+
+        .category-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="landing-container">
+      <!-- Left Side - Landing Content -->
+      <div class="landing-content">
+        <div class="brand-logo">🛍️ ShopHub</div>
+        <p class="tagline">Your Trusted Shopping Partner</p>
+
+        <h1 class="main-heading">
+          Shop Smarter,<br />
+          Live <span class="gradient-text">Better</span>
+        </h1>
+
+        <p class="main-description">
+          Discover millions of products from trusted sellers worldwide. Get
+          exclusive deals, fast shipping, and unbeatable prices. Your perfect
+          shopping experience starts here.
+        </p>
+
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-number">10M+</div>
+            <div class="stat-label">Products</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5M+</div>
+            <div class="stat-label">Happy Users</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Sellers</div>
+          </div>
+        </div>
+
+        <div class="cta-container">
+          <button class="btn btn-primary">Start Shopping 🚀</button>
+          <button class="btn btn-secondary">Learn More</button>
+        </div>
+
+        <div class="trust-badges">
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>Secure Payment</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>Free Shipping</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>24/7 Support</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Tab Section -->
+      <div class="tab-section">
+        <div class="tab_box">
+          <button class="tab_btn active">Features</button>
+          <button class="tab_btn">Categories</button>
+          <button class="tab_btn">Journey</button>
+          <button class="tab_btn">Benefits</button>
+          <div class="line"></div>
+        </div>
+
+        <div class="content_box">
+          <!-- Features Content -->
+          <div class="content active">
+            <h2>🌟 Why Choose ShopHub?</h2>
+            <p>
+              We're revolutionizing online shopping with cutting-edge features
+              that make your experience seamless, secure, and enjoyable.
+            </p>
+
+            <div class="feature-grid">
+              <div class="feature-card">
+                <h4><span class="feature-icon">🔒</span> Secure Checkout</h4>
+                <p>
+                  Bank-level encryption and multiple payment options ensure your
+                  transactions are 100% safe and protected.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4>
+                  <span class="feature-icon">⚡</span> Lightning Fast Delivery
+                </h4>
+                <p>
+                  Get your orders delivered in 24-48 hours with our premium
+                  logistics network across 150+ countries.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4>
+                  <span class="feature-icon">💰</span> Best Price Guarantee
+                </h4>
+                <p>
+                  We monitor prices 24/7 to ensure you always get the best
+                  deals. Find it cheaper? We'll match it!
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">🎁</span> Exclusive Rewards</h4>
+                <p>
+                  Earn points on every purchase and unlock exclusive discounts,
+                  early access to sales, and VIP perks.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">🔄</span> Easy Returns</h4>
+                <p>
+                  Changed your mind? No worries! Free returns within 30 days
+                  with instant refunds to your account.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">🤖</span> AI Recommendations</h4>
+                <p>
+                  Our smart AI learns your preferences and suggests products
+                  you'll love. Shopping made personal!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Content -->
+          <div class="content">
+            <h2>🛒 Explore Categories</h2>
+            <p>
+              From electronics to fashion, home decor to sports gear - we've got
+              everything you need under one roof.
+            </p>
+
+            <div class="category-grid">
+              <div class="category-item">
+                <div class="category-emoji">📱</div>
+                <div class="category-name">Electronics</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">👗</div>
+                <div class="category-name">Fashion</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">🏠</div>
+                <div class="category-name">Home & Living</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">💄</div>
+                <div class="category-name">Beauty</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">⚽</div>
+                <div class="category-name">Sports</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">📚</div>
+                <div class="category-name">Books</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">🎮</div>
+                <div class="category-name">Gaming</div>
+              </div>
+              <div class="category-item">
+                <div class="category-emoji">🧸</div>
+                <div class="category-name">Toys</div>
+              </div>
+            </div>
+
+            <h3>🔥 Trending Now</h3>
+            <p>
+              Check out what's hot this season! Our trending section is updated
+              daily with the most popular products loved by millions of
+              shoppers.
+            </p>
+          </div>
+
+          <!-- Journey Content -->
+          <div class="content">
+            <h2>📍 Your Shopping Journey</h2>
+            <p>
+              We've simplified online shopping into 4 easy steps. From browsing
+              to delivery, we've got you covered!
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <h4>Step 1: Browse & Discover</h4>
+                <p>
+                  Explore millions of products with advanced filters, AI
+                  recommendations, and detailed reviews from verified buyers.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <h4>Step 2: Add to Cart</h4>
+                <p>
+                  Found something you love? Add it to your cart! Save items for
+                  later or create wishlists to share with friends.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <h4>Step 3: Secure Checkout</h4>
+                <p>
+                  Choose from multiple payment options including credit cards,
+                  PayPal, digital wallets, and buy-now-pay-later services.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <h4>Step 4: Fast Delivery</h4>
+                <p>
+                  Track your order in real-time and receive it at your doorstep.
+                  Our packaging is eco-friendly and 100% recyclable!
+                </p>
+              </div>
+            </div>
+
+            <h3>📦 After Delivery</h3>
+            <p>
+              Love your purchase? Leave a review! Not satisfied? Our 30-day
+              return policy ensures you shop with confidence.
+            </p>
+          </div>
+
+          <!-- Benefits Content -->
+          <div class="content">
+            <h2>✨ Member Benefits</h2>
+            <p>
+              Join ShopHub Premium and unlock exclusive perks that make shopping
+              even more rewarding!
+            </p>
+
+            <div class="feature-grid">
+              <div class="feature-card">
+                <h4><span class="feature-icon">🎯</span> Exclusive Deals</h4>
+                <p>
+                  Get early access to flash sales, exclusive discounts, and
+                  member-only pricing on premium products.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">🚚</span> Free Shipping</h4>
+                <p>
+                  Enjoy unlimited free shipping on all orders, no minimum
+                  purchase required. Save hundreds every year!
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4>
+                  <span class="feature-icon">🎬</span> Entertainment Bundle
+                </h4>
+                <p>
+                  Access our streaming service with thousands of movies, shows,
+                  and exclusive content at no extra cost.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">💳</span> Cashback Rewards</h4>
+                <p>
+                  Earn 5% cashback on every purchase. Stack with sale prices for
+                  maximum savings on your favorite brands.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">🎂</span> Birthday Surprise</h4>
+                <p>
+                  Celebrate your special day with a birthday gift from us!
+                  Receive special coupons and exclusive offers.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <h4><span class="feature-icon">👥</span> Priority Support</h4>
+                <p>
+                  Skip the queue with 24/7 priority customer support. Chat,
+                  call, or email - we're always here to help!
+                </p>
+              </div>
+            </div>
+
+            <h3>💎 Premium Membership</h3>
+            <p>
+              Start your free 30-day trial today! No credit card required.
+              Cancel anytime. Experience premium shopping like never before.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const tabs = document.querySelectorAll(".tab_btn");
+      const contents = document.querySelectorAll(".content");
+      const line = document.querySelector(".line");
+
+      // Initialize line position
+      function initLine() {
+        const activeTab = document.querySelector(".tab_btn.active");
+        line.style.width = activeTab.offsetWidth + "px";
+        line.style.left = activeTab.offsetLeft + "px";
+      }
+
+      // Call on load
+      initLine();
+
+      // Tab click handler
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", (e) => {
+          // Remove active class from all tabs
+          tabs.forEach((t) => t.classList.remove("active"));
+
+          // Add active class to clicked tab
+          tab.classList.add("active");
+
+          // Move the line
+          line.style.width = e.target.offsetWidth + "px";
+          line.style.left = e.target.offsetLeft + "px";
+
+          // Show corresponding content
+          contents.forEach((content) => content.classList.remove("active"));
+          contents[index].classList.add("active");
+        });
+      });
+
+      // Recalculate line position on window resize
+      window.addEventListener("resize", initLine);
+
+      // CTA Button functionality
+      document.querySelector(".btn-primary").addEventListener("click", () => {
+        alert("Welcome to ShopHub! 🎉 Let's start shopping!");
+      });
+
+      document.querySelector(".btn-secondary").addEventListener("click", () => {
+        alert("Want to learn more? Check out our Features tab! 👉");
+      });
+
+      // Category click handler
+      document.querySelectorAll(".category-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const categoryName = this.querySelector(".category-name").textContent;
+          alert(`Exploring ${categoryName}... 🛍️`);
+        });
+      });
+    </script>
+  </body>
+</html>
