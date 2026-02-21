@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How It Works</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .steps-wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0;
+        max-width: 860px;
+        width: 100%;
+      }
+
+      .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        position: relative;
+      }
+
+      /* Circle icon */
+      .icon-circle {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 28px;
+        flex-shrink: 0;
+      }
+
+      /* Red arc — top-right quadrant using clip+border trick */
+      .icon-circle::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        border-top-color: #d32f2f;
+        border-right-color: #d32f2f;
+        transform: rotate(-45deg);
+      }
+
+      /* Active step: arc on bottom-left */
+      .step.active .icon-circle::before {
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: #d32f2f;
+        border-left-color: #d32f2f;
+        transform: rotate(-45deg);
+      }
+
+      /* Third step: arc on top-right again */
+      .step:nth-child(3) .icon-circle::before {
+        border-top-color: #d32f2f;
+        border-right-color: #d32f2f;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        transform: rotate(-45deg);
+      }
+
+      .icon-circle svg {
+        width: 68px;
+        height: 68px;
+        stroke: #333;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Number + dashed line row */
+      .step-meta {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 14px;
+      }
+
+      .step-number {
+        font-size: 28px;
+        font-weight: 800;
+        color: #222;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-width: 44px;
+        text-align: center;
+      }
+
+      .dashed-line {
+        flex: 1;
+        border-top: 2px dashed #ccc;
+        margin-left: 10px;
+      }
+
+      .step:last-child .dashed-line {
+        display: none;
+      }
+
+      .step-label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #444;
+        text-align: center;
+        line-height: 1.5;
+        padding: 0 12px;
+      }
+
+      /* Animate on load */
+      .step {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.5s ease forwards;
+      }
+      .step:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .step:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      .step:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .icon-circle {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .step:hover .icon-circle {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      /* ── Tablet (≤ 700px): shrink circles & text ── */
+      @media (max-width: 700px) {
+        .steps-wrapper {
+          gap: 0;
+        }
+        .icon-circle {
+          width: 110px;
+          height: 110px;
+        }
+        .icon-circle svg {
+          width: 46px;
+          height: 46px;
+        }
+        .step-number {
+          font-size: 22px;
+        }
+        .step-label {
+          font-size: 13px;
+        }
+      }
+
+      /* ── Mobile (≤ 520px): stack vertically ── */
+      @media (max-width: 520px) {
+        .steps-wrapper {
+          flex-direction: column;
+          align-items: center;
+          gap: 0;
+        }
+
+        .step {
+          flex-direction: row;
+          align-items: center;
+          width: 100%;
+          max-width: 340px;
+          gap: 20px;
+          padding: 0 0 0 12px;
+        }
+
+        .icon-circle {
+          width: 100px;
+          height: 100px;
+          flex-shrink: 0;
+          margin-bottom: 0;
+        }
+
+        .icon-circle svg {
+          width: 42px;
+          height: 42px;
+        }
+
+        /* On mobile the dashed line becomes vertical, connecting steps */
+        .step-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          flex: 1;
+        }
+
+        .step-meta {
+          flex-direction: row;
+          width: auto;
+          margin-bottom: 6px;
+        }
+
+        /* Hide horizontal dashed line on mobile */
+        .dashed-line {
+          display: none !important;
+        }
+
+        .step-label {
+          text-align: left;
+          font-size: 14px;
+        }
+
+        /* Vertical connector between steps */
+        .step:not(:last-child)::after {
+          content: "";
+          display: block;
+          width: 2px;
+          height: 36px;
+          border-left: 2px dashed #ccc;
+          margin-left: 62px; /* align under circle center */
+        }
+
+        /* Reset row layout: icon on left, content on right */
+        .step {
+          flex-direction: row;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="steps-wrapper">
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="icon-circle">
+          <!-- Blueprint/projects icon -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- Paper/scroll -->
+            <rect x="10" y="8" width="36" height="44" rx="3" />
+            <line x1="10" y1="8" x2="10" y2="52" />
+            <!-- Lines on paper -->
+            <line x1="18" y1="20" x2="38" y2="20" />
+            <line x1="18" y1="28" x2="32" y2="28" />
+            <!-- Gear at bottom right -->
+            <circle cx="42" cy="46" r="7" />
+            <circle cx="42" cy="46" r="3" />
+            <line x1="42" y1="38" x2="42" y2="36" />
+            <line x1="42" y1="54" x2="42" y2="56" />
+            <line x1="34" y1="46" x2="32" y2="46" />
+            <line x1="50" y1="46" x2="52" y2="46" />
+            <line x1="36.5" y1="40.5" x2="35.1" y2="39.1" />
+            <line x1="47.5" y1="51.5" x2="48.9" y2="52.9" />
+            <line x1="47.5" y1="40.5" x2="48.9" y2="39.1" />
+            <line x1="36.5" y1="51.5" x2="35.1" y2="52.9" />
+            <!-- Hard hat -->
+            <path d="M24 42 Q24 36 32 36 Q40 36 40 42" />
+            <line x1="22" y1="44" x2="42" y2="44" />
+            <line x1="24" y1="42" x2="40" y2="42" />
+          </svg>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">
+            <span class="step-number">01</span>
+            <span class="dashed-line"></span>
+          </div>
+          <span class="step-label">Browse<br />Projects</span>
+        </div>
+      </div>
+
+      <!-- Step 2 (active) -->
+      <div class="step active">
+        <div class="icon-circle">
+          <!-- Professionals/stars icon -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- Stars -->
+            <polygon
+              points="20,10 21.5,15 27,15 22.5,18.5 24,23.5 20,20 16,23.5 17.5,18.5 13,15 18.5,15"
+            />
+            <polygon
+              points="32,8 33.8,14 40,14 34.8,18 36.8,24 32,20.5 27.2,24 29.2,18 24,14 30.2,14"
+            />
+            <polygon
+              points="44,10 45.5,15 51,15 46.5,18.5 48,23.5 44,20 40,23.5 41.5,18.5 37,15 42.5,15"
+            />
+            <!-- Three people -->
+            <!-- Left person -->
+            <circle cx="18" cy="38" r="5" />
+            <path d="M8 56 Q8 46 18 46 Q22 46 24 48" />
+            <!-- Right person -->
+            <circle cx="46" cy="38" r="5" />
+            <path d="M56 56 Q56 46 46 46 Q42 46 40 48" />
+            <!-- Center person (tie) -->
+            <circle cx="32" cy="36" r="6" />
+            <path d="M20 56 Q20 44 32 44 Q44 44 44 56" />
+            <!-- Tie -->
+            <line x1="32" y1="44" x2="32" y2="52" />
+            <polygon points="30,44 34,44 33,48 32,52 31,48" />
+          </svg>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">
+            <span class="step-number">02</span>
+            <span class="dashed-line"></span>
+          </div>
+          <span class="step-label">Connect with<br />Professionals</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="icon-circle">
+          <!-- Consultation/quote icon -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- Speech bubble -->
+            <rect x="28" y="8" width="26" height="18" rx="4" />
+            <line x1="34" y1="14" x2="48" y2="14" />
+            <line x1="34" y1="19" x2="44" y2="19" />
+            <polyline points="32,26 30,32 36,28" />
+            <!-- Table -->
+            <line x1="10" y1="42" x2="54" y2="42" />
+            <line x1="16" y1="42" x2="16" y2="56" />
+            <line x1="48" y1="42" x2="48" y2="56" />
+            <!-- Left person sitting -->
+            <circle cx="18" cy="32" r="6" />
+            <path d="M10 42 Q10 38 18 38 Q22 38 24 40 L28 42" />
+            <!-- Right person sitting -->
+            <circle cx="46" cy="32" r="6" />
+            <path d="M54 42 Q54 38 46 38 Q42 38 40 40 L36 42" />
+          </svg>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">
+            <span class="step-number">03</span>
+          </div>
+          <span class="step-label"
+            >Request Quotes or<br />Book Consultations</span
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
