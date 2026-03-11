@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Savings Calculator | BuildLance Solar</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --cus-calcul-red:        #e4002b;
+  --cus-calcul-red-dim:    rgba(228,0,43,0.12);
+  --cus-calcul-green:      #256e29;
+  --cus-calcul-green-l:    #2e8a34;
+  --cus-calcul-green-dim:  rgba(37,110,41,0.14);
+  --cus-calcul-charcoal:   #111111;
+  --cus-calcul-panel:      #191919;
+  --cus-calcul-panel2:     #212121;
+  --cus-calcul-surface:    #f5f2ed;
+  --cus-calcul-border-d:   rgba(255,255,255,0.08);
+  --cus-calcul-border-l:   rgba(0,0,0,0.09);
+  --cus-calcul-text-d:     #f0ede8;
+  --cus-calcul-muted-d:    rgba(240,237,232,0.42);
+  --cus-calcul-text-l:     #1a1a1a;
+  --cus-calcul-muted-l:    #666;
+  --cus-calcul-mono:       'DM Mono', monospace;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cus-calcul-charcoal);color:var(--cus-calcul-text-d);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ═══════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════ */
+.cus-calcul-wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+.cus-calcul-eyebrow{font-family:var(--cus-calcul-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.cus-calcul-eyebrow::before{content:'';display:block;width:28px;height:1.5px;flex-shrink:0}
+.cus-calcul-eyebrow.cus-calcul-green{color:var(--cus-calcul-green-l)}.cus-calcul-eyebrow.cus-calcul-green::before{background:var(--cus-calcul-green-l)}
+.cus-calcul-eyebrow.cus-calcul-red{color:var(--cus-calcul-red)}.cus-calcul-eyebrow.cus-calcul-red::before{background:var(--cus-calcul-red)}
+.cus-calcul-eyebrow.cus-calcul-muted{color:var(--cus-calcul-muted-d)}.cus-calcul-eyebrow.cus-calcul-muted::before{background:var(--cus-calcul-muted-d)}
+.cus-calcul-eyebrow.cus-calcul-light{color:var(--cus-calcul-muted-l)}.cus-calcul-eyebrow.cus-calcul-light::before{background:var(--cus-calcul-muted-l)}
+
+.cus-calcul-fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.cus-calcul-fade-up.cus-calcul-vis{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.cus-calcul-hero{background:var(--cus-calcul-charcoal);padding:90px 28px 76px;position:relative;overflow:hidden}
+.cus-calcul-hero-bg-word{font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,22vw,280px);color:rgba(255,255,255,0.03);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:.06em;user-select:none}
+.cus-calcul-hero-inner{max-width:1080px;margin:0 auto;position:relative;display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px}
+.cus-calcul-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,108px);line-height:.9;letter-spacing:.03em}
+.cus-calcul-hero h1 em{font-style:normal;color:var(--cus-calcul-red)}
+.cus-calcul-hero-sub{margin-top:22px;font-size:15px;color:var(--cus-calcul-muted-d);font-weight:300;max-width:520px;line-height:1.7}
+.cus-calcul-hero-badge{background:var(--cus-calcul-green-dim);border:1px solid rgba(46,138,52,.3);border-radius:3px;padding:20px 24px;text-align:center;flex-shrink:0;min-width:180px}
+.cus-calcul-hero-badge .cus-calcul-badge-num{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--cus-calcul-green-l);line-height:1}
+.cus-calcul-hero-badge .cus-calcul-badge-lbl{font-family:var(--cus-calcul-mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--cus-calcul-muted-d);margin-top:4px}
+
+/* ═══════════════════════════════════════
+   CALCULATOR
+═══════════════════════════════════════ */
+.cus-calcul-section{padding:0 28px 24px}
+.cus-calcul-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--cus-calcul-border-d);border-radius:3px;overflow:hidden;max-width:1080px;margin:0 auto}
+.cus-calcul-inputs{background:var(--cus-calcul-panel);padding:44px 40px;display:flex;flex-direction:column;gap:28px}
+.cus-calcul-results{background:var(--cus-calcul-panel2);padding:44px 40px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden}
+.cus-calcul-results::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(37,110,41,.12) 0%,transparent 70%);pointer-events:none}
+
+.cus-calcul-input-group{display:flex;flex-direction:column;gap:9px}
+.cus-calcul-input-label{display:flex;justify-content:space-between;align-items:baseline}
+.cus-calcul-input-label span{font-family:var(--cus-calcul-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cus-calcul-muted-d)}
+.cus-calcul-input-label strong{font-family:var(--cus-calcul-mono);font-size:14px;font-weight:500;color:var(--cus-calcul-text-d)}
+
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:3px;background:var(--cus-calcul-border-d);border-radius:10px;outline:none;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--cus-calcul-green);border:3px solid #111;box-shadow:0 0 0 2px var(--cus-calcul-green);cursor:pointer;transition:box-shadow .2s,transform .15s}
+input[type="range"]::-webkit-slider-thumb:hover{box-shadow:0 0 0 5px rgba(37,110,41,.3);transform:scale(1.1)}
+input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--cus-calcul-green);border:3px solid #111;cursor:pointer}
+
+.cus-calcul-slider-ticks{display:flex;justify-content:space-between;margin-top:5px}
+.cus-calcul-slider-ticks span{font-family:var(--cus-calcul-mono);font-size:8.5px;color:rgba(255,255,255,.18)}
+
+.cus-calcul-radio-group{display:grid;gap:7px}
+.cus-calcul-radio-group.cus-calcul-cols2{grid-template-columns:1fr 1fr}
+.cus-calcul-radio-group.cus-calcul-cols3{grid-template-columns:1fr 1fr 1fr}
+.cus-calcul-radio-pill{position:relative}
+.cus-calcul-radio-pill input{position:absolute;opacity:0;width:0}
+.cus-calcul-radio-pill label{display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 8px;background:var(--cus-calcul-panel2);border:1px solid rgba(255,255,255,.06);border-radius:2px;font-size:12px;font-weight:500;color:var(--cus-calcul-muted-d);cursor:pointer;transition:all .18s;text-align:center;line-height:1.3}
+.cus-calcul-radio-pill input:checked + label{background:rgba(37,110,41,.15);border-color:var(--cus-calcul-green);color:var(--cus-calcul-text-d)}
+
+.cus-calcul-toggle-wrap{display:flex;align-items:center;justify-content:space-between;background:var(--cus-calcul-panel2);border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:12px 16px;gap:12px}
+.cus-calcul-toggle-lbl{font-size:13px;color:var(--cus-calcul-text-d);flex:1}
+.cus-calcul-toggle-lbl small{display:block;font-size:11px;color:var(--cus-calcul-muted-d);font-weight:300;margin-top:2px}
+.cus-calcul-toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.cus-calcul-toggle input{opacity:0;width:0;height:0}
+.cus-calcul-toggle-track{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:100px;cursor:pointer;transition:background .2s}
+.cus-calcul-toggle-track::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.cus-calcul-toggle input:checked + .cus-calcul-toggle-track{background:var(--cus-calcul-green)}
+.cus-calcul-toggle input:checked + .cus-calcul-toggle-track::after{transform:translateX(20px)}
+
+.cus-calcul-results-title{font-family:var(--cus-calcul-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cus-calcul-muted-d);margin-bottom:24px}
+.cus-calcul-big-num .cus-calcul-prefix{font-family:var(--cus-calcul-mono);font-size:20px;color:var(--cus-calcul-green-l);vertical-align:top;margin-top:8px;display:inline-block}
+.cus-calcul-big-num .cus-calcul-amount{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,84px);letter-spacing:.02em;color:var(--cus-calcul-text-d);line-height:1;display:inline-block}
+.cus-calcul-big-num .cus-calcul-period{font-family:var(--cus-calcul-mono);font-size:10px;letter-spacing:.1em;color:var(--cus-calcul-muted-d);display:block;margin-top:4px;text-transform:uppercase}
+.cus-calcul-res-divider{border:none;border-top:1px solid var(--cus-calcul-border-d);margin:20px 0}
+.cus-calcul-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.cus-calcul-stat .cus-calcul-stat-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em;color:var(--cus-calcul-text-d);line-height:1}
+.cus-calcul-stat .cus-calcul-stat-val.cus-calcul-g{color:var(--cus-calcul-green-l)}
+.cus-calcul-stat .cus-calcul-stat-val.cus-calcul-r{color:var(--cus-calcul-red)}
+.cus-calcul-stat .cus-calcul-stat-lbl{font-family:var(--cus-calcul-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cus-calcul-muted-d);margin-top:3px}
+.cus-calcul-payback-wrap{margin-bottom:22px}
+.cus-calcul-payback-label{display:flex;justify-content:space-between;margin-bottom:7px}
+.cus-calcul-payback-label span{font-family:var(--cus-calcul-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cus-calcul-muted-d)}
+.cus-calcul-payback-label strong{font-size:13px;color:var(--cus-calcul-text-d);font-weight:600;font-family:var(--cus-calcul-mono)}
+.cus-calcul-payback-track{height:5px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
+.cus-calcul-payback-fill{height:100%;background:linear-gradient(90deg,var(--cus-calcul-green),var(--cus-calcul-green-l));border-radius:10px;transition:width .6s cubic-bezier(.22,1,.36,1)}
+.cus-calcul-co2-badge{display:flex;align-items:center;gap:12px;background:rgba(37,110,41,.1);border:1px solid rgba(37,110,41,.2);border-radius:2px;padding:13px 15px;margin-bottom:24px}
+.cus-calcul-co2-badge .cus-calcul-co2-icon{font-size:20px;flex-shrink:0}
+.cus-calcul-co2-badge strong{font-size:13px;font-weight:600;color:#7dce82;display:block}
+.cus-calcul-co2-badge span{font-size:11px;color:var(--cus-calcul-muted-d)}
+
+.cus-calcul-btn-cta-main{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--cus-calcul-red);color:#fff;padding:15px 20px;border-radius:2px;font-size:13.5px;font-weight:600;letter-spacing:.04em;transition:opacity .2s,transform .15s;border:none;cursor:pointer;width:100%;text-decoration:none}
+.cus-calcul-btn-cta-main:hover{opacity:.9;transform:translateY(-1px)}
+.cus-calcul-btn-cta-main svg{width:15px;height:15px;flex-shrink:0}
+.cus-calcul-cta-sub{margin-top:9px;font-size:11px;color:var(--cus-calcul-muted-d);text-align:center;font-weight:300}
+.cus-calcul-disc{margin-top:16px;font-size:11px;color:rgba(255,255,255,.2);line-height:1.6;font-style:italic;max-width:1080px;margin-left:auto;margin-right:auto;padding:0 2px}
+
+/* ═══════════════════════════════════════
+   SECTION BG VARIANTS
+═══════════════════════════════════════ */
+.cus-calcul-s-light{background:var(--cus-calcul-surface);color:var(--cus-calcul-text-l)}
+.cus-calcul-s-dark{background:var(--cus-calcul-charcoal);color:var(--cus-calcul-text-d)}
+.cus-calcul-s-dark2{background:var(--cus-calcul-panel);color:var(--cus-calcul-text-d)}
+.cus-calcul-section-pad{padding:80px 28px}
+.cus-calcul-two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cus-calcul-section-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,62px);letter-spacing:.03em;line-height:.95;margin-bottom:20px}
+.cus-calcul-section-h em{font-style:normal;color:var(--cus-calcul-red)}
+.cus-calcul-section-p{font-size:14.5px;line-height:1.72;font-weight:300;color:var(--cus-calcul-muted-l);max-width:520px}
+.cus-calcul-section-p.cus-calcul-dark{color:var(--cus-calcul-muted-d)}
+
+.cus-calcul-pill-list{display:flex;flex-direction:column;gap:11px;margin-top:4px}
+.cus-calcul-pill-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.5;color:var(--cus-calcul-text-l)}
+.cus-calcul-pill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.cus-calcul-pill-dot.cus-calcul-red{background:var(--cus-calcul-red)}
+.cus-calcul-pill-dot.cus-calcul-green{background:var(--cus-calcul-green-l)}
+
+.cus-calcul-info-card{background:#fff;border:1px solid var(--cus-calcul-border-l);border-radius:3px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.cus-calcul-info-card h4{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:var(--cus-calcul-text-l)}
+.cus-calcul-info-card p{font-size:13px;color:var(--cus-calcul-muted-l);line-height:1.6;font-weight:300}
+.cus-calcul-info-card .cus-calcul-card-icon{font-size:28px}
+
+.cus-calcul-note-box{border-left:3px solid var(--cus-calcul-red);background:rgba(228,0,43,.06);padding:16px 20px;border-radius:0 2px 2px 0;font-size:13.5px;color:var(--cus-calcul-text-l);font-weight:500}
+
+/* ═══════════════════════════════════════
+   SECTION 2 — WHY BUILDLANCE
+═══════════════════════════════════════ */
+.cus-calcul-diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--cus-calcul-border-d);border-radius:3px;overflow:hidden;max-width:1080px;margin:40px auto 0}
+.cus-calcul-diff-side{padding:52px 48px;display:flex;flex-direction:column;gap:0}
+.cus-calcul-diff-side.cus-calcul-dark{background:var(--cus-calcul-panel2)}
+.cus-calcul-diff-side.cus-calcul-green-bg{background:var(--cus-calcul-green)}
+
+.cus-calcul-check-list{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.cus-calcul-check-item{display:flex;align-items:center;gap:14px;font-size:14.5px;font-weight:500}
+.cus-calcul-check-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cus-calcul-check-icon.cus-calcul-g{background:rgba(37,110,41,.2);border:1px solid rgba(46,138,52,.4)}
+.cus-calcul-check-icon.cus-calcul-w{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25)}
+.cus-calcul-check-icon svg{width:12px;height:12px}
+
+.cus-calcul-savings-callout{margin-top:auto;padding-top:32px;border-top:1px solid rgba(255,255,255,.1)}
+.cus-calcul-savings-callout .cus-calcul-big{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;letter-spacing:.03em;line-height:1}
+.cus-calcul-savings-callout p{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px;line-height:1.5}
+
+/* ═══════════════════════════════════════
+   SECTION 3 — SYDNEY
+═══════════════════════════════════════ */
+.cus-calcul-suburb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cus-calcul-suburb-tag{background:var(--cus-calcul-panel2);border:1px solid var(--cus-calcul-border-d);border-radius:2px;padding:12px 16px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:9px;transition:border-color .18s,background .18s;cursor:default}
+.cus-calcul-suburb-tag:hover{border-color:var(--cus-calcul-green);background:var(--cus-calcul-green-dim)}
+.cus-calcul-suburb-tag::before{content:'📍';font-size:13px}
+.cus-calcul-rebate-banner{margin-top:32px;background:var(--cus-calcul-green-dim);border:1px solid rgba(46,138,52,.25);border-radius:3px;padding:20px 24px;display:flex;align-items:center;gap:16px;font-size:14px;color:var(--cus-calcul-text-d)}
+.cus-calcul-rebate-banner .cus-calcul-rb-icon{font-size:24px;flex-shrink:0}
+.cus-calcul-rebate-banner strong{font-weight:600;color:#7dce82}
+
+/* ═══════════════════════════════════════
+   SECTION 4 — BATTERY
+═══════════════════════════════════════ */
+.cus-calcul-battery-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:var(--cus-calcul-border-d);border-radius:3px;overflow:hidden;max-width:1080px;margin:40px auto 0}
+.cus-calcul-battery-content{background:var(--cus-calcul-panel);padding:52px 48px}
+.cus-calcul-battery-visual{background:var(--cus-calcul-charcoal);padding:52px 40px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;position:relative;overflow:hidden}
+.cus-calcul-battery-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(37,110,41,.15) 0%,transparent 65%)}
+.cus-calcul-batt-diagram{position:relative;z-index:1;display:flex;flex-direction:column;gap:3px;width:80px}
+.cus-calcul-batt-cap{width:28px;height:8px;background:var(--cus-calcul-green);border-radius:2px 2px 0 0;margin:0 auto}
+.cus-calcul-batt-body{background:var(--cus-calcul-panel2);border:2px solid var(--cus-calcul-green);border-radius:4px;overflow:hidden;height:130px;display:flex;flex-direction:column;justify-content:flex-end}
+.cus-calcul-batt-fill{background:linear-gradient(180deg,var(--cus-calcul-green-l),var(--cus-calcul-green));width:100%;animation:cusCalculBattCharge 2.5s ease-in-out infinite alternate}
+@keyframes cusCalculBattCharge{from{height:30%}to{height:88%}}
+.cus-calcul-batt-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;z-index:2;animation:cusCalculBattPct 2.5s ease-in-out infinite alternate}
+@keyframes cusCalculBattPct{from{opacity:.4}to{opacity:1}}
+.cus-calcul-battery-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;width:100%}
+.cus-calcul-bs-item{background:var(--cus-calcul-panel2);border:1px solid var(--cus-calcul-border-d);border-radius:2px;padding:14px 16px;text-align:center}
+.cus-calcul-bs-item .cus-calcul-bsv{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cus-calcul-green-l);line-height:1}
+.cus-calcul-bs-item .cus-calcul-bsl{font-family:var(--cus-calcul-mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cus-calcul-muted-d);margin-top:4px}
+
+/* ═══════════════════════════════════════
+   SECTION 5 — COMMERCIAL
+═══════════════════════════════════════ */
+.cus-calcul-commercial-strip{background:var(--cus-calcul-panel);border-top:1px solid var(--cus-calcul-border-d);border-bottom:1px solid var(--cus-calcul-border-d)}
+.cus-calcul-comm-inner{max-width:1080px;margin:0 auto;padding:60px 28px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:48px}
+.cus-calcul-comm-sizes{display:flex;gap:16px;margin-top:24px}
+.cus-calcul-comm-size{background:var(--cus-calcul-panel2);border:1px solid var(--cus-calcul-border-d);border-radius:2px;padding:16px 20px;text-align:center;flex:1;transition:border-color .18s}
+.cus-calcul-comm-size:hover{border-color:var(--cus-calcul-green)}
+.cus-calcul-comm-size .cus-calcul-csv{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--cus-calcul-green-l);line-height:1}
+.cus-calcul-comm-size .cus-calcul-csl{font-family:var(--cus-calcul-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cus-calcul-muted-d);margin-top:4px}
+
+/* ═══════════════════════════════════════
+   SECTION 6 — TRUST
+═══════════════════════════════════════ */
+.cus-calcul-trust-section{padding:72px 28px;background:var(--cus-calcul-surface)}
+.cus-calcul-trust-items{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px;max-width:1080px;margin-left:auto;margin-right:auto}
+.cus-calcul-trust-item{padding:28px 24px;border:1px solid var(--cus-calcul-border-l);border-radius:3px;background:#fff;text-align:center;position:relative;overflow:hidden}
+.cus-calcul-trust-item::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cus-calcul-green);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.cus-calcul-trust-item:hover::before{transform:scaleX(1)}
+.cus-calcul-trust-icon{font-size:30px;margin-bottom:14px}
+.cus-calcul-trust-item h4{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:var(--cus-calcul-text-l);margin-bottom:8px}
+.cus-calcul-trust-item p{font-size:12.5px;color:var(--cus-calcul-muted-l);line-height:1.55;font-weight:300}
+.cus-calcul-control-banner{max-width:1080px;margin:32px auto 0;background:var(--cus-calcul-charcoal);border-radius:3px;padding:24px 32px;display:flex;align-items:center;gap:20px;color:#fff}
+.cus-calcul-control-banner .cus-calcul-cb-icon{font-size:28px;flex-shrink:0}
+.cus-calcul-control-banner p{font-size:14px;line-height:1.5;font-weight:300;color:rgba(255,255,255,.7)}
+.cus-calcul-control-banner strong{color:#fff;font-weight:600}
+
+/* ═══════════════════════════════════════
+   SECTION 7 — LEAD CAPTURE
+═══════════════════════════════════════ */
+.cus-calcul-lead-section{padding:90px 28px;background:var(--cus-calcul-charcoal);position:relative;overflow:hidden}
+.cus-calcul-lead-section::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(228,0,43,.07) 0%,transparent 65%);pointer-events:none}
+.cus-calcul-lead-inner{max-width:1080px;margin:0 auto;position:relative;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.cus-calcul-lead-content .cus-calcul-section-h{font-size:clamp(38px,6vw,68px)}
+.cus-calcul-lead-benefits{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.cus-calcul-lead-benefit{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--cus-calcul-text-d);padding:14px 18px;background:var(--cus-calcul-panel);border:1px solid var(--cus-calcul-border-d);border-radius:2px}
+.cus-calcul-lb-check{width:24px;height:24px;border-radius:50%;background:var(--cus-calcul-green);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cus-calcul-lb-check svg{width:12px;height:12px}
+
+.cus-calcul-lead-form-wrap{background:var(--cus-calcul-panel);border:1px solid var(--cus-calcul-border-d);border-radius:3px;padding:40px 36px}
+.cus-calcul-lead-form-wrap h3{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;margin-bottom:6px;color:var(--cus-calcul-text-d)}
+.cus-calcul-form-desc{font-size:13px;color:var(--cus-calcul-muted-d);margin-bottom:28px;font-weight:300}
+.cus-calcul-form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.cus-calcul-form-group label{font-family:var(--cus-calcul-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cus-calcul-muted-d)}
+.cus-calcul-form-group input{background:var(--cus-calcul-panel2);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--cus-calcul-text-d);outline:none;transition:border-color .2s,box-shadow .2s}
+.cus-calcul-form-group input:focus{border-color:var(--cus-calcul-green);box-shadow:0 0 0 3px rgba(37,110,41,.12)}
+.cus-calcul-form-group input::placeholder{color:rgba(255,255,255,.2)}
+.cus-calcul-form-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.cus-calcul-btn-lead{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--cus-calcul-red);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:.05em;padding:16px 24px;border-radius:2px;transition:opacity .2s,transform .15s;margin-top:6px;text-decoration:none}
+.cus-calcul-btn-lead:hover{opacity:.9;transform:translateY(-1px)}
+.cus-calcul-btn-lead svg{width:16px;height:16px}
+
+.cus-calcul-lead-privacy{margin-top:12px;text-align:center;font-size:11px;color:var(--cus-calcul-muted-d);font-weight:300;display:flex;align-items:center;justify-content:center;gap:6px}
+.cus-calcul-lead-privacy::before{content:'🔒';font-size:11px}
+
+/* ═══════════════════════════════════════
+   GENERIC BUTTONS
+═══════════════════════════════════════ */
+.cus-calcul-btn{display:inline-flex;align-items:center;gap:10px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;letter-spacing:.04em;padding:13px 24px;border-radius:2px;border:none;cursor:pointer;transition:opacity .2s,transform .15s;text-decoration:none}
+.cus-calcul-btn:hover{opacity:.88;transform:translateY(-1px)}
+.cus-calcul-btn.cus-calcul-btn-green{background:var(--cus-calcul-green);color:#fff}
+.cus-calcul-btn.cus-calcul-btn-red{background:var(--cus-calcul-red);color:#fff}
+.cus-calcul-btn svg{width:15px;height:15px}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:900px){
+  .cus-calcul-hero-inner,.cus-calcul-two-col,.cus-calcul-diff-grid,.cus-calcul-battery-grid,.cus-calcul-lead-inner,.cus-calcul-comm-inner{grid-template-columns:1fr}
+  .cus-calcul-grid{grid-template-columns:1fr}
+  .cus-calcul-hero-badge{justify-self:start}
+  .cus-calcul-trust-items{grid-template-columns:1fr 1fr}
+  .cus-calcul-suburb-grid{grid-template-columns:1fr 1fr}
+  .cus-calcul-comm-sizes{flex-wrap:wrap}
+  .cus-calcul-diff-side{padding:36px 28px}
+  .cus-calcul-battery-content,.cus-calcul-battery-visual{padding:36px 28px}
+  .cus-calcul-lead-form-wrap{padding:30px 24px}
+}
+@media(max-width:600px){
+  .cus-calcul-hero{padding:64px 20px 56px}
+  .cus-calcul-section-pad{padding:56px 20px}
+  .cus-calcul-inputs,.cus-calcul-results{padding:28px 20px}
+  .cus-calcul-trust-items{grid-template-columns:1fr}
+  .cus-calcul-suburb-grid{grid-template-columns:1fr}
+  .cus-calcul-battery-stats,.cus-calcul-form-row2{grid-template-columns:1fr}
+  .cus-calcul-hero-badge{display:none}
+  .cus-calcul-comm-sizes{flex-direction:column}
+  .cus-calcul-radio-group.cus-calcul-cols3{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="cus-calcul-hero">
+  <div class="cus-calcul-hero-bg-word">SOLAR</div>
+  <div class="cus-calcul-hero-inner cus-calcul-fade-up">
+    <div>
+      <div class="cus-calcul-eyebrow cus-calcul-green">BuildLance Solar · NSW</div>
+      <h1>Solar Savings<br><em>Calculator</em></h1>
+      <p class="cus-calcul-hero-sub">Curious how much solar could save you each year? Get a realistic estimate based on your home, usage, and location — then compare quotes from verified local installers.</p>
+    </div>
+    <div class="cus-calcul-hero-badge">
+      <div class="cus-calcul-badge-num">10–20%</div>
+      <div class="cus-calcul-badge-lbl">Average savings<br>by comparing quotes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CALCULATOR ═══════════════ -->
+<section class="cus-calcul-section" style="padding-top:48px">
+  <div class="cus-calcul-grid cus-calcul-fade-up" style="transition-delay:.1s">
+
+    <!-- INPUTS -->
+    <div class="cus-calcul-inputs">
+
+      <div class="cus-calcul-input-group">
+        <div class="cus-calcul-input-label">
+          <span>Monthly electricity bill</span>
+          <strong id="billVal">$280</strong>
+        </div>
+        <input type="range" id="bill" min="50" max="800" step="10" value="280">
+        <div class="cus-calcul-slider-ticks"><span>$50</span><span>$200</span><span>$400</span><span>$600</span><span>$800</span></div>
+      </div>
+
+      <div class="cus-calcul-input-group">
+        <div class="cus-calcul-input-label">
+          <span>System size</span>
+          <strong id="sizeVal">6.6 kW</strong>
+        </div>
+        <input type="range" id="systemSize" min="3" max="20" step="0.5" value="6.6">
+        <div class="cus-calcul-slider-ticks"><span>3kW</span><span>6.6kW</span><span>10kW</span><span>15kW</span><span>20kW</span></div>
+      </div>
+
+      <div class="cus-calcul-input-group">
+        <div class="cus-calcul-input-label">
+          <span>State / Territory</span>
+          <strong id="stateVal">NSW</strong>
+        </div>
+        <div class="cus-calcul-radio-group cus-calcul-cols3">
+          <div class="cus-calcul-radio-pill"><input type="radio" name="state" id="s-nsw" value="nsw" checked><label for="s-nsw">NSW</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="state" id="s-vic" value="vic"><label for="s-vic">VIC</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="state" id="s-qld" value="qld"><label for="s-qld">QLD</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="state" id="s-sa" value="sa"><label for="s-sa">SA</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="state" id="s-wa" value="wa"><label for="s-wa">WA</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="state" id="s-tas" value="tas"><label for="s-tas">TAS</label></div>
+        </div>
+      </div>
+
+      <div class="cus-calcul-input-group">
+        <div class="cus-calcul-input-label"><span>Roof orientation</span></div>
+        <div class="cus-calcul-radio-group cus-calcul-cols2">
+          <div class="cus-calcul-radio-pill"><input type="radio" name="roof" id="r-north" value="north" checked><label for="r-north">☀️ North</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="roof" id="r-ne" value="ne"><label for="r-ne">↗️ North-East</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="roof" id="r-nw" value="nw"><label for="r-nw">↖️ North-West</label></div>
+          <div class="cus-calcul-radio-pill"><input type="radio" name="roof" id="r-ew" value="ew"><label for="r-ew">↔️ East / West</label></div>
+        </div>
+      </div>
+
+      <div class="cus-calcul-input-group">
+        <div class="cus-calcul-toggle-wrap">
+          <div class="cus-calcul-toggle-lbl">Include Battery Storage<small>AC-coupled system (+$8,000–$14,000 est.)</small></div>
+          <label class="cus-calcul-toggle"><input type="checkbox" id="battery"><span class="cus-calcul-toggle-track"></span></label>
+        </div>
+      </div>
+
+      <div class="cus-calcul-input-group">
+        <div class="cus-calcul-input-label">
+          <span>Feed-in tariff</span>
+          <strong id="fitVal">5.0¢/kWh</strong>
+        </div>
+        <input type="range" id="fit" min="2" max="20" step="0.5" value="5">
+        <div class="cus-calcul-slider-ticks"><span>2¢</span><span>5¢</span><span>10¢</span><span>15¢</span><span>20¢</span></div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="cus-calcul-results">
+      <div class="cus-calcul-results-title">— Your Estimated Results</div>
+      <div class="cus-calcul-big-num">
+        <span class="cus-calcul-prefix">$</span><span class="cus-calcul-amount" id="annualSaving">0</span>
+        <span class="cus-calcul-period">estimated annual savings</span>
+      </div>
+      <hr class="cus-calcul-res-divider">
+      <div class="cus-calcul-stat-grid">
+        <div class="cus-calcul-stat"><div class="cus-calcul-stat-val cus-calcul-g" id="dailyGen">0 kWh</div><div class="cus-calcul-stat-lbl">Daily generation</div></div>
+        <div class="cus-calcul-stat"><div class="cus-calcul-stat-val" id="selfConsume">0%</div><div class="cus-calcul-stat-lbl">Self-consumption</div></div>
+        <div class="cus-calcul-stat"><div class="cus-calcul-stat-val cus-calcul-r" id="systemCost">$0</div><div class="cus-calcul-stat-lbl">Est. system cost</div></div>
+        <div class="cus-calcul-stat"><div class="cus-calcul-stat-val" id="rebate">$0</div><div class="cus-calcul-stat-lbl">Govt. rebate (STC)</div></div>
+      </div>
+      <div class="cus-calcul-payback-wrap">
+        <div class="cus-calcul-payback-label"><span>Payback period</span><strong id="paybackText">— yrs</strong></div>
+        <div class="cus-calcul-payback-track"><div class="cus-calcul-payback-fill" id="paybackBar" style="width:0%"></div></div>
+      </div>
+      <div class="cus-calcul-co2-badge">
+        <div class="cus-calcul-co2-icon">🌿</div>
+        <div>
+          <strong id="co2Text">0 tonnes of CO₂ avoided per year</strong>
+          <span>Equivalent to planting <span id="treesText">0</span> trees annually</span>
+        </div>
+      </div>
+      <div style="margin-top:auto">
+        <a href="https://solar.buildlance.com.au/get-free-quotes/" class="cus-calcul-btn-cta-main">
+          Get Free Quotes from Local Installers
+          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="cus-calcul-cta-sub">Up to 3 verified installers · No obligation · No spam</p>
+      </div>
+    </div>
+  </div>
+  <p class="cus-calcul-disc">* Estimates are indicative only based on average Australian conditions. Actual savings vary by usage patterns, roof characteristics, shading, local tariffs and installer pricing. Always obtain professional quotes.</p>
+</section>
+
+<!-- ═══════════════ S1: WHAT THIS MEANS ═══════════════ -->
+<section class="cus-calcul-s-light cus-calcul-section-pad">
+  <div class="cus-calcul-wrap">
+    <div class="cus-calcul-two-col cus-calcul-fade-up">
+      <div>
+        <div class="cus-calcul-eyebrow cus-calcul-light">Understanding Your Results</div>
+        <h2 class="cus-calcul-section-h">What This Solar<br>Estimate <em>Means</em></h2>
+        <p class="cus-calcul-section-p" style="margin-bottom:24px">Your results above are a solid starting point — here's exactly what data drives them and what could change in your final quote.</p>
+        <div class="cus-calcul-note-box">👉 That's why comparing quotes matters. No two homes — or installers — are the same.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="cus-calcul-info-card">
+          <div class="cus-calcul-card-icon">📊</div>
+          <h4>What's Included</h4>
+          <div class="cus-calcul-pill-list">
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-green"></span>Your postcode sunlight data</div>
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-green"></span>Estimated energy usage patterns</div>
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-green"></span>Current electricity retail rates</div>
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-green"></span>Available NSW &amp; Federal rebates (STC)</div>
+          </div>
+        </div>
+        <div class="cus-calcul-info-card">
+          <div class="cus-calcul-card-icon">⚠️</div>
+          <h4>What May Vary</h4>
+          <div class="cus-calcul-pill-list">
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-red"></span>Roof orientation &amp; shading factors</div>
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-red"></span>Switchboard capacity &amp; upgrade needs</div>
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-red"></span>Future battery integration costs</div>
+            <div class="cus-calcul-pill-item"><span class="cus-calcul-pill-dot cus-calcul-red"></span>Installer pricing differences</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ S2: WHY BUILDLANCE ═══════════════ -->
+<section class="cus-calcul-s-dark cus-calcul-section-pad" style="padding:0 0 80px">
+  <div class="cus-calcul-wrap" style="padding-top:80px">
+    <div class="cus-calcul-eyebrow cus-calcul-green cus-calcul-fade-up">Your Competitive Advantage</div>
+    <h2 class="cus-calcul-section-h cus-calcul-fade-up" style="transition-delay:.05s">Why BuildLance<br>Is <em>Different</em></h2>
+  </div>
+  <div class="cus-calcul-diff-grid cus-calcul-fade-up" style="transition-delay:.1s">
+    <div class="cus-calcul-diff-side cus-calcul-dark">
+      <p style="font-size:14.5px;color:var(--cus-calcul-muted-d);line-height:1.7;font-weight:300;max-width:420px">Unlike getting a single solar company quote, BuildLance gives you the full picture — so you can choose with confidence, not guesswork.</p>
+      <div class="cus-calcul-check-list" style="margin-top:32px">
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Compare multiple trusted Sydney installers
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          See transparent component options &amp; specs
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Review warranty differences side by side
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Choose confidently with full information
+        </div>
+      </div>
+      <div style="margin-top:40px">
+        <a href="https://solar.buildlance.com.au/get-free-quotes/" class="cus-calcul-btn cus-calcul-btn-red">
+          Compare Free Quotes
+          <svg viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3.5l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="cus-calcul-diff-side cus-calcul-green-bg">
+      <div class="cus-calcul-eyebrow cus-calcul-muted" style="color:rgba(255,255,255,.6)">
+        <span style="display:block;width:28px;height:1.5px;background:rgba(255,255,255,.4);flex-shrink:0"></span>
+        Real Impact
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.65;font-weight:300;margin-top:16px">Many homeowners who compare multiple quotes before choosing their installer achieve significant savings over the lifetime of their system.</p>
+      <div class="cus-calcul-savings-callout">
+        <div class="cus-calcul-big">10–20%</div>
+        <p>Average savings achieved by homeowners who compare at least 3 quotes before choosing their solar installer.</p>
+      </div>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:10px">
+        <div class="cus-calcul-check-item" style="color:rgba(255,255,255,.85)">
+          <div class="cus-calcul-check-icon cus-calcul-w"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Maximum 3 installers per request
+        </div>
+        <div class="cus-calcul-check-item" style="color:rgba(255,255,255,.85)">
+          <div class="cus-calcul-check-icon cus-calcul-w"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Verified homeowner details — no fake leads
+        </div>
+        <div class="cus-calcul-check-item" style="color:rgba(255,255,255,.85)">
+          <div class="cus-calcul-check-icon cus-calcul-w"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          No spam, no long-term obligations
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ S3: SYDNEY ═══════════════ -->
+<section class="cus-calcul-s-dark2 cus-calcul-section-pad">
+  <div class="cus-calcul-wrap">
+    <div class="cus-calcul-two-col cus-calcul-fade-up" style="gap:56px">
+      <div>
+        <div class="cus-calcul-eyebrow cus-calcul-green">Local Expertise</div>
+        <h2 class="cus-calcul-section-h">Solar in Sydney<br>&amp; <em>NSW</em></h2>
+        <p class="cus-calcul-section-p cus-calcul-dark" style="margin-bottom:28px">Sydney receives strong annual solar exposure, making rooftop solar highly effective for homeowners across the greater metropolitan area and beyond.</p>
+        <div class="cus-calcul-rebate-banner">
+          <div class="cus-calcul-rb-icon">💰</div>
+          <div>If you're in NSW, rebates and incentives are currently available — <strong>but these may change over time.</strong> Act now to lock in current rates.</div>
+        </div>
+        <div style="margin-top:28px">
+          <a href="https://solar.buildlance.com.au/get-free-quotes/" class="cus-calcul-btn cus-calcul-btn-green">
+            Check NSW Eligibility
+            <svg viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3.5l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="cus-calcul-eyebrow cus-calcul-muted" style="margin-bottom:20px">Popular Suburbs We Service</div>
+        <div class="cus-calcul-suburb-grid">
+          <div class="cus-calcul-suburb-tag">Parramatta</div>
+          <div class="cus-calcul-suburb-tag">Blacktown</div>
+          <div class="cus-calcul-suburb-tag">Hills District</div>
+          <div class="cus-calcul-suburb-tag">Northern Beaches</div>
+          <div class="cus-calcul-suburb-tag">Sutherland Shire</div>
+          <div class="cus-calcul-suburb-tag">Western Sydney</div>
+          <div class="cus-calcul-suburb-tag">Penrith</div>
+          <div class="cus-calcul-suburb-tag">Liverpool</div>
+          <div class="cus-calcul-suburb-tag">Camden</div>
+        </div>
+        <p style="font-size:12px;color:var(--cus-calcul-muted-d);margin-top:14px;font-style:italic">Don't see your suburb? We service all of Greater Sydney &amp; regional NSW.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ S4: BATTERY UPSELL ═══════════════ -->
+<section class="cus-calcul-s-dark cus-calcul-section-pad" style="padding-bottom:0">
+  <div class="cus-calcul-wrap">
+    <div class="cus-calcul-eyebrow cus-calcul-red cus-calcul-fade-up">Existing Solar Owners</div>
+    <h2 class="cus-calcul-section-h cus-calcul-fade-up" style="transition-delay:.05s">Already Have <em>Solar?</em></h2>
+    <p class="cus-calcul-section-p cus-calcul-dark cus-calcul-fade-up" style="transition-delay:.1s">You may be sending excess energy back to the grid at low feed-in rates. Adding a battery storage system can dramatically improve your return.</p>
+  </div>
+  <div class="cus-calcul-battery-grid cus-calcul-fade-up" style="transition-delay:.15s">
+    <div class="cus-calcul-battery-content">
+      <div class="cus-calcul-eyebrow cus-calcul-muted" style="margin-bottom:20px">AC-Coupled Battery Benefits</div>
+      <div class="cus-calcul-check-list" style="margin-top:0">
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Increase self-consumption from ~32% to ~68%
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Reduce night-time peak electricity charges
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Provide backup power during grid outages
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Improve long-term ROI on existing solar system
+        </div>
+        <div class="cus-calcul-check-item" style="color:var(--cus-calcul-text-d)">
+          <div class="cus-calcul-check-icon cus-calcul-g"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#2e8a34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Works with any existing solar brand or age
+        </div>
+      </div>
+      <div style="margin-top:40px">
+        <a href="https://solar.buildlance.com.au/get-free-quotes/" class="cus-calcul-btn cus-calcul-btn-red">
+          Compare Solar + Battery Options
+          <svg viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3.5l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="cus-calcul-battery-visual">
+      <div class="cus-calcul-batt-diagram" style="position:relative">
+        <div class="cus-calcul-batt-cap"></div>
+        <div class="cus-calcul-batt-body">
+          <div class="cus-calcul-batt-fill"></div>
+        </div>
+        <div class="cus-calcul-batt-pct">⚡</div>
+      </div>
+      <div class="cus-calcul-battery-stats">
+        <div class="cus-calcul-bs-item"><div class="cus-calcul-bsv">+68%</div><div class="cus-calcul-bsl">Self-use rate</div></div>
+        <div class="cus-calcul-bs-item"><div class="cus-calcul-bsv">~10yr</div><div class="cus-calcul-bsl">Payback est.</div></div>
+        <div class="cus-calcul-bs-item"><div class="cus-calcul-bsv">10kWh</div><div class="cus-calcul-bsl">Avg. capacity</div></div>
+        <div class="cus-calcul-bs-item"><div class="cus-calcul-bsv">$11k</div><div class="cus-calcul-bsl">Avg. install cost</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ S5: COMMERCIAL ═══════════════ -->
+<section class="cus-calcul-commercial-strip cus-calcul-fade-up">
+  <div class="cus-calcul-comm-inner">
+    <div>
+      <div class="cus-calcul-eyebrow cus-calcul-green">Business Solar</div>
+      <h2 class="cus-calcul-section-h" style="font-size:clamp(32px,4.5vw,52px)">Looking for<br>Business <em>Solar?</em></h2>
+      <p class="cus-calcul-section-p cus-calcul-dark" style="max-width:420px;margin-bottom:24px">We also support large commercial systems for factories, offices, warehouses and retail businesses across NSW.</p>
+      <a href="https://solar.buildlance.com.au/get-free-quotes/" class="cus-calcul-btn cus-calcul-btn-green">
+        Get Commercial Solar Quotes
+        <svg viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3.5l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div>
+      <div class="cus-calcul-eyebrow cus-calcul-muted" style="margin-bottom:20px">System Sizes We Support</div>
+      <div class="cus-calcul-comm-sizes">
+        <div class="cus-calcul-comm-size"><div class="cus-calcul-csv">30kW</div><div class="cus-calcul-csl">Small commercial</div></div>
+        <div class="cus-calcul-comm-size"><div class="cus-calcul-csv">50kW</div><div class="cus-calcul-csl">Medium business</div></div>
+        <div class="cus-calcul-comm-size"><div class="cus-calcul-csv">100kW</div><div class="cus-calcul-csl">Large commercial</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ S6: TRUST ═══════════════ -->
+<section class="cus-calcul-trust-section">
+  <div class="cus-calcul-wrap">
+    <div class="cus-calcul-fade-up" style="text-align:center">
+      <div class="cus-calcul-eyebrow cus-calcul-light" style="justify-content:center">Why Homeowners Choose Us</div>
+      <h2 class="cus-calcul-section-h" style="color:var(--cus-calcul-text-l)">Trusted Solar<br><em>Comparison Platform</em></h2>
+    </div>
+  </div>
+  <div class="cus-calcul-trust-items cus-calcul-fade-up" style="transition-delay:.1s">
+    <div class="cus-calcul-trust-item">
+      <div class="cus-calcul-trust-icon">✅</div>
+      <h4>Verified Network</h4>
+      <p>Every installer in our network is screened, licensed and verified before they can receive quote requests.</p>
+    </div>
+    <div class="cus-calcul-trust-item">
+      <div class="cus-calcul-trust-icon">📍</div>
+      <h4>NSW-Focused</h4>
+      <p>We specialise in Greater Sydney and regional NSW — local knowledge, local expertise, local installers.</p>
+    </div>
+    <div class="cus-calcul-trust-item">
+      <div class="cus-calcul-trust-icon">🔍</div>
+      <h4>Transparent Comparison</h4>
+      <p>See component specs, warranties and pricing side by side. No hidden fees or undisclosed commissions.</p>
+    </div>
+    <div class="cus-calcul-trust-item">
+      <div class="cus-calcul-trust-icon">🤝</div>
+      <h4>No Obligation</h4>
+      <p>Compare as many quotes as you need. You decide if and when to proceed — zero pressure, zero spam.</p>
+    </div>
+  </div>
+  <div class="cus-calcul-control-banner cus-calcul-fade-up" style="transition-delay:.15s">
+    <div class="cus-calcul-cb-icon">🎯</div>
+    <p><strong>You stay in control of your decision.</strong> BuildLance simply connects you with the right installers — the final choice is always yours. Our platform earns a referral fee from installers, never from homeowners.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ S7: LEAD CAPTURE ═══════════════ -->
+<section class="cus-calcul-lead-section" id="lead-form">
+  <div class="cus-calcul-lead-inner">
+    <div class="cus-calcul-lead-content cus-calcul-fade-up">
+      <div class="cus-calcul-eyebrow cus-calcul-red">Your Next Step</div>
+      <h2 class="cus-calcul-section-h">Get Your Exact<br><em>Solar Quote</em></h2>
+      <p class="cus-calcul-section-p cus-calcul-dark" style="margin-top:16px">Your estimate is just the first step. Submit your details to receive accurate, installer-specific quotes tailored to your home.</p>
+      <div class="cus-calcul-lead-benefits">
+        <div class="cus-calcul-lead-benefit">
+          <div class="cus-calcul-lb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Accurate system design for your roof &amp; usage
+        </div>
+        <div class="cus-calcul-lead-benefit">
+          <div class="cus-calcul-lb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Side-by-side installer comparison
+        </div>
+        <div class="cus-calcul-lead-benefit">
+          <div class="cus-calcul-lb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Rebate &amp; incentive confirmation for your area
+        </div>
+        <div class="cus-calcul-lead-benefit">
+          <div class="cus-calcul-lb-check"><svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-5.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Fixed pricing options — no surprise costs
+        </div>
+      </div>
+    </div>
+    <div class="cus-calcul-fade-up" style="transition-delay:.1s">
+      <div class="cus-calcul-lead-form-wrap">
+        <h3>Compare Free Solar Quotes</h3>
+        <p class="cus-calcul-form-desc">Takes less than 60 seconds. No spam, ever.</p>
+        <div class="cus-calcul-form-row2">
+          <div class="cus-calcul-form-group">
+            <label>Full Name *</label>
+            <input type="text" id="fieldName" placeholder="Jane Smith">
+          </div>
+          <div class="cus-calcul-form-group">
+            <label>Phone *</label>
+            <input type="tel" id="fieldPhone" placeholder="04xx xxx xxx">
+          </div>
+        </div>
+        <div class="cus-calcul-form-group">
+          <label>Email *</label>
+          <input type="email" id="fieldEmail" placeholder="jane@email.com">
+        </div>
+        <div class="cus-calcul-form-group">
+          <label>Property Address *</label>
+          <input type="text" id="fieldAddress" placeholder="123 Example St, Parramatta NSW 2150">
+        </div>
+        <a href="https://solar.buildlance.com.au/get-free-quotes/" class="cus-calcul-btn-lead">
+          👉 Compare Free Solar Quotes
+          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="cus-calcul-lead-privacy">Your details are only shared with up to 3 verified local installers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ════════════════ CALCULATOR ════════════════ */
+const statePSH = {nsw:4.5,vic:4.0,qld:5.2,sa:4.8,wa:5.0,tas:3.6};
+const stateReb = {nsw:480,vic:500,qld:450,sa:460,wa:410,tas:390};
+const roofFac  = {north:1.0,ne:0.92,nw:0.90,ew:0.82};
+const TARIFF   = 0.32;
+const REDIRECT = 'https://solar.buildlance.com.au/get-free-quotes/';
+
+const $id = id => document.getElementById(id);
+
+function animNum(el, target) {
+  const start = parseFloat(el.dataset.cur || 0);
+  const dur = 420, t0 = performance.now();
+  function step(now) {
+    const p = Math.min((now-t0)/dur, 1);
+    const e = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(start + (target-start)*e).toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+    else el.dataset.cur = target;
+  }
+  requestAnimationFrame(step);
+}
+
+function calc() {
+  const bill  = +$id('bill').value;
+  const size  = +$id('systemSize').value;
+  const fit   = +$id('fit').value / 100;
+  const batt  = $id('battery').checked;
+  const state = document.querySelector('input[name="state"]:checked').value;
+  const roof  = document.querySelector('input[name="roof"]:checked').value;
+
+  $id('billVal').textContent  = '$' + bill;
+  $id('sizeVal').textContent  = size + ' kW';
+  $id('fitVal').textContent   = (+$id('fit').value).toFixed(1) + '¢/kWh';
+  $id('stateVal').textContent = state.toUpperCase();
+
+  const psh   = statePSH[state];
+  const rf    = roofFac[roof];
+  const daily = size * psh * rf * 0.82;
+  const annual = daily * 365;
+  const scRate = batt ? 0.68 : 0.32;
+
+  const saving = Math.min(
+    Math.round(annual * scRate * TARIFF + annual * (1 - scRate) * fit),
+    bill * 12
+  );
+
+  const baseCost = Math.round(size * 1050 / 100) * 100 + (batt ? 11000 : 0);
+  const stcReb   = Math.round(size * stateReb[state] / 100) * 100;
+  const netCost  = baseCost - stcReb;
+  const payback  = saving > 0 ? netCost / saving : 99;
+  const co2      = (annual * 0.81) / 1000;
+
+  animNum($id('annualSaving'), saving);
+  $id('dailyGen').textContent    = daily.toFixed(1) + ' kWh';
+  $id('selfConsume').textContent = Math.round(scRate * 100) + '%';
+  $id('systemCost').textContent  = '$' + baseCost.toLocaleString();
+  $id('rebate').textContent      = '$' + stcReb.toLocaleString();
+  $id('paybackText').textContent = payback < 15 ? payback.toFixed(1) + ' yrs' : '15+ yrs';
+  $id('paybackBar').style.width  = Math.max(4, 100 - (Math.min(payback, 15) / 15) * 100) + '%';
+  $id('co2Text').textContent     = co2.toFixed(1) + ' tonnes of CO₂ avoided per year';
+  $id('treesText').textContent   = Math.round(co2 * 45).toLocaleString();
+}
+
+['bill','systemSize','fit'].forEach(id => $id(id).addEventListener('input', calc));
+$id('battery').addEventListener('change', calc);
+document.querySelectorAll('input[name="state"], input[name="roof"]').forEach(el => el.addEventListener('change', calc));
+calc();
+
+/* ════════════════ REDIRECT ALL BUTTONS ════════════════ */
+document.querySelectorAll('a[href="' + REDIRECT + '"]').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = REDIRECT;
+  });
+});
+
+/* ════════════════ SCROLL FADE ════════════════ */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('cus-calcul-vis'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.cus-calcul-fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
