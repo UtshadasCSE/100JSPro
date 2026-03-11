@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIKIBOO Pets – Discover</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #7cb242;
+    --green-dark: #5e8a2f;
+    --green-light: #a8d46f;
+    --green-pale: #f0f8e6;
+    --black: #111111;
+    --white: #ffffff;
+    --gray: #555555;
+    --gray-light: #f5f5f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,178,66,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .hero-blob-1 {
+    width: 500px; height: 500px;
+    background: var(--green);
+    top: -100px; left: -150px;
+    animation: blobFloat 8s ease-in-out infinite alternate;
+  }
+  .hero-blob-2 {
+    width: 350px; height: 350px;
+    background: var(--green-light);
+    bottom: -80px; right: -80px;
+    animation: blobFloat 10s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes blobFloat {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.07); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    animation: fadeDown 0.9s ease 0.1s both;
+  }
+
+  .hero h1 span {
+    color: var(--green);
+    display: inline-block;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    font-weight: 300;
+    animation: fadeDown 1s ease 0.2s both;
+  }
+
+  .hero-cta-hint {
+    font-size: 0.95rem;
+    color: var(--green-light);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 50px;
+    animation: fadeDown 1s ease 0.3s both;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeDown 1.2s ease 0.6s both;
+  }
+  .scroll-arrow {
+    width: 20px; height: 20px;
+    border-right: 2px solid rgba(255,255,255,0.3);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    transform: rotate(45deg);
+    animation: scrollBounce 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%,100% { transform: rotate(45deg) translateY(0); }
+    50%      { transform: rotate(45deg) translateY(5px); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION WRAPPER */
+  .section {
+    padding: 80px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  /* BUTTONS SECTION */
+  .buttons-section {
+    background: var(--green-pale);
+    border-top: 3px solid var(--green);
+  }
+
+  .buttons-section .section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .btn-card {
+    background: var(--white);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+  }
+
+  .btn-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--green);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .btn-card:hover {
+    border-color: var(--green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,178,66,0.2);
+  }
+
+  .btn-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: var(--green-pale);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-text-group { flex: 1; }
+
+  .btn-main-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--black);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .btn-sub-text {
+    font-size: 0.82rem;
+    color: var(--gray);
+    font-weight: 400;
+  }
+
+  .btn-arrow {
+    font-size: 1.1rem;
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .btn-card:hover .btn-arrow { transform: translateX(4px); }
+
+  /* Country picker */
+  .country-picker {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 0 4px 68px;
+    animation: fadeDown 0.3s ease both;
+  }
+  .country-picker.open { display: flex; }
+
+  .country-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 2px solid var(--green);
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--black);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .country-btn:hover {
+    background: var(--green);
+    color: var(--white);
+  }
+
+  /* MISSION */
+  .mission-section {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .mission-section .section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .mission-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 36px;
+    filter: grayscale(20%);
+    border: 3px solid var(--green);
+  }
+
+  .mission-placeholder {
+    width: 100%;
+    height: 260px;
+    border-radius: 16px;
+    margin-bottom: 36px;
+    border: 3px solid var(--green);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  .mission-placeholder-icon {
+    font-size: 3rem;
+    opacity: 0.5;
+  }
+
+  .mission-section .section-title { color: var(--white); }
+
+  .mission-text {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .mission-text strong {
+    color: var(--green-light);
+    font-weight: 600;
+  }
+
+  .mission-stat-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .mission-stat {
+    flex: 1;
+    min-width: 120px;
+    background: rgba(124,178,66,0.12);
+    border: 1px solid rgba(124,178,66,0.3);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--green);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* EMAIL */
+  .email-section {
+    background: var(--white);
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .email-section .section-title { color: var(--black); }
+
+  .email-desc {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 15px 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--black);
+    background: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-input:focus { border-color: var(--green); }
+  .form-input::placeholder { color: #aaa; }
+
+  .form-submit {
+    padding: 16px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .form-submit:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(124,178,66,0.35);
+  }
+
+  .form-fine {
+    font-size: 0.78rem;
+    color: #aaa;
+    text-align: center;
+  }
+
+  .form-success {
+    display: none;
+    background: var(--green-pale);
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+
+  /* SOCIAL PROOF */
+  .proof-section {
+    background: var(--gray-light);
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .review-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--green);
+  }
+
+  .stars {
+    color: #f5a623;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .review-text {
+    font-size: 0.98rem;
+    color: var(--black);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .review-author {
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .verified-badge {
+    background: var(--green-pale);
+    color: var(--green-dark);
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 36px 24px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  footer a { color: var(--green-light); text-decoration: none; }
+  footer .logo-footer {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  footer .logo-footer span { color: var(--green); }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--green);
+    border-radius: 2px;
+    margin: 18px 0 26px;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-badge">🐾 Official QR Destination</div>
+  <h1>Welcome to<br><span>TIKIBOO</span> Pets 🐾</h1>
+  <p class="hero-sub">Premium treats, heartwarming stories, and a mission to build a sanctuary for pets who need it most.</p>
+  <p class="hero-cta-hint">Select your country or interest below to get started.</p>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- BUTTONS SECTION -->
+<div class="buttons-section">
+  <div class="section">
+    <span class="section-label reveal">Start Here</span>
+    <h2 class="section-title reveal">What brings you here?</h2>
+    <div class="divider reveal"></div>
+
+    <!-- Treats -->
+    <div class="btn-card reveal" onclick="toggleCountry()">
+      <div class="btn-card-inner">
+        <div class="btn-icon">🦴</div>
+        <div class="btn-text-group">
+          <span class="btn-main-text">Shop Dog Treats</span>
+          <span class="btn-sub-text">Available in the United States &amp; Canada</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </div>
+      <div class="country-picker" id="countryPicker">
+        <a class="country-btn" href="https://amazon.com" target="_blank" rel="noopener">🇺🇸 Shop on Amazon USA</a>
+        <a class="country-btn" href="https://amazon.ca" target="_blank" rel="noopener">🇨🇦 Shop on Amazon Canada</a>
+      </div>
+    </div>
+
+    <!-- Books -->
+    <a class="btn-card reveal" href="https://amazon.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="btn-card-inner">
+        <div class="btn-icon">📚</div>
+        <div class="btn-text-group">
+          <span class="btn-main-text">Shop TIKIBOO Books</span>
+          <span class="btn-sub-text">Available globally via Amazon — ships worldwide</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </div>
+    </a>
+
+    <!-- YouTube -->
+    <a class="btn-card reveal" href="https://youtube.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="btn-card-inner">
+        <div class="btn-icon">▶️</div>
+        <div class="btn-text-group">
+          <span class="btn-main-text">Watch Us on YouTube</span>
+          <span class="btn-sub-text">Funny pet videos, rescue stories, product updates &amp; more</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </div>
+    </a>
+
+    <!-- Website -->
+    <a class="btn-card reveal" href="https://tikiboopets.ca" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="btn-card-inner">
+        <div class="btn-icon">🌿</div>
+        <div class="btn-text-group">
+          <span class="btn-main-text">Explore TIKIBOO Pets</span>
+          <span class="btn-sub-text">Learn about our mission &amp; full product range</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- MISSION -->
+<div class="mission-section">
+  <div class="section">
+    <div class="mission-placeholder reveal">
+      <div class="mission-placeholder-icon">🐶</div>
+      <span>Add Your Rescue Dog Photo Here</span>
+    </div>
+    <span class="section-label reveal">Our Purpose</span>
+    <h2 class="section-title reveal">❤️ Our Mission</h2>
+    <div class="divider reveal"></div>
+    <p class="mission-text reveal">
+      Every purchase helps us build <strong>a sanctuary for pets who cannot be adopted</strong>.<br><br>
+      TIKIBOO Pets was created to combine <strong>premium products with real impact</strong> — because every animal deserves a safe place to call home.
+    </p>
+    <div class="mission-stat-row reveal">
+      <div class="mission-stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Premium Ingredients</div>
+      </div>
+      <div class="mission-stat">
+        <div class="stat-num">🐾</div>
+        <div class="stat-label">Sanctuary Funded</div>
+      </div>
+      <div class="mission-stat">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Amazon Rated</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL CAPTURE -->
+<div class="email-section">
+  <div class="section">
+    <span class="section-label reveal">Stay Connected</span>
+    <h2 class="section-title reveal">Join the TIKIBOO Family 🐾</h2>
+    <div class="divider reveal"></div>
+    <p class="email-desc reveal">Get early access to new products, rescue updates, and exclusive discounts.</p>
+    <div id="emailForm" class="email-form reveal">
+      <input class="form-input" type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
+      <input class="form-input" type="email" id="emailInput" placeholder="Email Address" autocomplete="email">
+      <button class="form-submit" onclick="submitEmail()">🐾 Join the Pack</button>
+      <p class="form-fine">No spam. Unsubscribe anytime. We respect your inbox.</p>
+    </div>
+    <div id="formSuccess" class="form-success">
+      🎉 Welcome to the Pack! We'll be in touch with exclusive updates soon.
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="proof-section">
+  <div class="section">
+    <span class="section-label reveal">Real Reviews</span>
+    <h2 class="section-title reveal">Pets &amp; Owners Love Us</h2>
+    <div class="divider reveal"></div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"My dog goes absolutely crazy for these treats! He starts spinning the moment he hears the bag. Best purchase I've made all year."</p>
+      <div class="review-author">
+        Sarah M. — Ontario, Canada
+        <span class="verified-badge">✓ Verified Amazon Customer</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Finally a treat I feel good about giving. Clean ingredients, my picky eater actually finishes them. Will be ordering again!"</p>
+      <div class="review-author">
+        Jake T. — Texas, USA
+        <span class="verified-badge">✓ Verified Amazon Customer</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Love the mission behind this brand. Great product AND they're helping animals in need. That's a win-win in my books."</p>
+      <div class="review-author">
+        Priya L. — British Columbia
+        <span class="verified-badge">✓ Verified Amazon Customer</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-footer">TIKIBOO <span>Pets</span></div>
+  <p>Premium Pet Products · Rescue Mission · Real Impact</p>
+  <p style="margin-top:6px;">
+    <a href="https://tikiboopets.ca">tikiboopets.ca</a> &nbsp;·&nbsp;
+    <a href="https://youtube.com">YouTube</a> &nbsp;·&nbsp;
+    <a href="https://amazon.ca">Amazon Canada</a> &nbsp;·&nbsp;
+    <a href="https://amazon.com">Amazon USA</a>
+  </p>
+  <p style="margin-top:14px; font-size:0.75rem;">© 2025 TIKIBOO Pets. All rights reserved.</p>
+</footer>
+
+<script>
+  // Country picker toggle
+  function toggleCountry() {
+    const picker = document.getElementById('countryPicker');
+    picker.classList.toggle('open');
+  }
+
+  // Email form submit
+  function submitEmail() {
+    const name = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name) { alert('Please enter your first name.'); return; }
+    if (!emailRegex.test(email)) { alert('Please enter a valid email address.'); return; }
+    document.getElementById('emailForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

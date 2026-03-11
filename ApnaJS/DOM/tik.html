@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIKIBOO – Shop & Discover</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green: #7cb242;
+        --green-dark: #5e8a2f;
+        --green-light: #a8d46f;
+        --green-pale: #f2f9e8;
+        --black: #111111;
+        --white: #ffffff;
+        --gray: #666666;
+        --gray-light: #f7f7f7;
+        --border: #e4e4e4;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--gray-light);
+        color: var(--black);
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 48px 16px 64px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 620px;
+      }
+
+      /* Section header */
+      .section-header {
+        text-align: center;
+        margin-bottom: 36px;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--green);
+        color: var(--white);
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 100px;
+        margin-bottom: 16px;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.7rem, 5vw, 2.4rem);
+        font-weight: 900;
+        color: var(--black);
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+
+      .section-title span {
+        color: var(--green);
+      }
+
+      .section-sub {
+        font-size: 0.93rem;
+        color: var(--gray);
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      /* Cards */
+      .card {
+        background: var(--white);
+        border-radius: 20px;
+        border: 2px solid transparent;
+        margin-bottom: 14px;
+        overflow: hidden;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s,
+          transform 0.2s;
+        animation: fadeUp 0.6s ease both;
+        position: relative;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.19s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.26s;
+      }
+
+      .card:hover {
+        border-color: var(--green);
+        box-shadow: 0 8px 28px rgba(124, 178, 66, 0.18);
+        transform: translateY(-2px);
+      }
+
+      /* Accent stripe */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--green), var(--green-light));
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card-body {
+        padding: 24px 22px 20px;
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      .card-icon-wrap {
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        background: var(--green-pale);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7rem;
+        transition: transform 0.25s;
+      }
+      .card:hover .card-icon-wrap {
+        transform: scale(1.08) rotate(-3deg);
+      }
+
+      .card-content {
+        flex: 1;
+      }
+
+      .card-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--green-dark);
+        margin-bottom: 4px;
+      }
+
+      .card-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 6px;
+        line-height: 1.2;
+      }
+
+      .card-desc {
+        font-size: 0.84rem;
+        color: var(--gray);
+        line-height: 1.5;
+        margin-bottom: 16px;
+        font-weight: 400;
+      }
+
+      /* Main button */
+      .card-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--green);
+        color: var(--white);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 11px 20px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        letter-spacing: 0.2px;
+        margin-bottom: 8px;
+      }
+
+      .card-btn:hover {
+        background: var(--green-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 5px 16px rgba(124, 178, 66, 0.35);
+      }
+
+      .card-btn:active {
+        transform: scale(0.97);
+      }
+
+      .card-btn .btn-icon-inline {
+        font-size: 1rem;
+      }
+
+      .card-btn .btn-arrow {
+        margin-left: 2px;
+        font-size: 1rem;
+        transition: transform 0.2s;
+      }
+      .card-btn:hover .btn-arrow {
+        transform: translateX(3px);
+      }
+
+      .card-note {
+        display: block;
+        font-size: 0.76rem;
+        color: #aaa;
+        margin-top: 2px;
+        font-weight: 400;
+      }
+
+      /* Country Picker */
+      .country-drawer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        background: var(--green-pale);
+        border-top: 2px dashed rgba(124, 178, 66, 0.3);
+      }
+
+      .country-drawer.open {
+        max-height: 160px;
+      }
+
+      .country-drawer-inner {
+        padding: 16px 22px 18px 96px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .country-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--white);
+        border: 2px solid var(--green);
+        color: var(--black);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 600;
+        padding: 9px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        width: fit-content;
+      }
+
+      .country-link:hover {
+        background: var(--green);
+        color: var(--white);
+        transform: translateX(4px);
+      }
+
+      .country-flag {
+        font-size: 1.2rem;
+      }
+
+      /* Treats toggle indicator */
+      .toggle-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        color: var(--green-dark);
+        font-weight: 500;
+        margin-left: 4px;
+        transition: opacity 0.2s;
+      }
+
+      .chevron {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 5px solid var(--green-dark);
+        transition: transform 0.25s;
+      }
+      .chevron.up {
+        transform: rotate(180deg);
+      }
+
+      /* Bottom note */
+      .bottom-note {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 0.8rem;
+        color: #aaa;
+        animation: fadeUp 0.6s ease 0.4s both;
+      }
+
+      .bottom-note span {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 5px 14px;
+        display: inline-block;
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 420px) {
+        .card-body {
+          gap: 14px;
+        }
+        .card-icon-wrap {
+          width: 48px;
+          height: 48px;
+          font-size: 1.4rem;
+          border-radius: 12px;
+        }
+        .country-drawer-inner {
+          padding-left: 22px;
+        }
+        .card-title {
+          font-size: 1.05rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="section-header">
+        <div class="section-tag">🐾 Start Here</div>
+        <h2 class="section-title">
+          What brings<br />you to <span>TIKIBOO</span>?
+        </h2>
+        <p class="section-sub">
+          Select your country or interest below to get started.
+        </p>
+      </div>
+
+      <!-- Card 1: Treats -->
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon-wrap">🦴</div>
+          <div class="card-content">
+            <div class="card-label">Treats</div>
+            <div class="card-title">Shop TIKIBOO Treats</div>
+            <p class="card-desc">
+              Give your dog something they'll truly love. Our premium treats are
+              available through Amazon for fast, reliable delivery.
+            </p>
+            <button class="card-btn" onclick="toggleTreats(this)">
+              <span class="btn-icon-inline">🛒</span>
+              Shop Treats on Amazon
+              <span class="toggle-indicator">
+                <span class="chevron" id="treatsChevron"></span>
+              </span>
+            </button>
+            <span class="card-note"
+              >Available in the United States &amp; Canada</span
+            >
+          </div>
+        </div>
+        <!-- Country Drawer -->
+        <div class="country-drawer" id="treatsDrawer">
+          <div class="country-drawer-inner">
+            <a
+              class="country-link"
+              href="https://amazon.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="country-flag">🇺🇸</span> Shop on Amazon USA
+            </a>
+            <a
+              class="country-link"
+              href="https://amazon.ca"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="country-flag">🇨🇦</span> Shop on Amazon Canada
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Books -->
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon-wrap">📚</div>
+          <div class="card-content">
+            <div class="card-label">Books</div>
+            <div class="card-title">Discover TIKIBOO Books</div>
+            <p class="card-desc">
+              Explore our fun and creative books designed for animal lovers and
+              families.
+            </p>
+            <a
+              class="card-btn"
+              href="https://amazon.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="btn-icon-inline">📦</span>
+              Discover Our Books
+              <span class="btn-arrow">›</span>
+            </a>
+            <span class="card-note">Ships worldwide via Amazon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: YouTube -->
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon-wrap">🎥</div>
+          <div class="card-content">
+            <div class="card-label">Community</div>
+            <div class="card-title">Join the TIKIBOO Pack</div>
+            <p class="card-desc">
+              Follow along for funny pet moments, heartwarming rescue stories,
+              and updates from the TIKIBOO community.
+            </p>
+            <a
+              class="card-btn"
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="btn-icon-inline">▶️</span>
+              Watch Us on YouTube
+              <span class="btn-arrow">›</span>
+            </a>
+            <span class="card-note"
+              >Funny pet videos, rescue stories &amp; product updates</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Website -->
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon-wrap">🌎</div>
+          <div class="card-content">
+            <div class="card-label">Mission</div>
+            <div class="card-title">Visit Our Official Website</div>
+            <p class="card-desc">
+              Learn more about the TIKIBOO mission, explore our products, and
+              see how we're working to support animals in need.
+            </p>
+            <a
+              class="card-btn"
+              href="https://tikiboopets.ca"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="btn-icon-inline">🌿</span>
+              Explore TIKIBOO Pets
+              <span class="btn-arrow">›</span>
+            </a>
+            <span class="card-note"
+              >Discover our mission &amp; full product range</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <p class="bottom-note">
+        <span>🔒 Secure links · Powered by TIKIBOO Pets</span>
+      </p>
+    </div>
+
+    <script>
+      let treatsOpen = false;
+
+      function toggleTreats(btn) {
+        const drawer = document.getElementById("treatsDrawer");
+        const chevron = document.getElementById("treatsChevron");
+        treatsOpen = !treatsOpen;
+        drawer.classList.toggle("open", treatsOpen);
+        chevron.classList.toggle("up", treatsOpen);
+        btn.style.background = treatsOpen
+          ? "var(--green-dark)"
+          : "var(--green)";
+      }
+    </script>
+  </body>
+</html>
