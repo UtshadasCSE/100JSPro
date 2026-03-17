@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIKIBOO – Our Mission</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Reset & Root ─────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --g: #7cb242;
+        --gd: #4e7220;
+        --gl: #b2d97a;
+        --gp: #f0f8e4;
+        --blk: #0d0d0d;
+        --wht: #ffffff;
+        --warm: #f7f4ee;
+      }
+
+      .cus-body {
+        background: var(--warm);
+        /* min-height: 100vh; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* padding: 40px 0; */
+      }
+
+      /* ── SECTION WRAPPER ──────────────────────── */
+      .mission {
+        width: 100%;
+        background: var(--blk);
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      /* Organic background shapes */
+      .mission-bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0;
+        transition: opacity 1.2s ease;
+      }
+      .bg-c1 {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(124, 178, 66, 0.22),
+          transparent 70%
+        );
+        top: -180px;
+        left: -150px;
+      }
+      .bg-c2 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(178, 217, 122, 0.12),
+          transparent 70%
+        );
+        bottom: -100px;
+        right: -80px;
+      }
+      .mission.visible .bg-c1,
+      .mission.visible .bg-c2 {
+        opacity: 1;
+      }
+
+      /* Subtle dot grid texture */
+      .mission::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── INNER GRID ───────────────────────────── */
+      .mission-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 560px;
+      }
+
+      /* ── LEFT — IMAGE PANEL ───────────────────── */
+      .mission-image-panel {
+        position: relative;
+        overflow: hidden;
+        min-height: 440px;
+      }
+
+      /* Image itself */
+      .mission-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(25%) brightness(0.88);
+        transition:
+          filter 1s ease,
+          transform 8s ease;
+        transform: scale(1.06);
+      }
+      .mission.visible .mission-img {
+        filter: grayscale(0%) brightness(0.92);
+        transform: scale(1);
+      }
+
+      /* Placeholder when no real image */
+      .mission-img-placeholder {
+        width: 100%;
+        height: 100%;
+        min-height: 440px;
+        background: linear-gradient(
+          160deg,
+          #1a2a0f 0%,
+          #0d1a07 40%,
+          #0a0a0a 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Animated paw print pattern in placeholder */
+      .placeholder-paws {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 30px;
+        padding: 20px;
+        opacity: 0.05;
+        font-size: 1.4rem;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .placeholder-center {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .placeholder-icon {
+        font-size: 4rem;
+        opacity: 0.35;
+        animation: gentleFloat 4s ease-in-out infinite;
+      }
+
+      @keyframes gentleFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      .placeholder-label {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+        font-weight: 500;
+      }
+
+      /* Image overlay gradient */
+      .mission-image-panel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          transparent 55%,
+          rgba(13, 13, 13, 0.6) 100%
+        );
+        pointer-events: none;
+      }
+
+      /* Corner tag on image */
+      .img-corner-tag {
+        position: absolute;
+        top: 28px;
+        left: 28px;
+        background: var(--g);
+        color: #fff;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 100px;
+        z-index: 2;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition:
+          opacity 0.6s 0.5s ease,
+          transform 0.6s 0.5s ease;
+      }
+      .mission.visible .img-corner-tag {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Stats floating on image bottom */
+      .img-stats {
+        position: absolute;
+        bottom: 28px;
+        left: 28px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.7s 0.6s ease,
+          transform 0.7s 0.6s ease;
+      }
+      .mission.visible .img-stats {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stat-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(13, 13, 13, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(124, 178, 66, 0.35);
+        color: #fff;
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 7px 14px;
+        border-radius: 100px;
+        width: fit-content;
+      }
+      .stat-pill .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--g);
+        flex-shrink: 0;
+        animation: statPulse 2.2s ease-in-out infinite;
+      }
+      @keyframes statPulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(0.6);
+        }
+      }
+      .stat-pill:nth-child(2) .dot {
+        animation-delay: 0.4s;
+      }
+      .stat-pill:nth-child(3) .dot {
+        animation-delay: 0.8s;
+      }
+
+      /* ── RIGHT — TEXT PANEL ───────────────────── */
+      .mission-text-panel {
+        padding: 72px 56px 72px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+      }
+
+      /* Eyebrow */
+      .mission-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 22px;
+        opacity: 0;
+        transform: translateX(18px);
+        transition:
+          opacity 0.6s 0.2s ease,
+          transform 0.6s 0.2s ease;
+      }
+      .mission.visible .mission-eyebrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .eyebrow-line {
+        width: 32px;
+        height: 2px;
+        background: var(--g);
+        border-radius: 2px;
+      }
+      .eyebrow-text {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--g);
+      }
+
+      /* Heart + headline */
+      .mission-headline-wrap {
+        margin-bottom: 28px;
+        opacity: 0;
+        transform: translateX(20px);
+        transition:
+          opacity 0.7s 0.32s ease,
+          transform 0.7s 0.32s ease;
+      }
+      .mission.visible .mission-headline-wrap {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .mission-heart {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        display: block;
+        animation: heartbeat 2.8s ease-in-out infinite;
+      }
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.2);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.12);
+        }
+        56% {
+          transform: scale(1);
+        }
+      }
+
+      .mission-headline {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.06;
+        letter-spacing: -0.5px;
+      }
+      .mission-headline em {
+        color: var(--gl);
+        font-style: italic;
+      }
+
+      /* Divider bar */
+      .mission-divider {
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--g), transparent);
+        border-radius: 2px;
+        margin-bottom: 28px;
+        transition: width 1s 0.55s ease;
+      }
+      .mission.visible .mission-divider {
+        width: 64px;
+      }
+
+      /* Body text */
+      .mission-body {
+        opacity: 0;
+        transform: translateX(18px);
+        transition:
+          opacity 0.7s 0.5s ease,
+          transform 0.7s 0.5s ease;
+      }
+      .mission.visible .mission-body {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .mission-body p {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.75;
+        font-weight: 300;
+        margin-bottom: 16px;
+      }
+      .mission-body p:last-of-type {
+        margin-bottom: 0;
+      }
+      .mission-body strong {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+      }
+
+      /* CTA link */
+      .mission-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 36px;
+        color: var(--gl);
+        font-size: 0.88rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        padding-bottom: 4px;
+        border-bottom: 1.5px solid rgba(178, 217, 122, 0.3);
+        transition: all 0.2s;
+        width: fit-content;
+        opacity: 0;
+        transform: translateX(14px);
+        transition:
+          opacity 0.7s 0.65s ease,
+          transform 0.7s 0.65s ease,
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .mission.visible .mission-cta {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .mission-cta:hover {
+        color: var(--g);
+        border-color: var(--g);
+      }
+      .mission-cta .cta-arrow {
+        font-size: 1rem;
+        transition: transform 0.2s;
+      }
+      .mission-cta:hover .cta-arrow {
+        transform: translateX(4px);
+      }
+
+      /* ── BOTTOM STRIP ─────────────────────────── */
+      .mission-strip {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        divide: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .strip-item {
+        padding: 28px 32px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border-right: 1px solid rgba(255, 255, 255, 0.07);
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .strip-item:last-child {
+        border-right: none;
+      }
+      .mission.visible .strip-item:nth-child(1) {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0.6s;
+      }
+      .mission.visible .strip-item:nth-child(2) {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0.72s;
+      }
+      .mission.visible .strip-item:nth-child(3) {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0.84s;
+      }
+
+      .strip-icon {
+        font-size: 1.6rem;
+        flex-shrink: 0;
+      }
+      .strip-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--g);
+        display: block;
+        margin-bottom: 2px;
+      }
+      .strip-value {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.2;
+      }
+
+      /* ── RESPONSIVE ───────────────────────────── */
+      @media (max-width: 860px) {
+        .mission-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mission-image-panel {
+          min-height: 320px;
+          max-height: 380px;
+        }
+        .mission-image-panel::after {
+          background: linear-gradient(
+            to bottom,
+            transparent 55%,
+            rgba(13, 13, 13, 0.65) 100%
+          );
+        }
+
+        .mission-text-panel {
+          padding: 52px 32px 52px;
+        }
+
+        .mission-strip {
+          grid-template-columns: 1fr;
+        }
+        .strip-item {
+          border-right: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+          padding: 20px 28px;
+        }
+        .strip-item:last-child {
+          border-bottom: none;
+        }
+
+        .img-stats {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .mission-text-panel {
+          padding: 40px 24px 44px;
+        }
+        .mission-headline {
+          font-size: 2.2rem;
+        }
+        .mission-body p {
+          font-size: 0.97rem;
+        }
+        .img-corner-tag {
+          top: 16px;
+          left: 16px;
+        }
+        .img-stats {
+          bottom: 16px;
+          left: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cus-body">
+      <!-- ════════════════════════════════════════════
+     THE MISSION SECTION
+═══════════════════════════════════════════════ -->
+      <section class="mission" id="mission">
+        <!-- Background atmosphere -->
+        <div class="mission-bg">
+          <div class="bg-circle bg-c1"></div>
+          <div class="bg-circle bg-c2"></div>
+        </div>
+
+        <!-- Two-column grid: image | text -->
+        <div class="mission-grid">
+          <!-- LEFT: IMAGE PANEL -->
+          <div class="mission-image-panel">
+            <!--
+        ─────────────────────────────────────────
+        TO USE A REAL PHOTO:
+        Replace the <div class="mission-img-placeholder">...</div>
+        block below with:
+        <img src="YOUR-DOG-PHOTO.jpg" alt="Rescue dog" class="mission-img">
+        ─────────────────────────────────────────
+      -->
+            <div class="mission-img-placeholder">
+              <div class="placeholder-paws" aria-hidden="true">
+                🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾
+              </div>
+              <div class="placeholder-center">
+                <div class="placeholder-icon">🐕</div>
+                <span class="placeholder-label">Add rescue dog photo here</span>
+              </div>
+            </div>
+
+            <!-- Badge overlay -->
+            <div class="img-corner-tag">🐾 Rescue &amp; Sanctuary</div>
+
+            <!-- Floating stat pills -->
+            <div class="img-stats">
+              <div class="stat-pill">
+                <span class="dot"></span>Premium ingredients
+              </div>
+              <div class="stat-pill">
+                <span class="dot"></span>Sanctuary funded by purchases
+              </div>
+              <div class="stat-pill">
+                <span class="dot"></span>Real impact, every order
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: TEXT PANEL -->
+          <div class="mission-text-panel">
+            <div class="mission-eyebrow">
+              <div class="eyebrow-line"></div>
+              <span class="eyebrow-text">The Mission</span>
+            </div>
+
+            <div class="mission-headline-wrap">
+              <span class="mission-heart" aria-hidden="true">❤️</span>
+              <h2 class="mission-headline">Our<br /><em>Mission</em></h2>
+            </div>
+
+            <div class="mission-divider"></div>
+
+            <div class="mission-body">
+              <p>
+                Every purchase helps us build
+                <strong>a sanctuary for pets who cannot be adopted</strong> —
+                giving them a safe, loving place to call home for life.
+              </p>
+              <p>
+                TIKIBOO Pets was created to combine
+                <strong>premium products with real impact</strong>. Because we
+                believe quality and purpose should always go hand in hand.
+              </p>
+            </div>
+
+            <a href="#" class="mission-cta">
+              Learn about our sanctuary project
+              <span class="cta-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom stat strip -->
+        <div class="mission-strip">
+          <div class="strip-item">
+            <div class="strip-icon">🏡</div>
+            <div>
+              <span class="strip-label">The Goal</span>
+              <span class="strip-value">Build a permanent sanctuary</span>
+            </div>
+          </div>
+          <div class="strip-item">
+            <div class="strip-icon">🛒</div>
+            <div>
+              <span class="strip-label">How You Help</span>
+              <span class="strip-value">Every purchase contributes</span>
+            </div>
+          </div>
+          <div class="strip-item">
+            <div class="strip-icon">🐾</div>
+            <div>
+              <span class="strip-label">Who Benefits</span>
+              <span class="strip-value">Pets who can't be adopted</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // Intersection Observer — triggers all CSS reveal animations
+      const section = document.getElementById("mission");
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            section.classList.add("visible");
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.15 },
+      );
+
+      observer.observe(section);
+
+      // Fire immediately if already in view (e.g. top of page)
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        section.classList.add("visible");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1616 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIKIBOO Pets – Creator Program</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ───────────────────────────────────────────
+   ROOT & RESET
+─────────────────────────────────────────── */
+      :root {
+        --g: #7cb242;
+        --gd: #5a8530;
+        --gl: #a8d46f;
+        --gp: #f1f9e6;
+        --blk: #0f0f0f;
+        --wht: #ffffff;
+        --gry: #6b6b6b;
+        --bdr: #e2e2e2;
+        --bg: #fafaf8;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--blk);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ───────────────────────────────────────────
+   TYPOGRAPHY HELPERS
+─────────────────────────────────────────── */
+      .serif {
+        font-family: "Fraunces", serif;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--g);
+        color: #fff;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        padding: 5px 16px;
+        border-radius: 100px;
+      }
+      .tag-outline {
+        background: transparent;
+        border: 1.5px solid var(--g);
+        color: var(--gd);
+      }
+
+      /* ───────────────────────────────────────────
+   LAYOUT
+─────────────────────────────────────────── */
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .wrap-sm {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      section {
+        padding: 96px 0;
+      }
+      .section-head {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .section-head .tag {
+        margin-bottom: 18px;
+      }
+      .section-head h2 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 14px;
+      }
+      .section-head h2 em {
+        color: var(--g);
+        font-style: normal;
+      }
+      .section-head p {
+        font-size: 1rem;
+        color: var(--gry);
+        max-width: 580px;
+        margin: 0 auto;
+      }
+
+      /* ───────────────────────────────────────────
+   SCROLL REVEAL
+─────────────────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ───────────────────────────────────────────
+   1. HERO
+─────────────────────────────────────────── */
+      #hero {
+        position: relative;
+        min-height: 100vh;
+        background: var(--blk);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 100px 24px 80px;
+        overflow: hidden;
+      }
+
+      /* animated mesh blobs */
+      .hero-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+      }
+      .hb1 {
+        width: 700px;
+        height: 700px;
+        background: rgba(124, 178, 66, 0.15);
+        top: -200px;
+        left: -200px;
+        animation: hbf 9s ease-in-out infinite alternate;
+      }
+      .hb2 {
+        width: 500px;
+        height: 500px;
+        background: rgba(168, 212, 111, 0.12);
+        bottom: -150px;
+        right: -120px;
+        animation: hbf 12s ease-in-out infinite alternate-reverse;
+      }
+      .hb3 {
+        width: 300px;
+        height: 300px;
+        background: rgba(124, 178, 66, 0.08);
+        top: 40%;
+        left: 60%;
+        animation: hbf 7s ease-in-out infinite alternate;
+      }
+      @keyframes hbf {
+        from {
+          transform: scale(1) translate(0, 0);
+        }
+        to {
+          transform: scale(1.15) translate(30px, 20px);
+        }
+      }
+
+      /* noise grain overlay */
+      #hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 820px;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1.5px solid rgba(124, 178, 66, 0.5);
+        color: var(--gl);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 100px;
+        margin-bottom: 30px;
+        animation: fadeD 0.8s ease both;
+      }
+      .hero-badge span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--g);
+        display: inline-block;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.7);
+        }
+      }
+
+      #hero h1 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2.8rem, 8vw, 5.8rem);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.02;
+        letter-spacing: -1.5px;
+        margin-bottom: 22px;
+        animation: fadeD 0.9s 0.1s ease both;
+      }
+      #hero h1 em {
+        color: var(--g);
+        font-style: normal;
+        display: inline-block;
+      }
+      #hero p {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 600px;
+        margin: 0 auto 40px;
+        font-weight: 300;
+        animation: fadeD 1s 0.2s ease both;
+      }
+
+      .hero-ctas {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeD 1s 0.3s ease both;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 14px 28px;
+        border-radius: 12px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.22s;
+        letter-spacing: 0.2px;
+      }
+      .btn-primary {
+        background: var(--g);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--gd);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(124, 178, 66, 0.4);
+      }
+      .btn-ghost {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #fff;
+      }
+      .btn-ghost:hover {
+        border-color: var(--g);
+        color: var(--gl);
+        transform: translateY(-2px);
+      }
+
+      .hero-scroll {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        z-index: 2;
+        animation: fadeD 1.2s 0.7s both;
+      }
+      .scroll-dot {
+        width: 20px;
+        height: 30px;
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 100px;
+        display: flex;
+        justify-content: center;
+        padding-top: 5px;
+      }
+      .scroll-dot::after {
+        content: "";
+        width: 4px;
+        height: 7px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 100px;
+        animation: scrollDown 1.8s ease-in-out infinite;
+      }
+      @keyframes scrollDown {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(10px);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeD {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ───────────────────────────────────────────
+   2. WHY JOIN – BENEFITS CARDS
+─────────────────────────────────────────── */
+      #benefits {
+        background: var(--gp);
+        border-top: 3px solid var(--g);
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .benefit-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 28px 22px;
+        border: 2px solid transparent;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .benefit-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--g), var(--gl));
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .benefit-card:hover {
+        border-color: var(--g);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(124, 178, 66, 0.15);
+      }
+      .benefit-card:hover::before {
+        opacity: 1;
+      }
+      .benefit-icon {
+        font-size: 2rem;
+        margin-bottom: 14px;
+      }
+      .benefit-card h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .benefit-card p {
+        font-size: 0.85rem;
+        color: var(--gry);
+        line-height: 1.55;
+      }
+
+      .review-notice {
+        margin-top: 48px;
+        background: #fff;
+        border-left: 4px solid var(--g);
+        border-radius: 0 14px 14px 0;
+        padding: 20px 24px;
+        font-size: 0.88rem;
+        color: var(--gry);
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .review-notice strong {
+        color: var(--blk);
+      }
+
+      /* ───────────────────────────────────────────
+   3. ABOUT TIKIBOO
+─────────────────────────────────────────── */
+      #about {
+        background: #fff;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      .about-visual {
+        position: relative;
+      }
+
+      .about-img-placeholder {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: linear-gradient(135deg, var(--gp) 0%, #e0f0c8 100%);
+        border-radius: 20px;
+        border: 3px solid var(--g);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: rgba(0, 0, 0, 0.25);
+        font-size: 0.82rem;
+        letter-spacing: 1px;
+      }
+      .about-img-placeholder .paw {
+        font-size: 3.5rem;
+        opacity: 0.35;
+      }
+
+      .about-badge-float {
+        position: absolute;
+        bottom: -18px;
+        right: -18px;
+        background: var(--blk);
+        color: #fff;
+        font-family: "Fraunces", serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 2px solid var(--g);
+        line-height: 1.3;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      .about-badge-float em {
+        color: var(--gl);
+        font-style: normal;
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      .about-text h2 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+      .about-text h2 em {
+        color: var(--g);
+        font-style: normal;
+      }
+      .about-text p {
+        font-size: 0.96rem;
+        color: var(--gry);
+        margin-bottom: 16px;
+        line-height: 1.7;
+      }
+      .about-text p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ───────────────────────────────────────────
+   4. HOW IT WORKS
+─────────────────────────────────────────── */
+      #how {
+        background: var(--blk);
+        color: #fff;
+      }
+      #how .section-head h2 {
+        color: #fff;
+      }
+      #how .section-head p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .steps-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .steps-track::before {
+        content: "";
+        position: absolute;
+        top: 36px;
+        left: calc(16.6% + 18px);
+        right: calc(16.6% + 18px);
+        height: 2px;
+        background: linear-gradient(90deg, var(--g), var(--gl));
+        opacity: 0.35;
+      }
+
+      .step {
+        text-align: center;
+        padding: 0 16px;
+        position: relative;
+      }
+      .step-num {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: rgba(124, 178, 66, 0.12);
+        border: 2px solid rgba(124, 178, 66, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Fraunces", serif;
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: var(--g);
+        margin: 0 auto 22px;
+        position: relative;
+        z-index: 1;
+        transition: all 0.25s;
+      }
+      .step:hover .step-num {
+        background: var(--g);
+        color: #fff;
+        border-color: var(--g);
+        transform: scale(1.08);
+      }
+      .step h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+      .step p {
+        font-size: 0.83rem;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.55;
+      }
+
+      /* ───────────────────────────────────────────
+   5. FEATURED DOGS
+─────────────────────────────────────────── */
+      #dogs {
+        background: var(--bg);
+      }
+
+      .dogs-text {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto 52px;
+      }
+      .dogs-text p {
+        font-size: 0.97rem;
+        color: var(--gry);
+        margin-bottom: 12px;
+      }
+
+      .dogs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .dog-tile {
+        aspect-ratio: 1;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--gp), #e0f0c4);
+        border: 2px solid var(--bdr);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: rgba(0, 0, 0, 0.2);
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        overflow: hidden;
+        position: relative;
+        transition: all 0.25s;
+        cursor: pointer;
+      }
+      .dog-tile:hover {
+        border-color: var(--g);
+        transform: scale(1.02);
+        box-shadow: 0 8px 24px rgba(124, 178, 66, 0.18);
+      }
+      .dog-tile .dog-icon {
+        font-size: 2.4rem;
+        opacity: 0.4;
+      }
+      .dog-tile:nth-child(2) {
+        grid-row: span 2;
+        aspect-ratio: auto;
+      }
+      .dog-tile:nth-child(5) {
+        grid-column: span 2;
+      }
+
+      .dogs-cta {
+        text-align: center;
+        margin-top: 40px;
+      }
+      .dogs-cta p {
+        font-size: 0.9rem;
+        color: var(--gry);
+        margin-bottom: 16px;
+      }
+
+      /* ───────────────────────────────────────────
+   6. APPLICATION FORM
+─────────────────────────────────────────── */
+      #apply {
+        background: var(--gp);
+        border-top: 3px solid var(--g);
+      }
+
+      .form-shell {
+        background: #fff;
+        border-radius: 24px;
+        padding: 48px 44px;
+        box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .form-full {
+        grid-column: 1/-1;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-group label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--blk);
+        letter-spacing: 0.4px;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid var(--bdr);
+        border-radius: 11px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.92rem;
+        color: var(--blk);
+        background: #fff;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        outline: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--g);
+        box-shadow: 0 0 0 3px rgba(124, 178, 66, 0.12);
+      }
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: #bbb;
+      }
+      .form-group select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+
+      .form-agreement {
+        background: var(--gp);
+        border-left: 3px solid var(--g);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 18px;
+        font-size: 0.82rem;
+        color: var(--gry);
+        line-height: 1.6;
+        margin-top: 4px;
+      }
+
+      .form-submit-wrap {
+        margin-top: 10px;
+        text-align: center;
+      }
+      .btn-submit {
+        background: var(--g);
+        color: #fff;
+        border: none;
+        font-size: 1rem;
+        padding: 16px 48px;
+        border-radius: 13px;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        transition: all 0.22s;
+        letter-spacing: 0.3px;
+        width: 100%;
+      }
+      .btn-submit:hover {
+        background: var(--gd);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(124, 178, 66, 0.35);
+      }
+
+      .form-success {
+        display: none;
+        text-align: center;
+        padding: 48px 32px;
+      }
+      .form-success .success-icon {
+        font-size: 3.5rem;
+        margin-bottom: 16px;
+      }
+      .form-success h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--g);
+        margin-bottom: 12px;
+      }
+      .form-success p {
+        color: var(--gry);
+        font-size: 0.95rem;
+      }
+
+      /* ───────────────────────────────────────────
+   7. REVIEW NOTICE BLOCK
+─────────────────────────────────────────── */
+      #review {
+        background: #fff;
+      }
+      .review-block {
+        max-width: 680px;
+        margin: 0 auto;
+        border: 2px solid var(--bdr);
+        border-radius: 20px;
+        padding: 40px 44px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .review-block::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--g), var(--gl));
+      }
+      .review-block .icon {
+        font-size: 2.8rem;
+        margin-bottom: 16px;
+      }
+      .review-block h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.5rem;
+        font-weight: 900;
+        margin-bottom: 12px;
+      }
+      .review-block p {
+        color: var(--gry);
+        font-size: 0.92rem;
+        line-height: 1.65;
+      }
+      .review-block p + p {
+        margin-top: 10px;
+      }
+
+      /* ───────────────────────────────────────────
+   8. FAQ
+─────────────────────────────────────────── */
+      #faq {
+        background: var(--bg);
+      }
+
+      .faq-list {
+        max-width: 720px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .faq-item {
+        background: #fff;
+        border-radius: 14px;
+        border: 2px solid var(--bdr);
+        overflow: hidden;
+        transition: border-color 0.25s;
+      }
+      .faq-item.open {
+        border-color: var(--g);
+      }
+      .faq-q {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 20px 22px;
+        text-align: left;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.97rem;
+        font-weight: 600;
+        color: var(--blk);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .faq-q .faq-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--gp);
+        border: 1.5px solid var(--g);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1rem;
+        color: var(--g);
+        transition: all 0.25s;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .faq-item.open .faq-q .faq-icon {
+        background: var(--g);
+        color: #fff;
+        transform: rotate(45deg);
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.35s;
+        padding: 0 22px;
+        font-size: 0.88rem;
+        color: var(--gry);
+        line-height: 1.65;
+      }
+      .faq-item.open .faq-a {
+        max-height: 200px;
+        padding-bottom: 20px;
+      }
+
+      /* ───────────────────────────────────────────
+   9. FINAL CTA
+─────────────────────────────────────────── */
+      #final {
+        background: var(--blk);
+        text-align: center;
+        padding: 120px 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      #final::before {
+        content: "";
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(124, 178, 66, 0.18),
+          transparent 65%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+      .final-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      #final .tag {
+        margin-bottom: 24px;
+      }
+      #final h2 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2rem, 6vw, 3.8rem);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.07;
+        margin-bottom: 18px;
+        letter-spacing: -1px;
+      }
+      #final h2 em {
+        color: var(--g);
+        font-style: normal;
+      }
+      #final p {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.65);
+        margin-bottom: 36px;
+        font-weight: 300;
+        line-height: 1.65;
+      }
+      .final-ctas {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ───────────────────────────────────────────
+   DIVIDER
+─────────────────────────────────────────── */
+      .divider {
+        width: 48px;
+        height: 3px;
+        background: var(--g);
+        border-radius: 2px;
+        margin: 18px auto 28px;
+      }
+
+      /* ───────────────────────────────────────────
+   RESPONSIVE
+─────────────────────────────────────────── */
+      @media (max-width: 860px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .about-badge-float {
+          bottom: -12px;
+          right: 12px;
+        }
+        .steps-track {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          max-width: 360px;
+        }
+        .steps-track::before {
+          display: none;
+        }
+        .dogs-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .dog-tile:nth-child(2) {
+          grid-row: auto;
+        }
+        .dog-tile:nth-child(5) {
+          grid-column: auto;
+        }
+        .form-shell {
+          padding: 32px 24px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .review-block {
+          padding: 32px 24px;
+        }
+        section {
+          padding: 72px 0;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .dogs-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-ctas {
+          flex-direction: column;
+          align-items: center;
+        }
+        .btn {
+          width: 100%;
+          max-width: 320px;
+          justify-content: center;
+        }
+        .final-ctas {
+          flex-direction: column;
+          align-items: center;
+        }
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+        section {
+          padding: 60px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── 1. HERO ──────────────────────────────────── -->
+    <section id="hero">
+      <div class="hb1 hero-blob"></div>
+      <div class="hb2 hero-blob"></div>
+      <div class="hb3 hero-blob"></div>
+
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <span></span>
+          Creator Program — Now Open
+        </div>
+        <h1>Join the <em>TIKIBOO</em><br />Creator Pack</h1>
+        <p>
+          Love sharing your dog online? Partner with TIKIBOO Pets and earn
+          commission while helping us create better products for dogs
+          everywhere.
+        </p>
+        <div class="hero-ctas">
+          <a href="#apply" class="btn btn-primary">🐾 Apply Now</a>
+          <a href="#benefits" class="btn btn-ghost">Learn More</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-dot"></div>
+      </div>
+    </section>
+
+    <!-- ─── 2. BENEFITS ───────────────────────────────── -->
+    <section id="benefits">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="tag">Why Join</div>
+          <h2>Why Join the <em>TIKIBOO</em><br />Creator Program?</h2>
+          <p>Everything you get as part of the TIKIBOO Creator Pack.</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">💰</div>
+            <h3>10% Commission</h3>
+            <p>
+              Earn 10% commission on every sale generated through your personal
+              discount code.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">🎁</div>
+            <h3>Free Products</h3>
+            <p>
+              Selected creators receive free TIKIBOO Pets products to try and
+              feature with their dog.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">🏷️</div>
+            <h3>Personal Code</h3>
+            <p>
+              Get your own exclusive discount code to share with your followers
+              and community.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">✨</div>
+            <h3>Be Featured</h3>
+            <p>
+              Get featured on the TIKIBOO website and social media channels to
+              grow your audience.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">🚀</div>
+            <h3>Early Access</h3>
+            <p>
+              Creators get early access to new product launches before they go
+              public.
+            </p>
+          </div>
+        </div>
+
+        <div class="review-notice reveal">
+          <strong>📋 Application Review:</strong> All creator applications are
+          reviewed by the TIKIBOO Pets team to ensure the best fit for our brand
+          and community. You'll hear back within 3–5 business days.
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 3. ABOUT ───────────────────────────────────── -->
+    <section id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="about-visual reveal">
+            <div class="about-img-placeholder">
+              <span
+                ><img
+                  src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_20_16dbf2c9-16bb-4d58-a069-2c54784c8d97.png?v=1773228605"
+                  alt=""
+              /></span>
+            </div>
+            <div class="about-badge-float">
+              <em>🐾 Our Mission</em>
+              Building a sanctuary<br />for unadoptable pets
+            </div>
+          </div>
+
+          <div class="about-text reveal">
+            <div class="tag tag-outline" style="margin-bottom: 18px">
+              About TIKIBOO Pets
+            </div>
+            <h2>Products with<br /><em>Real Purpose</em></h2>
+            <div class="divider" style="margin: 18px 0 24px 0"></div>
+            <p>
+              TIKIBOO Pets creates premium products for modern pet parents who
+              care about quality, sustainability, and animal welfare.
+            </p>
+            <p>
+              Our mission goes beyond products. A portion of our efforts support
+              pet rescue, and our long-term goal is to build a sanctuary for
+              animals that cannot be adopted.
+            </p>
+            <p>
+              We believe dogs deserve the best — and so do the people who love
+              them.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 4. HOW IT WORKS ────────────────────────────── -->
+    <section id="how">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="tag">The Process</div>
+          <h2>How the Creator<br /><em>Program Works</em></h2>
+          <p>Three simple steps to start earning with TIKIBOO.</p>
+        </div>
+
+        <div class="steps-track">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <h3>Apply to Join</h3>
+            <p>
+              Fill out the creator application form with your dog content and
+              social profile.
+            </p>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <h3>Get Your Code</h3>
+            <p>
+              Receive your personal affiliate code and creator welcome kit by
+              email.
+            </p>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03</div>
+            <h3>Share & Earn</h3>
+            <p>
+              Share your dog enjoying TIKIBOO products and earn commission on
+              every sale.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 5. FEATURED DOGS ───────────────────────────── -->
+    <section id="dogs">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="tag">Community Spotlight</div>
+          <h2>Featured Dogs of the<br /><em>TIKIBOO</em> Community</h2>
+        </div>
+
+        <div class="dogs-text reveal">
+          <p>
+            We love celebrating the amazing dogs in our community. Selected
+            creators and their dogs may be featured on the TIKIBOO Pets website
+            and social media.
+          </p>
+          <p>
+            Share your dog enjoying life, treats, adventures, or funny moments —
+            we're always looking for great content to feature.
+          </p>
+          <p>
+            <strong
+              >Your dog could be the next member of the TIKIBOO spotlight.
+              🌟</strong
+            >
+          </p>
+        </div>
+
+        <!-- Dog content grid – replace placeholders with real images/videos -->
+        <div class="dogs-grid reveal">
+          <div class="dog-tile">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_21.png?v=1773252071"
+                alt=""
+            /></span>
+          </div>
+          <div class="dog-tile" style="min-height: 320px">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_21.png?v=1773252071"
+                alt=""
+            /></span>
+          </div>
+          <div class="dog-tile">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_21.png?v=1773252071"
+                alt=""
+            /></span>
+          </div>
+          <div class="dog-tile">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_21.png?v=1773252071"
+                alt=""
+            /></span>
+          </div>
+          <div class="dog-tile">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_21.png?v=1773252071"
+                alt=""
+            /></span>
+          </div>
+          <div class="dog-tile">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0728/7914/5250/files/Untitled_design_21.png?v=1773252071"
+                alt=""
+            /></span>
+          </div>
+        </div>
+
+        <div class="dogs-cta reveal">
+          <p>Want your dog featured? Apply to become a creator below.</p>
+          <a href="#apply" class="btn btn-primary">Apply Now →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 6. APPLICATION FORM ────────────────────────── -->
+    <section id="apply">
+      <div class="wrap-sm">
+        <div class="section-head reveal">
+          <div class="tag">Join the Pack</div>
+          <h2>Creator <em>Application</em></h2>
+          <p>
+            Fill out the form below and the TIKIBOO team will review your
+            application within 3–5 business days.
+          </p>
+        </div>
+
+        <div class="form-shell reveal">
+          <div id="appForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input
+                  type="text"
+                  id="f-name"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Email Address *</label>
+                <input
+                  type="email"
+                  id="f-email"
+                  placeholder="you@email.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Social Media Handle *</label>
+                <input
+                  type="text"
+                  id="f-handle"
+                  placeholder="@yourhandle"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Platform *</label>
+                <select id="f-platform">
+                  <option value="" disabled selected>Select platform</option>
+                  <option>TikTok</option>
+                  <option>Instagram</option>
+                  <option>YouTube</option>
+                  <option>Multiple</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Number of Followers</label>
+                <input type="text" id="f-followers" placeholder="e.g. 5,000" />
+              </div>
+              <div class="form-group">
+                <label>Dog Name</label>
+                <input
+                  type="text"
+                  id="f-dogname"
+                  placeholder="Your dog's name"
+                />
+              </div>
+              <div class="form-group">
+                <label>Dog Breed</label>
+                <input
+                  type="text"
+                  id="f-breed"
+                  placeholder="e.g. Golden Retriever"
+                />
+              </div>
+              <div class="form-group">
+                <label>Shipping Address</label>
+                <input
+                  type="text"
+                  id="f-address"
+                  placeholder="City, Province/State, Country"
+                />
+              </div>
+              <div class="form-group form-full">
+                <label>Link to Your Dog Content *</label>
+                <input
+                  type="url"
+                  id="f-link"
+                  placeholder="https://..."
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-agreement" style="margin-top: 22px">
+              <strong>Creator Content Agreement:</strong> By submitting this
+              application you grant TIKIBOO Pets permission to repost, share,
+              and use your content across marketing channels including our
+              website, social media, advertisements, and product listings.
+              Creators will be credited whenever possible. Affiliate commissions
+              are paid monthly based on tracked sales generated through your
+              unique code or link.
+            </div>
+
+            <div class="form-submit-wrap" style="margin-top: 22px">
+              <button class="btn-submit" onclick="submitForm()">
+                🐾 Apply Now — Become a Creator
+              </button>
+            </div>
+          </div>
+
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon">🎉</div>
+            <h3>Application Received!</h3>
+            <p>
+              Thanks for applying to the TIKIBOO Creator Program.<br />Our team
+              will review your application and be in touch within
+              <strong>3–5 business days</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 7. REVIEW NOTICE ───────────────────────────── -->
+    <section id="review" style="padding: 72px 0">
+      <div class="wrap-sm">
+        <div class="review-block reveal">
+          <div class="icon">📬</div>
+          <h3>What Happens After You Apply?</h3>
+          <div class="divider"></div>
+          <p>
+            Creator applications are reviewed by the TIKIBOO Pets team within
+            <strong>3–5 business days</strong>.
+          </p>
+          <p>
+            Approved creators will receive their affiliate code, program
+            details, and next steps by email. We look forward to welcoming you
+            to the pack!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 8. FAQ ─────────────────────────────────────── -->
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="tag">FAQ</div>
+          <h2>Creator Program <em>FAQ</em></h2>
+          <p>Everything you need to know before applying.</p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Do I need a minimum number of followers?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-a">
+              No. We review every application individually. We look for creators
+              who share authentic dog content and have an engaged audience — not
+              just a large one.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              How do commissions work?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-a">
+              Approved creators receive a personal discount code to share with
+              their audience. You earn 10% commission on all sales generated
+              using your unique code.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              When are commissions paid?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-a">
+              Commissions are calculated monthly and paid after the end of each
+              month via PayPal or e-transfer.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Do I receive free products?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-a">
+              Selected creators may receive free TIKIBOO Pets products to
+              feature in their content. This is determined during the review
+              process based on content style and audience fit.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Can TIKIBOO Pets use my content?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-a">
+              Yes. By participating in the program, you grant TIKIBOO Pets
+              permission to repost and use your content for marketing purposes
+              including social media, website, and advertisements. You will be
+              credited whenever possible.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              How long does the review process take?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-a">
+              Creator applications are reviewed within 3–10 business days.
+              Approved creators will receive their affiliate code and full
+              program details by email.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 9. FINAL CTA ──────────────────────────────── -->
+    <section id="final">
+      <div class="final-inner">
+        <div class="tag reveal">🐾 Ready to Join?</div>
+        <h2 class="reveal">
+          Ready to Join the<br /><em>TIKIBOO</em> Creator Pack?
+        </h2>
+        <p class="reveal">
+          Apply today and start earning while sharing your dog's favorite
+          products.
+        </p>
+        <div class="final-ctas reveal">
+          <a href="#apply" class="btn btn-primary">🐾 Apply Now</a>
+          <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      /* ── Scroll Reveal ───────────────────────── */
+      const revealEls = document.querySelectorAll(".reveal");
+      const ro = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("in"), 80);
+              ro.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      revealEls.forEach((el) => ro.observe(el));
+
+      /* ── FAQ Toggle ─────────────────────────── */
+      function toggleFaq(btn) {
+        const item = btn.closest(".faq-item");
+        const isOpen = item.classList.contains("open");
+        document
+          .querySelectorAll(".faq-item.open")
+          .forEach((i) => i.classList.remove("open"));
+        if (!isOpen) item.classList.add("open");
+      }
+
+      /* ── Form Submit ─────────────────────────── */
+      function submitForm() {
+        const name = document.getElementById("f-name").value.trim();
+        const email = document.getElementById("f-email").value.trim();
+        const handle = document.getElementById("f-handle").value.trim();
+        const link = document.getElementById("f-link").value.trim();
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name) {
+          alert("Please enter your full name.");
+          return;
+        }
+        if (!emailRe.test(email)) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+        if (!handle) {
+          alert("Please enter your social media handle.");
+          return;
+        }
+        if (!link) {
+          alert("Please enter a link to your dog content.");
+          return;
+        }
+
+        document.getElementById("appForm").style.display = "none";
+        document.getElementById("formSuccess").style.display = "block";
+        document
+          .getElementById("formSuccess")
+          .scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      /* ── Smooth scroll for anchor links ─────── */
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const target = document.querySelector(a.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

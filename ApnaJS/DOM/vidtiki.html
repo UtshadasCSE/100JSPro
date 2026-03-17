@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join the TIKIBOO Pack — Submit Your Pet's Chaos</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ─── RESET ─────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --g: #7cb242;
+        --gd: #5a8a2e;
+        --gl: #a8d46f;
+        --gp: #f0f8e4;
+        --blk: #0e0e0e;
+        --wht: #ffffff;
+        --off: #f7f7f4;
+        --gry: #555555;
+        --lgry: #999999;
+        --bdr: #e4e4e0;
+        --star: #f5a623;
+        --red: #e84545;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--off);
+        color: var(--blk);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ─── HERO ──────────────────────────────────── */
+      .hero {
+        background: var(--blk);
+        position: relative;
+        overflow: hidden;
+        padding: 100px 24px 90px;
+        text-align: center;
+      }
+
+      /* animated blobs */
+      .hero-blobs {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        animation: blobMove 12s ease-in-out infinite alternate;
+      }
+      .blob-1 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(124, 178, 66, 0.2),
+          transparent 65%
+        );
+        top: -180px;
+        left: -120px;
+      }
+      .blob-2 {
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(
+          circle,
+          rgba(90, 138, 46, 0.15),
+          transparent 65%
+        );
+        bottom: -120px;
+        right: -80px;
+        animation-delay: -4s;
+        animation-duration: 9s;
+      }
+      .blob-3 {
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(
+          circle,
+          rgba(124, 178, 66, 0.08),
+          transparent 65%
+        );
+        top: 40%;
+        right: 10%;
+        animation-delay: -2s;
+        animation-duration: 7s;
+      }
+
+      @keyframes blobMove {
+        from {
+          transform: scale(1) translate(0, 0);
+        }
+        to {
+          transform: scale(1.14) translate(24px, 16px);
+        }
+      }
+
+      /* dot texture */
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
+        background-size: 26px 26px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 780px;
+        margin: 0 auto;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1.5px solid rgba(124, 178, 66, 0.45);
+        color: var(--gl);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 100px;
+        margin-bottom: 28px;
+      }
+      .hero-badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--g);
+        animation: pulse 2.2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(0.6);
+        }
+      }
+
+      .hero-title {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2.6rem, 6.5vw, 5rem);
+        font-weight: 900;
+        color: var(--wht);
+        line-height: 1;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+      }
+      .hero-title .green {
+        color: var(--g);
+        font-style: italic;
+      }
+
+      .hero-sub {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+        max-width: 560px;
+        margin: 0 auto 40px;
+      }
+
+      /* hero info pills */
+      .hero-pills {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .pill {
+        background: rgba(124, 178, 66, 0.12);
+        border: 1px solid rgba(124, 178, 66, 0.25);
+        color: var(--gl);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 100px;
+      }
+
+      /* ─── WAVE DIVIDER ──────────────────────────── */
+      .wave {
+        display: block;
+        background: var(--blk);
+        line-height: 0;
+      }
+      .wave svg {
+        display: block;
+        width: 100%;
+      }
+
+      /* ─── WHAT WE WANT ──────────────────────────── */
+      .info-strip {
+        background: var(--gp);
+        padding: 64px 24px;
+      }
+      .info-strip-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 32px;
+      }
+      .info-card {
+        background: var(--wht);
+        border-radius: 18px;
+        padding: 28px 24px;
+        border: 1.5px solid var(--bdr);
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.04);
+        transition:
+          transform 0.22s,
+          box-shadow 0.22s;
+      }
+      .info-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 28px rgba(124, 178, 66, 0.12);
+      }
+      .info-card-icon {
+        font-size: 2rem;
+        margin-bottom: 14px;
+        display: block;
+      }
+      .info-card-title {
+        font-family: "Fraunces", serif;
+        font-size: 1.05rem;
+        font-weight: 900;
+        color: var(--blk);
+        margin-bottom: 10px;
+      }
+      .info-card-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .info-card-list li {
+        font-size: 0.875rem;
+        color: var(--gry);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        line-height: 1.5;
+      }
+      .info-card-list li::before {
+        content: "·";
+        color: var(--g);
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* ─── FORM SECTION ──────────────────────────── */
+      .form-section {
+        padding: 80px 24px 100px;
+        background: var(--off);
+      }
+      .form-section-inner {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--g);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2.2px;
+        text-transform: uppercase;
+        padding: 5px 16px;
+        border-radius: 100px;
+        margin-bottom: 16px;
+      }
+
+      .section-title {
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.9rem, 4vw, 2.9rem);
+        font-weight: 900;
+        color: var(--blk);
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+      .section-title .green {
+        color: var(--g);
+        font-style: italic;
+      }
+
+      .section-desc {
+        font-size: 0.95rem;
+        color: var(--gry);
+        line-height: 1.7;
+        margin-bottom: 44px;
+      }
+
+      /* ─── FORM CARD ─────────────────────────────── */
+      .form-card {
+        background: var(--wht);
+        border-radius: 24px;
+        padding: 48px 44px;
+        border: 1.5px solid var(--bdr);
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.07);
+      }
+
+      /* field group */
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .field-row.full {
+        grid-template-columns: 1fr;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .field label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--blk);
+        letter-spacing: 0.2px;
+      }
+      .field label span {
+        color: var(--red);
+        margin-left: 2px;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.93rem;
+        color: var(--blk);
+        background: var(--off);
+        border: 1.5px solid var(--bdr);
+        border-radius: 12px;
+        padding: 13px 16px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s,
+          background 0.2s;
+        width: 100%;
+        appearance: none;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--g);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(124, 178, 66, 0.12);
+      }
+      .field input.error,
+      .field select.error {
+        border-color: var(--red);
+      }
+      .field textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+
+      /* select arrow */
+      .select-wrap {
+        position: relative;
+      }
+      .select-wrap::after {
+        content: "▾";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--lgry);
+        pointer-events: none;
+        font-size: 0.85rem;
+      }
+
+      /* upload zone */
+      .upload-zone {
+        border: 2px dashed var(--bdr);
+        border-radius: 14px;
+        padding: 36px 24px;
+        text-align: center;
+        cursor: pointer;
+        background: var(--off);
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        position: relative;
+      }
+      .upload-zone:hover,
+      .upload-zone.drag-over {
+        border-color: var(--g);
+        background: var(--gp);
+      }
+      .upload-zone input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+      .upload-icon {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .upload-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--blk);
+        margin-bottom: 4px;
+      }
+      .upload-sub {
+        font-size: 0.8rem;
+        color: var(--lgry);
+      }
+      .upload-sub span {
+        color: var(--g);
+        font-weight: 600;
+      }
+      .upload-name {
+        display: none;
+        margin-top: 10px;
+        font-size: 0.82rem;
+        color: var(--g);
+        font-weight: 600;
+        background: rgba(124, 178, 66, 0.1);
+        padding: 4px 12px;
+        border-radius: 100px;
+      }
+
+      /* divider */
+      .or-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 16px 0;
+        font-size: 0.78rem;
+        color: var(--lgry);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .or-divider::before,
+      .or-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--bdr);
+      }
+
+      /* ─── LEGAL BOX ─────────────────────────────── */
+      .legal-box {
+        background: #fffbe6;
+        border: 1.5px solid #f0d060;
+        border-radius: 14px;
+        padding: 20px 20px 20px 18px;
+        margin: 24px 0 20px;
+        font-size: 0.82rem;
+        color: #555;
+        line-height: 1.65;
+      }
+      .legal-box strong {
+        color: var(--blk);
+      }
+
+      /* checkbox */
+      .check-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+      .check-group input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        accent-color: var(--g);
+        cursor: pointer;
+        margin-top: 1px;
+      }
+      .check-group-text {
+        font-size: 0.875rem;
+        color: var(--gry);
+        line-height: 1.55;
+      }
+      .check-group-text strong {
+        color: var(--blk);
+      }
+
+      /* ─── SUBMIT BUTTON ─────────────────────────── */
+      .submit-btn {
+        width: 100%;
+        background: var(--g);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 18px 24px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        letter-spacing: 0.2px;
+      }
+      .submit-btn:hover {
+        background: var(--gd);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(124, 178, 66, 0.35);
+      }
+      .submit-btn:active {
+        transform: scale(0.97);
+      }
+      .submit-btn:disabled {
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      .submit-note {
+        text-align: center;
+        font-size: 0.78rem;
+        color: var(--lgry);
+        margin-top: 12px;
+      }
+
+      /* ─── THANK YOU STATE ───────────────────────── */
+      .thankyou {
+        display: none;
+        text-align: center;
+        padding: 60px 24px;
+      }
+      .thankyou.active {
+        display: block;
+      }
+      .form-card.hidden {
+        display: none;
+      }
+
+      .ty-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .ty-title {
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 900;
+        color: var(--blk);
+        margin-bottom: 14px;
+      }
+      .ty-desc {
+        font-size: 0.97rem;
+        color: var(--gry);
+        line-height: 1.7;
+        max-width: 480px;
+        margin: 0 auto 36px;
+      }
+
+      .ty-btns {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .ty-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 26px;
+        border-radius: 12px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+      .ty-btn-primary {
+        background: var(--g);
+        color: #fff;
+      }
+      .ty-btn-primary:hover {
+        background: var(--gd);
+        transform: translateY(-2px);
+      }
+      .ty-btn-ghost {
+        background: transparent;
+        border-color: var(--bdr);
+        color: var(--blk);
+      }
+      .ty-btn-ghost:hover {
+        border-color: var(--g);
+        color: var(--g);
+      }
+
+      /* ─── FOOTER STRIP ──────────────────────────── */
+      .footer-strip {
+        background: var(--blk);
+        padding: 32px 24px;
+        text-align: center;
+      }
+      .footer-strip p {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .footer-strip a {
+        color: var(--gl);
+        text-decoration: none;
+      }
+
+      /* ─── SCROLL REVEAL ─────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ─── RESPONSIVE ─────────────────────────────── */
+      @media (max-width: 900px) {
+        .info-strip-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .info-strip-inner {
+          grid-template-columns: 1fr;
+        }
+        .form-card {
+          padding: 28px 20px;
+        }
+        .field-row {
+          grid-template-columns: 1fr;
+        }
+        .ty-btns {
+          flex-direction: column;
+          align-items: center;
+        }
+        .ty-btn {
+          width: 100%;
+          max-width: 300px;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════
+  HERO
+══════════════════════════════════════ -->
+    <section class="hero">
+      <div class="hero-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Total Animal Chaos — Now Accepting Submissions
+        </div>
+        <h1 class="hero-title">
+          Submit Your Pet's<br /><span class="green">Most Chaotic</span
+          ><br />Moment
+        </h1>
+        <p class="hero-sub">
+          Got a hilarious, heart-melting, or totally chaotic pet video? We
+          feature
+          <strong style="color: #fff">REAL pets</strong> from REAL animal lovers
+          on Total Animal Chaos — and your pet could be next.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">😂 Funny Fails</span>
+          <span class="pill">⚡ Zoomies</span>
+          <span class="pill">😲 Unexpected Reactions</span>
+          <span class="pill">🌀 Chaos Moments</span>
+          <span class="pill">💛 Heartwarming Stories</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- wave -->
+    <div class="wave">
+      <svg
+        viewBox="0 0 1440 48"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <path d="M0,32 C360,0 1080,64 1440,24 L1440,0 L0,0 Z" fill="#0e0e0e" />
+        <path
+          d="M0,32 C360,0 1080,64 1440,24 L1440,48 L0,48 Z"
+          fill="#f0f8e4"
+        />
+      </svg>
+    </div>
+
+    <!-- ══════════════════════════════════════
+  WHY / WHAT / PERKS
+══════════════════════════════════════ -->
+    <section class="info-strip">
+      <div class="info-strip-inner">
+        <div class="info-card reveal">
+          <span class="info-card-icon">🎬</span>
+          <div class="info-card-title">What We're Looking For</div>
+          <ul class="info-card-list">
+            <li>Funny fails & accidents</li>
+            <li>Zoomie episodes</li>
+            <li>Unexpected reactions</li>
+            <li>Pure chaos moments</li>
+            <li>Heartwarming pet stories</li>
+          </ul>
+        </div>
+
+        <div class="info-card reveal" style="transition-delay: 0.1s">
+          <span class="info-card-icon">🏆</span>
+          <div class="info-card-title">Why Submit?</div>
+          <ul class="info-card-list">
+            <li>Your pet featured on YouTube</li>
+            <li>Credit given when possible</li>
+            <li>Support a future rescue sanctuary</li>
+            <li>Spread joy to animal lovers worldwide</li>
+            <li>Chance to win in our draw</li>
+          </ul>
+        </div>
+
+        <div class="info-card reveal" style="transition-delay: 0.2s">
+          <span class="info-card-icon">🏡</span>
+          <div class="info-card-title">The TIKIBOO Mission</div>
+          <ul class="info-card-list">
+            <li>Every submission grows our community</li>
+            <li>Supports our long-term rescue goals</li>
+            <li>Helping build a sanctuary for animals</li>
+            <li>Who can't be adopted out</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+  SUBMISSION FORM
+══════════════════════════════════════ -->
+    <section class="form-section">
+      <div class="form-section-inner">
+        <div class="reveal">
+          <div class="section-label">📹 Submit Your Video</div>
+          <h2 class="section-title">
+            Join the <span class="green">TIKIBOO Pack</span>
+          </h2>
+          <p class="section-desc">
+            We love seeing happy pets with our products. Submit your video for a
+            chance to be featured on our YouTube channel and entered into a
+            draw!
+          </p>
+        </div>
+
+        <!-- FORM CARD -->
+        <div
+          class="form-card reveal"
+          id="formCard"
+          style="transition-delay: 0.1s"
+        >
+          <form id="submitForm" novalidate>
+            <!-- Row 1: Pet name + Owner name -->
+            <div class="field-row">
+              <div class="field">
+                <label for="petName">Pet's Name <span>*</span></label>
+                <input
+                  type="text"
+                  id="petName"
+                  name="petName"
+                  placeholder="Buddy, Luna, Max…"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="ownerName">Your Name <span>*</span></label>
+                <input
+                  type="text"
+                  id="ownerName"
+                  name="ownerName"
+                  placeholder="Jane Smith"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Row 2: Email + Country -->
+            <div class="field-row">
+              <div class="field">
+                <label for="email">Email Address <span>*</span></label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="country">Country <span>*</span></label>
+                <div class="select-wrap">
+                  <select id="country" name="country" required>
+                    <option value="" disabled selected>Select country</option>
+                    <option>Canada</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Australia</option>
+                    <option>New Zealand</option>
+                    <option>Ireland</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 3: Where purchased -->
+            <div class="field-row full">
+              <div class="field">
+                <label for="purchase"
+                  >Where did you purchase? <span>*</span></label
+                >
+                <div class="select-wrap">
+                  <select id="purchase" name="purchase" required>
+                    <option value="" disabled selected>Select option</option>
+                    <option>Amazon USA</option>
+                    <option>Amazon Canada</option>
+                    <option>TIKIBOO Website</option>
+                    <option>Other</option>
+                    <option>Haven't purchased yet</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video Upload -->
+            <div class="field-row full">
+              <div class="field">
+                <label>Upload Your Video <span>*</span></label>
+                <div class="upload-zone" id="uploadZone">
+                  <input
+                    type="file"
+                    id="videoFile"
+                    accept="video/*"
+                    aria-label="Upload video"
+                  />
+                  <span class="upload-icon">🎥</span>
+                  <div class="upload-title">Drag & drop your video here</div>
+                  <div class="upload-sub">
+                    MP4, MOV, AVI — max 500MB · <span>Browse files</span>
+                  </div>
+                  <div class="upload-name" id="uploadName"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="or-divider">or paste a link instead</div>
+
+            <!-- Video link fallback -->
+            <div class="field-row full">
+              <div class="field">
+                <label for="videoLink"
+                  >Video Link (YouTube, Google Drive, Dropbox…)</label
+                >
+                <input
+                  type="url"
+                  id="videoLink"
+                  name="videoLink"
+                  placeholder="https://drive.google.com/…"
+                />
+              </div>
+            </div>
+
+            <!-- Legal Box -->
+            <div class="legal-box">
+              <strong>📋 Video Submission Terms</strong><br /><br />
+              By submitting your video to TIKIBOO Pets, you confirm that you are
+              the original creator and owner of the content, and that it does
+              not infringe on any copyright, trademark, or third-party rights.
+              You grant TIKIBOO Pets a non-exclusive, worldwide, royalty-free,
+              perpetual license to use, reproduce, edit, distribute, publish,
+              and display the submitted content across digital platforms
+              including YouTube, social media, and websites.
+              <strong
+                >You understand that your content may be monetized.</strong
+              >
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="field-row full" style="margin-bottom: 8px">
+              <label class="check-group">
+                <input type="checkbox" id="permCheck" required />
+                <div class="check-group-text">
+                  <strong>I give TIKIBOO Pets permission</strong> to use this
+                  content on their website, Amazon listings, social media,
+                  YouTube channel, and marketing materials.
+                </div>
+              </label>
+            </div>
+
+            <div class="field-row full" style="margin-bottom: 0">
+              <label class="check-group">
+                <input type="checkbox" id="ownCheck" required />
+                <div class="check-group-text">
+                  I confirm I own this content and grant TIKIBOO Pets unlimited
+                  usage rights. I am at least 18 years old or have parental
+                  consent.
+                </div>
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span>🐾</span> Submit My Pet's Video
+            </button>
+            <p class="submit-note">
+              We'll review your submission within 3–5 business days.
+            </p>
+          </form>
+        </div>
+
+        <!-- THANK YOU STATE -->
+        <div class="thankyou" id="thankYou">
+          <span class="ty-icon">🎉</span>
+          <h2 class="ty-title">You're in the TIKIBOO Pack!</h2>
+          <p class="ty-desc">
+            Thank you for submitting your pet's video! Our team will review it
+            within 3–5 business days and reach out if we feature it. You're
+            helping build something special — a sanctuary for animals who need
+            it most. 🐾
+          </p>
+          <div class="ty-btns">
+            <a href="https://tikiboopets.ca" class="ty-btn ty-btn-primary"
+              >🛍️ Shop Our Treats</a
+            >
+            <a href="https://tikiboopets.ca/books" class="ty-btn ty-btn-ghost"
+              >📚 Discover Our Books</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+  FOOTER STRIP
+══════════════════════════════════════ -->
+    <footer class="footer-strip">
+      <p>
+        © 2025 TIKIBOO Pets ·
+        <a href="https://tikiboopets.ca">tikiboopets.ca</a> · All submissions
+        reviewed by the TIKIBOO team.
+      </p>
+    </footer>
+
+    <script>
+      // ── SCROLL REVEAL ──────────────────────────────
+      var reveals = document.querySelectorAll(".reveal");
+      function checkReveal() {
+        reveals.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 60) el.classList.add("in");
+        });
+      }
+      window.addEventListener("scroll", checkReveal, { passive: true });
+      checkReveal();
+
+      // ── DRAG & DROP ────────────────────────────────
+      var zone = document.getElementById("uploadZone");
+      var fileInput = document.getElementById("videoFile");
+      var nameEl = document.getElementById("uploadName");
+
+      fileInput.addEventListener("change", function () {
+        if (this.files[0]) showFileName(this.files[0].name);
+      });
+      zone.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        zone.classList.add("drag-over");
+      });
+      zone.addEventListener("dragleave", function () {
+        zone.classList.remove("drag-over");
+      });
+      zone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        zone.classList.remove("drag-over");
+        var file = e.dataTransfer.files[0];
+        if (file) {
+          fileInput.files = e.dataTransfer.files;
+          showFileName(file.name);
+        }
+      });
+      function showFileName(name) {
+        nameEl.textContent = "✓ " + name;
+        nameEl.style.display = "inline-block";
+      }
+
+      // ── FORM VALIDATION & SUBMIT ──────────────────
+      var form = document.getElementById("submitForm");
+      var formCard = document.getElementById("formCard");
+      var tyEl = document.getElementById("thankYou");
+      var submitBtn = document.getElementById("submitBtn");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var valid = true;
+
+        // clear errors
+        form.querySelectorAll(".error").forEach(function (el) {
+          el.classList.remove("error");
+        });
+
+        // required text / email / select
+        ["petName", "ownerName", "email", "country", "purchase"].forEach(
+          function (id) {
+            var el = document.getElementById(id);
+            if (!el.value.trim()) {
+              el.classList.add("error");
+              valid = false;
+            }
+          },
+        );
+
+        // need video file OR link
+        var hasFile = fileInput.files && fileInput.files[0];
+        var hasLink = document.getElementById("videoLink").value.trim();
+        if (!hasFile && !hasLink) {
+          zone.style.borderColor = "var(--red)";
+          valid = false;
+        } else {
+          zone.style.borderColor = "";
+        }
+
+        // checkboxes
+        var perm = document.getElementById("permCheck");
+        var own = document.getElementById("ownCheck");
+        if (!perm.checked || !own.checked) {
+          valid = false;
+        }
+
+        if (!valid) {
+          // scroll to first error
+          var firstErr = form.querySelector('.error, [style*="red"]');
+          if (firstErr)
+            firstErr.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        // simulate submission
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<span style="display:inline-block;animation:spin .7s linear infinite">⏳</span> Submitting…';
+
+        setTimeout(function () {
+          formCard.classList.add("hidden");
+          tyEl.classList.add("active");
+          window.scrollTo({ top: tyEl.offsetTop - 80, behavior: "smooth" });
+        }, 1400);
+      });
+
+      // spin keyframe for loading icon
+      var style = document.createElement("style");
+      style.textContent =
+        "@keyframes spin { to { transform: rotate(360deg); } }";
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
