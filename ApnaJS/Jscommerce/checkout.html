@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout &mdash; LUXE Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/header.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Minimal Header for Checkout -->
+<header class="site-header" id="siteHeader" style="position:sticky;">
+  <div class="topbar" style="background:#111118;">
+    <div class="container topbar__inner">
+      <div class="topbar__center" style="width:100%;text-align:center;"><span class="topbar__deal-text"><i class="fa-solid fa-lock" style="margin-right:6px;color:var(--color-secondary)"></i> Secure &amp; Encrypted Checkout &mdash; Your data is protected</span></div>
+    </div>
+  </div>
+  <div class="header__main" style="border-bottom:1px solid var(--color-border);">
+    <div class="container header__main-inner">
+      <a href="index.html" class="header__logo"><span class="logo__icon">L</span><span class="logo__text">LUXE<em>store</em></span></a>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--color-muted);">
+        <i class="fa-solid fa-shield-halved" style="color:#15803d"></i>
+        <span>SSL Secured</span>
+        <span style="margin:0 8px;color:var(--color-border)">|</span>
+        <i class="fa-solid fa-rotate-left" style="color:var(--color-secondary)"></i>
+        <span>30-Day Returns</span>
+        <span style="margin:0 8px;color:var(--color-border)">|</span>
+        <i class="fa-solid fa-headset" style="color:var(--color-secondary)"></i>
+        <span>24/7 Support</span>
+      </div>
+      <a href="shop.html" style="font-size:13px;color:var(--color-text-light);display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-chevron-left"></i> Continue Shopping</a>
+    </div>
+  </div>
+</header>
+<div style="height:calc(var(--topbar-height) + var(--header-main-height));"></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <h1 class="page-hero__title">Checkout</h1>
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i>
+      <a href="shop.html">Shop</a><i class="fa-solid fa-chevron-right"></i>
+      <span>Checkout</span>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Progress Steps -->
+  <div class="checkout-steps" style="padding:32px 0 0;">
+    <div class="checkout-step is-done">
+      <div class="step-num"><i class="fa-solid fa-check" style="font-size:11px"></i></div>
+      <span>Cart</span>
+      <span></span>
+    </div>
+    <div class="checkout-step is-active">
+      <div class="step-num">2</div>
+      <span>Information</span>
+      <span></span>
+    </div>
+    <div class="checkout-step">
+      <div class="step-num">3</div>
+      <span>Shipping</span>
+      <span></span>
+    </div>
+    <div class="checkout-step">
+      <div class="step-num">4</div>
+      <span>Payment</span>
+    </div>
+  </div>
+
+  <div class="checkout-layout">
+    <!-- LEFT: Forms -->
+    <div class="checkout-forms">
+
+      <!-- Contact Info -->
+      <div class="checkout-card">
+        <h2 class="checkout-card__title"><i class="fa-solid fa-user"></i> Contact Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">First Name <span class="req">*</span></label>
+            <input class="form-input" type="text" placeholder="John"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name <span class="req">*</span></label>
+            <input class="form-input" type="text" placeholder="Doe"/>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label">Email Address <span class="req">*</span></label>
+            <div class="form-input-icon-wrap">
+              <input class="form-input" type="email" placeholder="john@example.com"/>
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label">Phone Number</label>
+            <div class="form-input-icon-wrap">
+              <input class="form-input" type="tel" placeholder="+1 (555) 000-0000"/>
+              <i class="fa-solid fa-phone"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Address -->
+      <div class="checkout-card">
+        <h2 class="checkout-card__title"><i class="fa-solid fa-location-dot"></i> Shipping Address</h2>
+        <div class="form-grid">
+          <div class="form-group span-2">
+            <label class="form-label">Street Address <span class="req">*</span></label>
+            <input class="form-input" type="text" placeholder="123 Main Street"/>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label">Apartment, Suite, etc.</label>
+            <input class="form-input" type="text" placeholder="Apt 4B (optional)"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">City <span class="req">*</span></label>
+            <input class="form-input" type="text" placeholder="New York"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State / Province <span class="req">*</span></label>
+            <select class="form-select">
+              <option value="">Select State</option>
+              <option>New York</option><option>California</option><option>Texas</option>
+              <option>Florida</option><option>Illinois</option><option>Washington</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ZIP / Postal Code <span class="req">*</span></label>
+            <input class="form-input" type="text" placeholder="10001"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Country <span class="req">*</span></label>
+            <select class="form-select">
+              <option>United States</option><option>Canada</option><option>United Kingdom</option>
+              <option>Australia</option><option>Germany</option><option>France</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <label class="filter-check" style="font-size:13.5px;color:var(--color-text);"><input type="checkbox" style="accent-color:var(--color-primary);margin-right:8px;"> Save this address for future orders</label>
+        </div>
+      </div>
+
+      <!-- Shipping Method -->
+      <div class="checkout-card">
+        <h2 class="checkout-card__title"><i class="fa-solid fa-truck"></i> Shipping Method</h2>
+        <div class="shipping-options">
+          <label class="shipping-option is-selected">
+            <input type="radio" name="shipping" checked/>
+            <div class="shipping-option__info">
+              <div class="shipping-option__name">Standard Shipping</div>
+              <div class="shipping-option__eta"><i class="fa-regular fa-clock"></i> Estimated delivery: 5-7 business days</div>
+            </div>
+            <div class="shipping-option__price free">FREE</div>
+          </label>
+          <label class="shipping-option">
+            <input type="radio" name="shipping"/>
+            <div class="shipping-option__info">
+              <div class="shipping-option__name">Express Shipping</div>
+              <div class="shipping-option__eta"><i class="fa-regular fa-clock"></i> Estimated delivery: 2-3 business days</div>
+            </div>
+            <div class="shipping-option__price">$9.99</div>
+          </label>
+          <label class="shipping-option">
+            <input type="radio" name="shipping"/>
+            <div class="shipping-option__info">
+              <div class="shipping-option__name">Overnight Shipping</div>
+              <div class="shipping-option__eta"><i class="fa-regular fa-clock"></i> Delivered by tomorrow</div>
+            </div>
+            <div class="shipping-option__price">$24.99</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="checkout-card">
+        <h2 class="checkout-card__title"><i class="fa-solid fa-credit-card"></i> Payment Method</h2>
+        <div class="payment-tabs">
+          <div class="payment-tab is-active" id="tabCard"><i class="fa-solid fa-credit-card"></i> Credit Card</div>
+          <div class="payment-tab" id="tabPaypal"><i class="fa-brands fa-paypal" style="color:#003087"></i> PayPal</div>
+          <div class="payment-tab" id="tabApple"><i class="fa-brands fa-apple"></i> Apple Pay</div>
+          <div class="payment-tab" id="tabGoogle"><i class="fa-brands fa-google-pay"></i> Google Pay</div>
+        </div>
+        <div id="cardForm">
+          <div class="form-grid">
+            <div class="form-group span-2">
+              <label class="form-label">Card Number <span class="req">*</span></label>
+              <div class="form-input-icon-wrap">
+                <input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="cardNumInput"/>
+                <i class="fa-solid fa-credit-card"></i>
+              </div>
+            </div>
+            <div class="form-group span-2">
+              <label class="form-label">Name on Card <span class="req">*</span></label>
+              <input class="form-input" type="text" placeholder="John Doe"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expiry Date <span class="req">*</span></label>
+              <input class="form-input" type="text" placeholder="MM / YY" maxlength="7"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV <span class="req">*</span></label>
+              <div class="form-input-icon-wrap">
+                <input class="form-input" type="password" placeholder="&#9679;&#9679;&#9679;" maxlength="4"/>
+                <i class="fa-solid fa-lock"></i>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px;">
+            <label class="filter-check" style="font-size:13.5px;color:var(--color-text);"><input type="checkbox" style="accent-color:var(--color-primary);margin-right:8px;"> Save card for future purchases</label>
+          </div>
+        </div>
+        <div id="paypalForm" style="display:none;padding:20px;text-align:center;background:var(--color-light);border-radius:10px;">
+          <i class="fa-brands fa-paypal" style="font-size:40px;color:#003087;margin-bottom:10px;display:block;"></i>
+          <p style="color:var(--color-text-light);font-size:14px;">You'll be redirected to PayPal to complete your payment securely.</p>
+        </div>
+        <div id="appleForm" style="display:none;padding:20px;text-align:center;background:var(--color-light);border-radius:10px;">
+          <i class="fa-brands fa-apple" style="font-size:40px;color:#111;margin-bottom:10px;display:block;"></i>
+          <p style="color:var(--color-text-light);font-size:14px;">Click "Place Order" to authorize with Apple Pay on your device.</p>
+        </div>
+        <div id="googleForm" style="display:none;padding:20px;text-align:center;background:var(--color-light);border-radius:10px;">
+          <i class="fa-brands fa-google-pay" style="font-size:40px;color:#4285f4;margin-bottom:10px;display:block;"></i>
+          <p style="color:var(--color-text-light);font-size:14px;">Click "Place Order" to complete payment with Google Pay.</p>
+        </div>
+      </div>
+
+      <!-- Additional Notes -->
+      <div class="checkout-card">
+        <h2 class="checkout-card__title"><i class="fa-solid fa-note-sticky"></i> Order Notes</h2>
+        <div class="form-group">
+          <label class="form-label">Special Instructions (optional)</label>
+          <textarea class="form-input" style="height:80px;resize:vertical;" placeholder="Leave a note for your order, e.g., gift wrapping, delivery instructions..."></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Order Summary -->
+    <div>
+      <div class="order-summary">
+        <h3 class="order-summary__title">Order Summary</h3>
+        <div class="order-items" id="orderItems">
+          <!-- Injected by JS -->
+        </div>
+        <div class="coupon-row">
+          <input type="text" placeholder="Coupon or promo code"/>
+          <button class="coupon-btn">Apply</button>
+        </div>
+        <div class="order-totals">
+          <div class="order-total-row"><span>Subtotal (4 items)</span><span>$218.97</span></div>
+          <div class="order-total-row discount"><span><i class="fa-solid fa-tag"></i> Discount (LUXE20)</span><span>-$43.79</span></div>
+          <div class="order-total-row"><span>Shipping</span><span style="color:#15803d">Free</span></div>
+          <div class="order-total-row"><span>Tax (8%)</span><span>$14.02</span></div>
+          <div class="order-total-row grand"><span>Total</span><span>$189.20</span></div>
+        </div>
+        <button class="btn--place-order" id="placeOrderBtn" onclick="placeOrder()">
+          <i class="fa-solid fa-lock"></i> Place Order &mdash; $189.20
+        </button>
+        <div class="secure-note"><i class="fa-solid fa-shield-halved"></i> 256-bit SSL Encrypted &amp; Secure</div>
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:14px;">
+          <span class="pay-icon">VISA</span><span class="pay-icon">MC</span><span class="pay-icon">AMEX</span><span class="pay-icon">PayPal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer" style="margin-top:48px;">
+  <div class="container">
+    <div class="footer__bottom" style="border-top:none;"><span>&copy; 2025 LUXE Store. All rights reserved.</span><div class="footer__payments"><span class="pay-icon">VISA</span><span class="pay-icon">MC</span><span class="pay-icon">AMEX</span><span class="pay-icon">PayPal</span></div></div>
+  </div>
+</footer>
+
+<!-- Order Success Modal -->
+<div id="successModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:5000;display:none;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:20px;padding:48px;text-align:center;max-width:440px;width:90%;position:relative;animation:slideUp 0.4s ease;">
+    <div style="width:72px;height:72px;background:rgba(21,128,61,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;"><i class="fa-solid fa-check" style="font-size:28px;color:#15803d;"></i></div>
+    <h2 style="font-family:var(--font-display);font-size:28px;color:var(--color-primary);margin-bottom:10px;">Order Confirmed!</h2>
+    <p style="color:var(--color-text-light);font-size:15px;margin-bottom:6px;">Thank you for your purchase.</p>
+    <p style="color:var(--color-muted);font-size:13px;margin-bottom:28px;">Order #LX-2025-<strong>38471</strong> &mdash; A confirmation has been sent to your email.</p>
+    <a href="index.html" style="display:inline-block;background:var(--color-primary);color:#fff;padding:13px 32px;border-radius:8px;font-weight:600;font-size:14px;">Continue Shopping</a>
+  </div>
+</div>
+<style>
+@keyframes slideUp { from { transform:translateY(30px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+</style>
+
+<script src="js/header.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Payment tabs
+  ['tabCard','tabPaypal','tabApple','tabGoogle'].forEach(function(id) {
+    document.getElementById(id).addEventListener('click', function() {
+      document.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('is-active'));
+      this.classList.add('is-active');
+      document.getElementById('cardForm').style.display = 'none';
+      document.getElementById('paypalForm').style.display = 'none';
+      document.getElementById('appleForm').style.display = 'none';
+      document.getElementById('googleForm').style.display = 'none';
+      var map = { tabCard:'cardForm', tabPaypal:'paypalForm', tabApple:'appleForm', tabGoogle:'googleForm' };
+      document.getElementById(map[id]).style.display = 'block';
+    });
+  });
+  // Shipping options
+  document.querySelectorAll('.shipping-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.shipping-option').forEach(o => o.classList.remove('is-selected'));
+      this.classList.add('is-selected');
+    });
+  });
+  // Card number formatting
+  var cardInput = document.getElementById('cardNumInput');
+  if (cardInput) {
+    cardInput.addEventListener('input', function() {
+      var v = this.value.replace(/\D/g,'').substring(0,16);
+      this.value = v.replace(/(.{4})/g,'$1 ').trim();
+    });
+  }
+  // Place order
+  function placeOrder() {
+    var modal = document.getElementById('successModal');
+    modal.style.display = 'flex';
+    modal.addEventListener('click', function(e) { if (e.target === modal) modal.style.display = 'none'; });
+  }
+  // Inject order items
+  window.addEventListener('load', function() {
+    if (window.LUXE && window.LUXE.cartItems) {
+      var container = document.getElementById('orderItems');
+      if (!container) return;
+      window.LUXE.cartItems.forEach(function(item) {
+        container.innerHTML += '<div class="order-item"><div style="position:relative">' +
+          '<div class="order-item__img" style="background:'+item.bg+';border-radius:8px;width:58px;height:58px;"></div>' +
+          '<span class="order-item__qty-badge">'+item.qty+'</span></div>' +
+          '<div style="flex:1"><div class="order-item__name">'+item.name+'</div><div class="order-item__variant">'+item.variant+'</div></div>' +
+          '<div class="order-item__price">$'+item.price+'</div></div>';
+      });
+    }
+  });
+</script>
+</body>
+</html>

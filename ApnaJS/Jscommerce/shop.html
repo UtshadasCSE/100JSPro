@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop &mdash; LUXE Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/header.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer__header">
+    <div class="cart-drawer__title"><i class="fa-solid fa-bag-shopping"></i> My Cart <span class="cart-count-badge" id="cartCountBadge">4</span></div>
+    <button class="cart-close" id="cartClose"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cart-drawer__body" id="cartBody"></div>
+  <div class="cart-drawer__footer">
+    <div class="cart-free-ship"><i class="fa-solid fa-truck"></i> Add <strong>&nbsp;$24.00&nbsp;</strong> more for FREE shipping!</div>
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal</span><span id="cartSubtotal">$218.97</span></div>
+      <div class="cart-summary-row"><span>Shipping</span><span style="color:#15803d">Free</span></div>
+      <div class="cart-summary-row is-total"><span>Total</span><span id="cartTotal">$236.49</span></div>
+    </div>
+    <div class="cart-cta">
+      <a href="checkout.html" class="btn--checkout">Proceed to Checkout &rarr;</a>
+      <a href="shop.html" class="btn--view-cart">View Full Cart</a>
+    </div>
+  </div>
+</aside>
+<div class="toast-container" id="toastContainer"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left"><span><i class="fa-solid fa-phone"></i> +1 (800) 123-4567</span><span><i class="fa-solid fa-envelope"></i> hello@luxestore.com</span></div>
+      <div class="topbar__center"><span class="topbar__deal-text">&#128293; Summer Sale &mdash; Up to 60% OFF! Ends in: <span id="topbarCountdown" class="topbar__countdown">00:00:00</span></span></div>
+      <div class="topbar__right"><a href="#">Track Order</a><a href="#">Store Locator</a></div>
+    </div>
+  </div>
+  <div class="header__main">
+    <div class="container header__main-inner">
+      <a href="index.html" class="header__logo"><span class="logo__icon">L</span><span class="logo__text">LUXE<em>store</em></span></a>
+      <div class="header__search">
+        <div class="search__category"><select><option>All Categories</option><option>Men</option><option>Women</option><option>Electronics</option></select></div>
+        <input type="text" placeholder="Search for products..."/>
+        <button class="search__btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="header__actions">
+        <a href="#" class="action-btn"><i class="fa-regular fa-heart"></i><span class="action-btn__badge">3</span></a>
+        <a href="#" class="action-btn"><i class="fa-regular fa-user"></i></a>
+        <button class="action-btn cart-btn" id="cartToggle"><i class="fa-solid fa-bag-shopping"></i><span class="action-btn__badge" id="cartBadgeHeader">4</span><span class="action-btn__label">Cart</span></button>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="header__nav" id="headerNav">
+    <div class="container">
+      <ul class="nav__list">
+        <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+        <li class="nav__item has-mega"><a href="#" class="nav__link">Men <i class="fa-solid fa-chevron-down"></i></a><div class="mega-menu"><div class="container"><div class="mega-menu__grid"><div class="mega-col"><h4 class="mega-col__title">Clothing</h4><ul><li><a href="#">T-Shirts</a></li><li><a href="#">Shirts</a></li><li><a href="#">Jeans</a></li><li><a href="#">Jackets</a></li></ul></div><div class="mega-col"><h4 class="mega-col__title">Footwear</h4><ul><li><a href="#">Sneakers</a></li><li><a href="#">Formal</a></li><li><a href="#">Boots</a></li></ul></div><div class="mega-col"><h4 class="mega-col__title">Accessories</h4><ul><li><a href="#">Watches</a></li><li><a href="#">Bags</a></li></ul></div><div class="mega-col mega-col--banner"><div class="mega-banner"><div class="mega-banner__content"><span>New Arrivals</span><h3>Summer 2025</h3><a href="#">Shop Now &rarr;</a></div></div></div></div></div></div></li>
+        <li class="nav__item"><a href="#" class="nav__link">Women</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">Electronics</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">Home &amp; Living</a></li>
+        <li class="nav__item"><a href="shop.html" class="nav__link active">Shop</a></li>
+        <li class="nav__item"><a href="#" class="nav__link nav__link--sale">Sale &#128293;</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+</header>
+<div class="header-placeholder"></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container page-hero__inner">
+    <h1 class="page-hero__title">All Products</h1>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Shop</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Shop Layout -->
+<div class="container">
+  <div class="shop-layout">
+
+    <!-- Sidebar -->
+    <aside class="shop-sidebar">
+      <!-- Active Filters -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Active Filters <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="background:var(--color-primary);color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;display:inline-flex;align-items:center;gap:6px;">Women <i class="fa-solid fa-xmark" style="cursor:pointer"></i></span>
+          <span style="background:var(--color-primary);color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;display:inline-flex;align-items:center;gap:6px;">Sale <i class="fa-solid fa-xmark" style="cursor:pointer"></i></span>
+        </div>
+      </div>
+      <!-- Categories -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Categories <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body filter-check-list">
+          <label class="filter-check"><input type="checkbox" checked> Women's Fashion <span class="count">412</span></label>
+          <label class="filter-check"><input type="checkbox"> Men's Fashion <span class="count">298</span></label>
+          <label class="filter-check"><input type="checkbox"> Electronics <span class="count">184</span></label>
+          <label class="filter-check"><input type="checkbox"> Home &amp; Living <span class="count">93</span></label>
+          <label class="filter-check"><input type="checkbox"> Beauty <span class="count">67</span></label>
+          <label class="filter-check"><input type="checkbox"> Sports &amp; Outdoors <span class="count">45</span></label>
+        </div>
+      </div>
+      <!-- Price -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Price Range <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body price-range-wrap">
+          <input type="range" class="range-slider" min="0" max="500" value="300"/>
+          <div class="price-range-inputs">
+            <input type="text" value="$0" />
+            <span>to</span>
+            <input type="text" value="$300" />
+          </div>
+        </div>
+      </div>
+      <!-- Brand -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Brand <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body filter-check-list">
+          <label class="filter-check"><input type="checkbox" checked> Nike <span class="count">128</span></label>
+          <label class="filter-check"><input type="checkbox"> Adidas <span class="count">94</span></label>
+          <label class="filter-check"><input type="checkbox"> Zara <span class="count">76</span></label>
+          <label class="filter-check"><input type="checkbox"> H&amp;M <span class="count">65</span></label>
+          <label class="filter-check"><input type="checkbox"> Levi's <span class="count">54</span></label>
+          <label class="filter-check"><input type="checkbox"> Gucci <span class="count">32</span></label>
+        </div>
+      </div>
+      <!-- Color -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Color <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body color-swatches">
+          <div class="color-swatch is-active" style="background:#1a1a2e" title="Navy"></div>
+          <div class="color-swatch" style="background:#fff;border-color:#ccc" title="White"></div>
+          <div class="color-swatch" style="background:#111" title="Black"></div>
+          <div class="color-swatch" style="background:#c9a96e" title="Tan"></div>
+          <div class="color-swatch" style="background:#e63946" title="Red"></div>
+          <div class="color-swatch" style="background:#8b3a62" title="Pink"></div>
+          <div class="color-swatch" style="background:#4a7c59" title="Green"></div>
+          <div class="color-swatch" style="background:#6b8cce" title="Blue"></div>
+        </div>
+      </div>
+      <!-- Size -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Size <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body size-filter">
+          <button class="size-btn">XS</button>
+          <button class="size-btn is-active">S</button>
+          <button class="size-btn is-active">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+          <button class="size-btn">XXL</button>
+        </div>
+      </div>
+      <!-- Rating -->
+      <div class="filter-widget">
+        <div class="filter-widget__title">Rating <i class="fa-solid fa-chevron-down"></i></div>
+        <div class="filter-widget__body filter-check-list">
+          <label class="filter-check"><input type="checkbox"> <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span> &amp; up</label>
+          <label class="filter-check"><input type="checkbox" checked> <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span> &amp; up</label>
+          <label class="filter-check"><input type="checkbox"> <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></span> &amp; up</label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Products -->
+    <div class="shop-main">
+      <div class="shop-toolbar">
+        <div class="shop-results">Showing <strong>1-12</strong> of <strong>248</strong> products</div>
+        <div class="shop-sort-wrap">
+          <select class="sort-select">
+            <option>Sort: Featured</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest First</option>
+            <option>Best Selling</option>
+            <option>Top Rated</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn is-active" id="gridViewBtn" title="Grid view"><i class="fa-solid fa-grip"></i></button>
+            <button class="view-btn" id="listViewBtn" title="List view"><i class="fa-solid fa-list"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-grid" id="shopGrid">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="page-btn is-active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn page-dots">...</button>
+        <button class="page-btn">12</button>
+        <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="header__logo"><span class="logo__icon">L</span><span class="logo__text">LUXE<em>store</em></span></a>
+        <p class="footer__desc">Your destination for premium fashion, electronics, and lifestyle products.</p>
+        <div class="footer__socials"><a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a><a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a></div>
+      </div>
+      <div><h4 class="footer__col-title">Shop</h4><div class="footer__links"><a href="#">Men's Fashion</a><a href="#">Women's Fashion</a><a href="#">Electronics</a><a href="#">Sale Items</a></div></div>
+      <div><h4 class="footer__col-title">Customer Care</h4><div class="footer__links"><a href="#">Track Order</a><a href="#">Returns</a><a href="#">Shipping</a><a href="#">FAQs</a></div></div>
+      <div><h4 class="footer__col-title">Company</h4><div class="footer__links"><a href="#">About Us</a><a href="#">Careers</a><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; 2025 LUXE Store. All rights reserved.</span><div class="footer__payments"><span class="pay-icon">VISA</span><span class="pay-icon">MC</span><span class="pay-icon">PayPal</span></div></div>
+  </div>
+</footer>
+
+<script src="js/header.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // View toggle
+  document.getElementById('gridViewBtn').addEventListener('click', function() {
+    document.getElementById('shopGrid').classList.remove('list-view');
+    this.classList.add('is-active');
+    document.getElementById('listViewBtn').classList.remove('is-active');
+  });
+  document.getElementById('listViewBtn').addEventListener('click', function() {
+    document.getElementById('shopGrid').classList.add('list-view');
+    this.classList.add('is-active');
+    document.getElementById('gridViewBtn').classList.remove('is-active');
+  });
+  // Filter collapse
+  document.querySelectorAll('.filter-widget__title').forEach(function(title) {
+    title.addEventListener('click', function() {
+      this.closest('.filter-widget').classList.toggle('is-collapsed');
+    });
+  });
+  // Page buttons
+  document.querySelectorAll('.page-btn:not(.page-dots)').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('is-active'));
+      this.classList.add('is-active');
+    });
+  });
+  // Size buttons
+  document.querySelectorAll('.size-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { this.classList.toggle('is-active'); });
+  });
+  // Color swatches
+  document.querySelectorAll('.color-swatch').forEach(function(sw) {
+    sw.addEventListener('click', function() { this.classList.toggle('is-active'); });
+  });
+  // Inject shop products after main.js loads
+  window.addEventListener('load', function() {
+    if (window.LUXE && window.LUXE.renderProducts) {
+      window.LUXE.renderProducts('shopGrid', 12);
+    }
+  });
+</script>
+</body>
+</html>

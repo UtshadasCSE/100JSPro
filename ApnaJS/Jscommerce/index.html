@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LUXE Store &mdash; Premium eCommerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/header.css"/>
+  <link rel="stylesheet" href="css/hero.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+<!-- ===== CART OVERLAY + DRAWER ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="cart-drawer__header">
+    <div class="cart-drawer__title">
+      <i class="fa-solid fa-bag-shopping"></i> My Cart
+      <span class="cart-count-badge" id="cartCountBadge">4</span>
+    </div>
+    <button class="cart-close" id="cartClose" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cart-drawer__body" id="cartBody">
+    <!-- Items injected by JS -->
+  </div>
+  <div class="cart-drawer__footer">
+    <div class="cart-free-ship"><i class="fa-solid fa-truck"></i> Add <strong>&nbsp;$24.00&nbsp;</strong> more for FREE shipping!</div>
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal (4 items)</span><span>$218.97</span></div>
+      <div class="cart-summary-row"><span>Shipping</span><span style="color:#15803d">Free</span></div>
+      <div class="cart-summary-row"><span>Tax (8%)</span><span>$17.52</span></div>
+      <div class="cart-summary-row is-total"><span>Total</span><span>$236.49</span></div>
+    </div>
+    <div class="cart-cta">
+      <a href="checkout.html" class="btn--checkout">Proceed to Checkout &rarr;</a>
+      <a href="shop.html" class="btn--view-cart">View Full Cart</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="siteHeader">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span><i class="fa-solid fa-phone"></i> +1 (800) 123-4567</span>
+        <span><i class="fa-solid fa-envelope"></i> hello@luxestore.com</span>
+      </div>
+      <div class="topbar__center">
+        <span class="topbar__deal-text">&#128293; Summer Sale &mdash; Up to 60% OFF! Ends in: <span id="topbarCountdown" class="topbar__countdown">00:00:00</span></span>
+      </div>
+      <div class="topbar__right">
+        <a href="#">Track Order</a>
+        <a href="#">Store Locator</a>
+        <div class="topbar__lang"><select><option>EN</option><option>FR</option><option>DE</option></select></div>
+      </div>
+    </div>
+  </div>
+  <div class="header__main">
+    <div class="container header__main-inner">
+      <a href="index.html" class="header__logo">
+        <span class="logo__icon">L</span>
+        <span class="logo__text">LUXE<em>store</em></span>
+      </a>
+      <div class="header__search">
+        <div class="search__category"><select><option>All Categories</option><option>Men</option><option>Women</option><option>Electronics</option><option>Home &amp; Living</option><option>Beauty</option></select></div>
+        <input type="text" placeholder="Search for products, brands and more..."/>
+        <button class="search__btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="header__actions">
+        <a href="#" class="action-btn" title="Wishlist"><i class="fa-regular fa-heart"></i><span class="action-btn__badge">3</span></a>
+        <a href="#" class="action-btn" title="Account"><i class="fa-regular fa-user"></i></a>
+        <button class="action-btn cart-btn" id="cartToggle" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="action-btn__badge" id="cartBadgeHeader">4</span>
+          <span class="action-btn__label">Cart</span>
+        </button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="header__nav" id="headerNav">
+    <div class="container">
+      <ul class="nav__list">
+        <li class="nav__item"><a href="index.html" class="nav__link active">Home</a></li>
+        <li class="nav__item has-mega">
+          <a href="#" class="nav__link">Men <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-menu"><div class="container"><div class="mega-menu__grid">
+            <div class="mega-col"><h4 class="mega-col__title">Clothing</h4><ul><li><a href="#">T-Shirts &amp; Polos</a></li><li><a href="#">Shirts</a></li><li><a href="#">Jeans &amp; Trousers</a></li><li><a href="#">Jackets &amp; Coats</a></li><li><a href="#">Suits &amp; Blazers</a></li></ul></div>
+            <div class="mega-col"><h4 class="mega-col__title">Footwear</h4><ul><li><a href="#">Sneakers</a></li><li><a href="#">Formal Shoes</a></li><li><a href="#">Boots</a></li><li><a href="#">Loafers</a></li><li><a href="#">Sandals</a></li></ul></div>
+            <div class="mega-col"><h4 class="mega-col__title">Accessories</h4><ul><li><a href="#">Watches</a></li><li><a href="#">Belts &amp; Wallets</a></li><li><a href="#">Sunglasses</a></li><li><a href="#">Bags &amp; Backpacks</a></li></ul></div>
+            <div class="mega-col mega-col--banner"><div class="mega-banner"><div class="mega-banner__content"><span>New Arrivals</span><h3>Summer Collection 2025</h3><a href="#">Shop Now &rarr;</a></div></div></div>
+          </div></div></div>
+        </li>
+        <li class="nav__item has-mega">
+          <a href="#" class="nav__link">Women <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-menu"><div class="container"><div class="mega-menu__grid">
+            <div class="mega-col"><h4 class="mega-col__title">Clothing</h4><ul><li><a href="#">Dresses</a></li><li><a href="#">Tops &amp; Blouses</a></li><li><a href="#">Skirts</a></li><li><a href="#">Jeans &amp; Trousers</a></li><li><a href="#">Activewear</a></li></ul></div>
+            <div class="mega-col"><h4 class="mega-col__title">Footwear</h4><ul><li><a href="#">Heels</a></li><li><a href="#">Flats</a></li><li><a href="#">Sneakers</a></li><li><a href="#">Boots</a></li><li><a href="#">Sandals</a></li></ul></div>
+            <div class="mega-col"><h4 class="mega-col__title">Bags &amp; Accessories</h4><ul><li><a href="#">Handbags</a></li><li><a href="#">Clutches</a></li><li><a href="#">Jewelry</a></li><li><a href="#">Scarves</a></li></ul></div>
+            <div class="mega-col mega-col--banner"><div class="mega-banner mega-banner--pink"><div class="mega-banner__content"><span>Trending Now</span><h3>Boho Chic Edit</h3><a href="#">Explore &rarr;</a></div></div></div>
+          </div></div></div>
+        </li>
+        <li class="nav__item has-mega">
+          <a href="#" class="nav__link">Electronics <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-menu"><div class="container"><div class="mega-menu__grid">
+            <div class="mega-col"><h4 class="mega-col__title">Devices</h4><ul><li><a href="#">Smartphones</a></li><li><a href="#">Laptops &amp; PCs</a></li><li><a href="#">Tablets</a></li><li><a href="#">Smart Watches</a></li></ul></div>
+            <div class="mega-col"><h4 class="mega-col__title">Audio</h4><ul><li><a href="#">Headphones</a></li><li><a href="#">Earbuds</a></li><li><a href="#">Speakers</a></li><li><a href="#">Home Theatre</a></li></ul></div>
+            <div class="mega-col"><h4 class="mega-col__title">Accessories</h4><ul><li><a href="#">Chargers &amp; Cables</a></li><li><a href="#">Phone Cases</a></li><li><a href="#">Gaming</a></li><li><a href="#">Smart Home</a></li></ul></div>
+            <div class="mega-col mega-col--banner"><div class="mega-banner mega-banner--dark"><div class="mega-banner__content"><span>Hot Deal</span><h3>Tech Must-Haves</h3><a href="#">View All &rarr;</a></div></div></div>
+          </div></div></div>
+        </li>
+        <li class="nav__item"><a href="#" class="nav__link">Home &amp; Living</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">Beauty</a></li>
+        <li class="nav__item"><a href="shop.html" class="nav__link">Shop</a></li>
+        <li class="nav__item"><a href="#" class="nav__link nav__link--sale">Sale &#128293;</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+</header>
+<div class="header-placeholder"></div>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-band">
+  <div class="marquee-band__track" id="marqueeTrack">
+    <span class="marquee-band__item"><i class="fa-solid fa-truck"></i> Free Shipping on orders over $75</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-rotate-left"></i> 30-Day Easy Returns</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-lock"></i> Secure &amp; Encrypted Checkout</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-tag"></i> Use code LUXE20 for 20% off your first order</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-headset"></i> 24/7 Customer Support</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-star"></i> Over 50,000 Happy Customers</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-band__item"><i class="fa-solid fa-truck"></i> Free Shipping on orders over $75</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-rotate-left"></i> 30-Day Easy Returns</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-lock"></i> Secure &amp; Encrypted Checkout</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-tag"></i> Use code LUXE20 for 20% off your first order</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-headset"></i> 24/7 Customer Support</span>
+    <span class="marquee-band__sep">&#9670;</span>
+    <span class="marquee-band__item"><i class="fa-solid fa-star"></i> Over 50,000 Happy Customers</span>
+    <span class="marquee-band__sep">&#9670;</span>
+  </div>
+</div>
+
+<!-- ===== HERO SLIDER ===== -->
+<main id="mainContent">
+<section class="hero-slider" id="heroSlider">
+  <div class="hero-track" id="heroTrack">
+    <div class="hero-slide hero-slide--1 is-active" data-index="0">
+      <div class="hero-slide__bg"></div>
+      <div class="container hero-slide__inner">
+        <div class="hero-slide__content">
+          <span class="hero-eyebrow">New Collection 2025</span>
+          <h1 class="hero-title">Elevate Your<br><em>Summer Style</em></h1>
+          <p class="hero-desc">Discover hand-picked pieces crafted for the modern wardrobe. Timeless designs, effortless elegance.</p>
+          <div class="hero-actions">
+            <a href="shop.html" class="btn btn--primary">Shop Collection</a>
+            <a href="#" class="btn btn--outline">View Lookbook</a>
+          </div>
+          <div class="hero-badges">
+            <div class="hero-badge"><i class="fa-solid fa-truck"></i><span>Free Shipping</span></div>
+            <div class="hero-badge"><i class="fa-solid fa-rotate-left"></i><span>Easy Returns</span></div>
+            <div class="hero-badge"><i class="fa-solid fa-headset"></i><span>24/7 Support</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-img-wrap">
+            <div class="hero-img hero-img--1"></div>
+            <div class="hero-float-card hero-float-card--top"><div class="float-card__icon"><i class="fa-solid fa-fire"></i></div><div class="float-card__text"><strong>Trending Now</strong><span>Summer Linen Edit</span></div></div>
+            <div class="hero-float-card hero-float-card--bottom"><div class="float-card__icon float-card__icon--gold"><i class="fa-solid fa-tag"></i></div><div class="float-card__text"><strong>Up to 60% OFF</strong><span>Limited time only</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide hero-slide--2" data-index="1">
+      <div class="hero-slide__bg"></div>
+      <div class="container hero-slide__inner">
+        <div class="hero-slide__content">
+          <span class="hero-eyebrow hero-eyebrow--light">Electronics Sale</span>
+          <h1 class="hero-title hero-title--light">Next-Gen Tech<br><em>At Your Fingertips</em></h1>
+          <p class="hero-desc hero-desc--light">Premium gadgets, wearables &amp; smart devices &mdash; curated for the tech-forward lifestyle.</p>
+          <div class="hero-actions">
+            <a href="shop.html" class="btn btn--gold">Shop Electronics</a>
+            <a href="#" class="btn btn--outline-light">Best Sellers</a>
+          </div>
+          <div class="hero-offer-badge">
+            <div class="offer-circle"><span class="offer-percent">30%</span><span class="offer-off">OFF</span></div>
+            <div class="offer-info"><strong>On all smart devices</strong><span>Use code: <em>TECH30</em></span></div>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="hero-img-wrap"><div class="hero-img hero-img--2"></div></div></div>
+      </div>
+    </div>
+    <div class="hero-slide hero-slide--3" data-index="2">
+      <div class="hero-slide__bg"></div>
+      <div class="container hero-slide__inner">
+        <div class="hero-slide__content">
+          <span class="hero-eyebrow">Women's Exclusive</span>
+          <h1 class="hero-title">Luxury Defined,<br><em>Beautifully Worn</em></h1>
+          <p class="hero-desc">From evening gowns to everyday essentials &mdash; shop the season's most coveted women's edit.</p>
+          <div class="hero-actions">
+            <a href="shop.html" class="btn btn--primary">Explore Women's</a>
+            <a href="#" class="btn btn--outline">New Arrivals</a>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="hero-img-wrap"><div class="hero-img hero-img--3"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <button class="hero-arrow hero-arrow--prev" id="heroPrev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="hero-arrow hero-arrow--next" id="heroNext" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="hero-dots" id="heroDots">
+    <button class="hero-dot is-active" data-slide="0"></button>
+    <button class="hero-dot" data-slide="1"></button>
+    <button class="hero-dot" data-slide="2"></button>
+  </div>
+  <div class="hero-progress-bar" id="heroProgressBar"></div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__eyebrow">Browse By</span>
+      <h2 class="section__title">Shop by <em>Category</em></h2>
+      <p class="section__sub">Explore our carefully curated departments — from fashion to electronics and everything in between.</p>
+    </div>
+    <div class="categories-grid">
+      <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-shirt"></i></div><div class="cat-name">Men's Fashion</div><div class="cat-count">2,340 products</div></div>
+      <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-person-dress"></i></div><div class="cat-name">Women's Fashion</div><div class="cat-count">3,180 products</div></div>
+      <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><div class="cat-name">Electronics</div><div class="cat-count">1,250 products</div></div>
+      <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-couch"></i></div><div class="cat-name">Home &amp; Living</div><div class="cat-count">890 products</div></div>
+      <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-spa"></i></div><div class="cat-name">Beauty</div><div class="cat-count">640 products</div></div>
+      <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-dumbbell"></i></div><div class="cat-name">Sports</div><div class="cat-count">475 products</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROMO STRIP ===== -->
+<section class="section">
+  <div class="container">
+    <div class="promo-strip">
+      <div class="promo-card promo-card--1"><div class="promo-card__deco"></div><div class="promo-card__icon" style="color:#c9a96e"><i class="fa-solid fa-bolt"></i></div><div class="promo-card__content"><div class="promo-card__sub">Flash Sale</div><div class="promo-card__title">Electronics Up to 40% Off</div><a href="shop.html" class="promo-card__link">Shop Now <i class="fa-solid fa-arrow-right"></i></a></div></div>
+      <div class="promo-card promo-card--2"><div class="promo-card__deco"></div><div class="promo-card__icon" style="color:rgba(255,255,255,0.8)"><i class="fa-solid fa-crown"></i></div><div class="promo-card__content"><div class="promo-card__sub">Exclusive</div><div class="promo-card__title">Women's Luxury Edit</div><a href="shop.html" class="promo-card__link">Explore <i class="fa-solid fa-arrow-right"></i></a></div></div>
+      <div class="promo-card promo-card--3"><div class="promo-card__deco"></div><div class="promo-card__icon" style="color:#1a1a2e"><i class="fa-solid fa-gift"></i></div><div class="promo-card__content"><div class="promo-card__sub">New Season</div><div class="promo-card__title">Summer Must-Haves</div><a href="shop.html" class="promo-card__link">View All <i class="fa-solid fa-arrow-right"></i></a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="section section--gray" id="featuredSection">
+  <div class="container">
+    <div class="section__header-row">
+      <div class="section__header">
+        <span class="section__eyebrow">Hand-Picked</span>
+        <h2 class="section__title">Featured <em>Products</em></h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div class="product-tabs" id="productTabs">
+          <button class="product-tab is-active" data-filter="all">All</button>
+          <button class="product-tab" data-filter="new">New Arrivals</button>
+          <button class="product-tab" data-filter="sale">On Sale</button>
+          <button class="product-tab" data-filter="trending">Trending</button>
+        </div>
+        <a href="shop.html" class="view-all-link">View All <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="product-slider" id="featuredGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEW ARRIVALS SLIDER ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section__header-row">
+      <div class="section__header">
+        <span class="section__eyebrow">Just In</span>
+        <h2 class="section__title">New <em>Arrivals</em></h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="slider-nav">
+          <button class="slider-arrow" id="newPrev"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="slider-arrow" id="newNext"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <a href="shop.html" class="view-all-link">View All <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="product-slider-wrap">
+      <div class="product-slider" id="newArrivalsSlider">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter">
+  <div class="container newsletter__inner">
+    <div class="newsletter__copy">
+      <div class="newsletter__eyebrow">Join the Club</div>
+      <h2 class="newsletter__title">Get Exclusive Deals<br>&amp; <em>Style Inspiration</em></h2>
+      <p class="newsletter__desc">Join 80,000+ subscribers and be the first to know about new collections, exclusive sales, and style tips.</p>
+    </div>
+    <div class="newsletter__form-wrap">
+      <div class="newsletter__perks">
+        <div class="newsletter__perk"><i class="fa-solid fa-check"></i> 10% off your first order</div>
+        <div class="newsletter__perk"><i class="fa-solid fa-check"></i> Early access to sales</div>
+        <div class="newsletter__perk"><i class="fa-solid fa-check"></i> Exclusive member deals</div>
+      </div>
+      <form class="newsletter__form" id="newsletterForm" onsubmit="handleNewsletter(event)">
+        <input class="newsletter__input" type="email" placeholder="Enter your email address..." required/>
+        <button type="submit" class="newsletter__submit">Subscribe</button>
+      </form>
+      <p class="newsletter__note"><i class="fa-solid fa-lock"></i> No spam, ever. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="header__logo"><span class="logo__icon">L</span><span class="logo__text">LUXE<em>store</em></span></a>
+        <p class="footer__desc">Your destination for premium fashion, electronics, and lifestyle products. Curated with care, delivered with love.</p>
+        <div class="footer__socials">
+          <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-pinterest-p"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Shop</h4>
+        <div class="footer__links">
+          <a href="#">Men's Fashion</a><a href="#">Women's Fashion</a><a href="#">Electronics</a><a href="#">Home &amp; Living</a><a href="#">Beauty</a><a href="#">Sale Items</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Customer Care</h4>
+        <div class="footer__links">
+          <a href="#">Track Your Order</a><a href="#">Returns &amp; Exchanges</a><a href="#">Shipping Info</a><a href="#">Size Guide</a><a href="#">FAQs</a><a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Company</h4>
+        <div class="footer__links">
+          <a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Sustainability</a><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2025 LUXE Store. All rights reserved.</span>
+      <div class="footer__payments">
+        <span class="pay-icon">VISA</span>
+        <span class="pay-icon">MC</span>
+        <span class="pay-icon">AMEX</span>
+        <span class="pay-icon">PayPal</span>
+        <span class="pay-icon">Apple Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script src="js/header.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

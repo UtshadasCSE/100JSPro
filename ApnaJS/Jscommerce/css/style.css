@@ -1,0 +1,70 @@
+/* ============================================
+   STYLE.CSS — Global Variables & Base Styles
+   ============================================ */
+
+:root {
+  /* Colors */
+  --color-primary:    #1a1a2e;
+  --color-secondary:  #c9a96e;
+  --color-accent:     #e63946;
+  --color-white:      #ffffff;
+  --color-light:      #f8f6f2;
+  --color-border:     #e8e4dc;
+  --color-muted:      #9a9080;
+  --color-text:       #2d2d2d;
+  --color-text-light: #6b6560;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Spacing */
+  --container-max: 1320px;
+  --container-pad: 24px;
+
+  /* Transitions */
+  --transition-fast: 0.18s ease;
+  --transition-mid:  0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:  0 6px 24px rgba(0,0,0,0.10);
+  --shadow-lg:  0 16px 48px rgba(0,0,0,0.14);
+
+  /* Header */
+  --topbar-height:     40px;
+  --header-main-height: 80px;
+  --nav-height:        48px;
+  --header-total:      calc(var(--topbar-height) + var(--header-main-height) + var(--nav-height));
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+button { border: none; background: none; cursor: pointer; font-family: inherit; }
+select { font-family: inherit; border: none; background: none; cursor: pointer; }
+input { font-family: inherit; }
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* Utility */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
