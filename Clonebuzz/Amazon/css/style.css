@@ -1,0 +1,113 @@
+/* =====================
+==================== RESET + BASE =============================
+===================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #222;
+  background-color: #fff;
+}
+
+/* =====================
+   2. MEDIA DEFAULTS
+===================== */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* =====================
+   3. FORM RESET
+===================== */
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* =====================
+   4. LINKS
+===================== */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =====================
+   5. LISTS
+===================== */
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* =====================
+   6. CONTAINER
+===================== */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* =====================
+   7. FLEX HELPERS
+===================== */
+
+/* =====================
+   8. GRID HELPER
+===================== */
+
+/* =====================
+   9. SPACING UTILITIES
+===================== */
+
+/* =====================
+   10. TYPOGRAPHY
+===================== */
+
+/* =====================
+   11. BUTTON BASE
+===================== */
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* =====================
+===================== RESPONSIVE =========================
+===================== */
