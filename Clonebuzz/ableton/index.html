@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn more about Ableton - maker of Live and Push | Ableton</title>
+    <!-- Externl Css -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- Fontawesome CDN  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header  -->
+      <header>
+        <div class="header-top">
+          <div class="header-left">
+            <!-- Logo  -->
+            <div class="logo">
+              <svg
+                role="img"
+                aria-label="Logo Ableton"
+                class="main-nav__logo__image"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                width="45"
+                height="21"
+                viewBox="0 0 45 21"
+              >
+                <path
+                  d="M0 0h3v21H0zM6 0h3v21H6zM12 0h3v21h-3zM18 0h3v21h-3zM24 18h21v3H24zM24 12h21v3H24zM24 6h21v3H24zM24 0h21v3H24z"
+                ></path>
+              </svg>
+              <button id="menu">
+                Menu <i class="fa-solid fa-caret-down"></i>
+              </button>
+            </div>
+            <!-- Navigation  -->
+            <ul class="nav-links navLinks-top">
+              <li><a href="">Live</a></li>
+              <li><a href="">Push</a></li>
+              <li><a href="">Move</a></li>
+              <li><a href="">Note</a></li>
+              <li><a href="">Link</a></li>
+              <li><a href="">Shop</a></li>
+              <li><a href="">Packs</a></li>
+              <li><a href="">Help</a></li>
+            </ul>
+          </div>
+          <div class="header-right">
+            <button id="tryNowBtn">Try Live for 12 Days</button>
+            <button id="authBtn">Login or Register</button>
+          </div>
+        </div>
+        <div class="header-bottom">
+          <ul class="nav-links">
+            <li><a href="">About</a></li>
+            <li><a href="">Jobs</a></li>
+            <li><a href="">Apprenticeships</a></li>
+          </ul>
+        </div>
+
+        <!-- Mobile Header  -->
+        <div class="mobile-header">
+          <ul class="mob-header-links">
+            <li><a href="">Live</a></li>
+            <li><a href="">Push</a></li>
+            <li><a href="">Move</a></li>
+            <li><a href="">Note</a></li>
+            <li><a href="">Link</a></li>
+            <li><a href="">Shop</a></li>
+            <li><a href="">Packs</a></li>
+            <li><a href="">Help</a></li>
+          </ul>
+          <div class="mob-header-btn">
+            <button>Try Now 30 Days Free</button>
+            <button>Try Now 30 Days Free</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <!-- Hero Section  -->
+        <div class="hero-section">
+          <p class="hero-title">Ableton</p>
+        </div>
+        <!-- About Section  -->
+        <div class="about-us">
+          <h3>
+            We make <a href="">Live</a>, <a href="">Push</a>,
+            <a href="">Note</a>, <a href="">Move</a> and <a href="">Link</a> —
+            unique software and hardware for music creation and performance.
+            With these products, our community of users creates amazing things.
+          </h3>
+          <p>
+            Ableton was founded in 1999 and released the first version of Live
+            in 2001. Our products are used by a community of dedicated
+            musicians, sound designers, and artists from across the world.
+          </p>
+        </div>
+        <!-- Image Section  -->
+        <div class="image-section">
+          <div class="image-wrapper">
+            <div class="image-left">
+              <img src="assets/image-1.png" alt="Left image" />
+            </div>
+
+            <div class="image-right">
+              <img src="assets/image-2.png" alt="Right image" />
+            </div>
+          </div>
+        </div>
+        <!-- About us 2  -->
+        <div class="about-us ab-2">
+          <h3>
+            We make <a href="">Live</a>, <a href="">Push</a>,
+            <a href="">Note</a>, <a href="">Move</a> and <a href="">Link</a> —
+            unique software and hardware for music creation and performance.
+            With these products, our community of users creates amazing things.
+          </h3>
+          <p>
+            Ableton was founded in 1999 and released the first version of Live
+            in 2001. Our products are used by a community of dedicated
+            musicians, sound designers, and artists from across the world.
+          </p>
+        </div>
+        <!-- Video Section  -->
+        <div class="video-section">
+          <div class="video-wrapper" id="videoWrapper" onclick="playVideo()">
+            <div class="play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <polygon points="6,4 20,12 6,20" fill="white" />
+              </svg>
+            </div>
+            <iframe
+              id="ytFrame"
+              allowfullscreen
+              allow="autoplay; encrypted-media"
+            ></iframe>
+          </div>
+          <p class="video-title">Why Ableton - Juanpe Bolivar</p>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <!-- Brand name -->
+        <div class="footer-brand">Ableton</div>
+
+        <!-- TOP 3-column grid -->
+        <div class="footer-grid">
+          <!-- Col 1: Quick links + social icons -->
+          <div class="footer-col">
+            <ul>
+              <li><a href="#">Register Live, Push or Move</a></li>
+              <li><a href="#">About Ableton</a></li>
+              <li><a href="#">Jobs</a></li>
+            </ul>
+            <div class="social-icons">
+              <a href="#" class="icon-fb">f</a>
+              <a href="#" class="icon-x">𝕏</a>
+              <a href="#" class="icon-yt">▶</a>
+              <a href="#" class="icon-ig">◉</a>
+              <a href="#" class="icon-tt">♪</a>
+              <a href="#" class="icon-disc">⌨</a>
+            </div>
+          </div>
+
+          <!-- Col 2: Education -->
+          <div class="footer-col">
+            <h4>Education</h4>
+            <ul>
+              <li><a href="#">Offers for students and teachers</a></li>
+              <li><a href="#">Ableton for the Classroom</a></li>
+              <li><a href="#">Ableton for Colleges and Universities</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Newsletter -->
+          <div class="footer-col">
+            <h4>Sign up to our newsletter</h4>
+            <p class="newsletter-desc">
+              Enter your email address to stay up to date with the latest
+              offers, tutorials, downloads, surveys and more.
+            </p>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Email Address" />
+              <button type="button">Sign up</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM grid -->
+        <div class="footer-bottom-grid">
+          <!-- Col 1: Community -->
+          <div class="footer-col">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="#">Find Ableton User Groups</a></li>
+              <li><a href="#">Find Certified Training</a></li>
+              <li><a href="#">Become a Certified Trainer</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 2: Language & Location -->
+          <div class="footer-col">
+            <h4>Language and Location</h4>
+            <div class="lang-selects">
+              <select>
+                <option>English</option>
+                <option>Deutsch</option>
+              </select>
+              <select>
+                <option>Bangladesh</option>
+                <option>Germany</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider line -->
+        <hr class="footer-divider" />
+
+        <!-- Legal bar -->
+        <div class="footer-legal">
+          <ul class="footer-legal-links">
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Press Resources</a></li>
+            <li><a href="#">Legal Info</a></li>
+            <li><a href="#">Corporate Information</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Settings</a></li>
+            <li><a href="#">Imprint</a></li>
+          </ul>
+          <div class="made-in-berlin">
+            <span>Made in Berlin</span>
+            <div class="barcode-icon">
+              <span style="height: 20px"></span>
+              <span style="height: 14px"></span>
+              <span style="height: 20px"></span>
+              <span style="height: 10px"></span>
+              <span style="height: 20px"></span>
+              <span style="height: 16px"></span>
+              <span style="height: 20px"></span>
+              <span style="height: 12px"></span>
+              <span style="height: 20px"></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
