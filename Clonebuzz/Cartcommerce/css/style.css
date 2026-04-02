@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/*================
+ Root color provide
+ ==================  */
+:root {
+  --color-bg: #0f0f0f; /* deep charcoal background */
+  --color-surface: #1a1a1a; /* card / drawer surface */
+  --color-surface2: #252525; /* hover / input surface */
+  --color-accent: #e8c87d; /* gold accent — our brand color */
+  --color-accent2: #c9a84c; /* darker gold for hover */
+  --color-text: #f0ede8; /* warm white text */
+  --color-muted: #888; /* muted gray for secondary text */
+  --color-border: #2e2e2e; /* subtle border */
+  --color-danger: #e05c5c; /* red for remove actions */
+  --radius: 12px; /* consistent border radius */
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* smooth easing */
+  --drawer-w: 420px; /* cart drawer width on desktop */
+}
+
+/*=================
+Reset and Base
+==================  */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+/* ============================================================
+HEADER — Sticky nav with logo, search, and cart icon
+============================================================ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 15, 15, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 clamp(16px 5vw 60px);
+}
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.logo {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+/* Navigation links hidden on mobile, visible on desktop */
+nav {
+  display: flex;
+  gap: 28px;
+  margin-left: 20px;
+}
+nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: 0.88em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width var(--transition);
+}
+nav a:hover {
+  color: var(--color-text);
+}
+nav a:hover::after {
+  width: 100%;
+}
+/* SEARCH BAR — expands on focus, collapses on blur */
+.search-wrap {
+  flex: 1; /* take all remaining space */
+  max-width: 400px;
+  margin-left: auto;
+  position: relative;
+}
+.search-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  color: var(--color-muted);
+  pointer-events: none;
+}
+#searchInput {
+  width: 100%;
+  background: var(--color-surface2);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 10px 16px 10px 42px;
+  color: var(--color-text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+#searchInput:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(232, 200, 125, 0.12);
+}
+#searchInput::placeholder {
+  color: var(--muted);
+}
+/* PREDICTIVE SEARCH DROPDOWN */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  z-index: 200;
+  /* Hidden by default — JS toggles .visible */
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+.search-dropdown.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.search-item:hover {
+  background: var(--surface2);
+}
+.search-item:hover {
+  background: var(--surface2);
+}
+
+.search-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.search-item-info strong {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+.search-item-info span {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+/* Highlighted match text */
+.search-item-info strong mark {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.no-results {
+  padding: 16px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* CART BUTTON */
+.cart-btn {
+  flex-shrink: 0;
+  position: relative;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.88rem;
+  transition:
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.cart-btn:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+/* Animated cart count badge */
+.cart-count {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.72rem;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Pop animation when count changes */
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cart-count.pop {
+  transform: scale(1.5);
+}
+
+/* Mobile hamburger — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
+}
+
+/* Mobile nav menu — slides down */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.mobile-nav a {
+  padding: 14px 0;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition);
+}
+
+.mobile-nav a:hover {
+  color: var(--text);
+}
+.mobile-nav.open {
+  display: flex;
+}
+  

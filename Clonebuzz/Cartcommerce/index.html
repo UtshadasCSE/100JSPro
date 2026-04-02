@@ -6,11 +6,77 @@
     <title>LUXE — Modern Shop</title>
     <!-- External CSS  -->
     <link rel="stylesheet" href="css/style.css" />
-    <!-- Google Fonts: Playfair Display (luxury display) + DM Sans (clean body) -->
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- Fontawesome CDN  -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
   </head>
-  <body></body>
+  <body>
+    <!--=============
+    Header
+    =================  -->
+    <header>
+      <div class="header-inner">
+        <!-- logo -->
+        <a class="logo" href="#">LUXE</a>
+        <!-- Desktop Navigation Links -->
+        <nav>
+          <a href="">Home</a>
+          <a href="">Collection</a>
+          <a href="">New Arrivals</a>
+          <a href="">Sale</a>
+        </nav>
+        <!-- Search bar with predictive dropdown  -->
+        <div class="search-wrap">
+          <!-- Search icon SVG -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+            />
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search products...."
+            autocomplete="off"
+          />
+          <!-- Predictive dropdown - Populated by JS  -->
+          <div id="searchDropdown" class="search-dropdown"></div>
+          <!-- Cart button  -->
+          <button id="cartBtn" class="cart-btn" aria-label="Open cart">
+            <!-- Cart icon  -->
+            <i class="fa-brands fa-opencart"></i>
+            <span>Cart</span>
+            <!-- Badge show item count  -->
+            <span id="cartCount" class="cart-count">0</span>
+          </button>
+
+          <!-- Mobile Hamburger Menu  -->
+          <button id="hamburger" class="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile nav menu items -->
+      <div id="mobileNav" class="mobile-nav">
+        <a href="#">Home</a>
+        <a href="#">Collections</a>
+        <a href="#">New Arrivals</a>
+        <a href="#">Sale</a>
+      </div>
+    </header>
+  </body>
 </html>

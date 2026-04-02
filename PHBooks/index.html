@@ -1,0 +1,2416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Pot Catering — Premium Corporate Catering</title>
+    <style>
+      :root {
+        --cream: #faf8f5;
+        --warm: #fff;
+        --charcoal: #1a1a1a;
+        --dark: #111;
+        --mid: #555;
+        --light: #999;
+        --border: #e8e4df;
+        --accent: #c8873a;
+        --accent-dark: #a66d28;
+        --accent-light: #f5e8d8;
+        --green: #2d6a4f;
+        --green-light: #d8efe6;
+        --red: #c0392b;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.13);
+        --r: 14px;
+        --font: "Inter", system-ui, -apple-system, sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--cream);
+        color: var(--charcoal);
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      input,
+      button,
+      select,
+      textarea {
+        font-family: inherit;
+      }
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(250, 248, 245, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        height: 68px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .logo-text {
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: var(--dark);
+      }
+      .logo-text span {
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .nav-links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--mid);
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--dark);
+      }
+      .nav-ctas {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-ghost {
+        padding: 8px 18px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--dark);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .btn-primary {
+        padding: 9px 20px;
+        background: var(--accent);
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-primary:hover {
+        background: var(--accent-dark);
+        transform: translateY(-1px);
+      }
+      .loc-badge {
+        display: none;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--green-light);
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--green);
+      }
+      .loc-badge.vis {
+        display: flex;
+      }
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        padding-top: 68px;
+        background: linear-gradient(
+          135deg,
+          #1a120a 0%,
+          #2c1a08 50%,
+          #1a1208 100%
+        );
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://images.unsplash.com/photo-1555244162-803834f70033?w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.22;
+      }
+      .hero-ov {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(20, 10, 0, 0.85) 40%,
+          rgba(20, 10, 0, 0.3) 100%
+        );
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(200, 135, 58, 0.18);
+        border: 1px solid rgba(200, 135, 58, 0.4);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #f5c989;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        font-size: clamp(36px, 5vw, 58px);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -1.5px;
+        color: #fff;
+        margin-bottom: 20px;
+      }
+      .hero h1 em {
+        color: var(--accent);
+        font-style: normal;
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.65;
+        margin-bottom: 36px;
+        max-width: 480px;
+      }
+      .hero-ctas {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 48px;
+      }
+      .btn-hero {
+        padding: 15px 32px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+      }
+      .btn-hp {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-hp:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200, 135, 58, 0.4);
+      }
+      .btn-hs {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+      }
+      .btn-hs:hover {
+        background: rgba(255, 255, 255, 0.18);
+      }
+      .hero-stats {
+        display: flex;
+        gap: 32px;
+      }
+      .h-stat-n {
+        font-size: 26px;
+        font-weight: 800;
+        color: #fff;
+      }
+      .h-stat-l {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 2px;
+      }
+      /* POSTCODE CARD */
+      .pc-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 36px;
+        box-shadow: var(--shadow-lg);
+      }
+      .pc-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .pc-card p {
+        font-size: 14px;
+        color: var(--mid);
+        margin-bottom: 24px;
+      }
+      .pc-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .pc-input {
+        flex: 1;
+        padding: 14px 16px;
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .pc-input:focus {
+        border-color: var(--accent);
+      }
+      .pc-btn {
+        padding: 14px 24px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .pc-btn:hover {
+        background: var(--accent-dark);
+      }
+      .loc-result {
+        display: none;
+        padding: 14px 16px;
+        background: var(--green-light);
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--green);
+        align-items: center;
+        gap: 8px;
+      }
+      .loc-result.show {
+        display: flex;
+      }
+      .loc-err {
+        display: none;
+        padding: 14px 16px;
+        background: #fdecea;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--red);
+      }
+      .loc-err.show {
+        display: block;
+      }
+      .pc-hint {
+        font-size: 12px;
+        color: var(--light);
+        margin-top: 10px;
+      }
+      /* SECTIONS */
+      section {
+        padding: 96px 24px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .s-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-light);
+        border-radius: 20px;
+        padding: 5px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+      .s-title {
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 800;
+        letter-spacing: -1px;
+        line-height: 1.15;
+        margin-bottom: 14px;
+      }
+      .s-sub {
+        font-size: 17px;
+        color: var(--mid);
+        line-height: 1.65;
+        max-width: 560px;
+      }
+      /* HOW IT WORKS */
+      #hiw {
+        background: var(--charcoal);
+      }
+      #hiw .s-tag {
+        background: rgba(200, 135, 58, 0.2);
+        color: #f5c989;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+        margin-top: 56px;
+      }
+      .step {
+        padding: 36px 28px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: var(--r);
+        position: relative;
+      }
+      .step-n {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+      .step-ico {
+        width: 52px;
+        height: 52px;
+        background: rgba(200, 135, 58, 0.15);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .step h4 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .step p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.6;
+      }
+      .step-arr {
+        position: absolute;
+        top: 50%;
+        right: -16px;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 24px;
+        z-index: 1;
+      }
+      /* MENU */
+      #menu {
+        background: var(--cream);
+      }
+      .mfilters {
+        display: flex;
+        gap: 8px;
+        margin: 40px 0 36px;
+        flex-wrap: wrap;
+      }
+      .fbtn {
+        padding: 10px 20px;
+        border: 2px solid var(--border);
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--mid);
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .fbtn.active,
+      .fbtn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-light);
+      }
+      .mgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .mcard {
+        background: #fff;
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.25s;
+        border: 1px solid var(--border);
+      }
+      .mcard:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-4px);
+      }
+      .mcard-img {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        background: #f0ebe4;
+      }
+      .mcard-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+      .mcard:hover .mcard-img img {
+        transform: scale(1.05);
+      }
+      .mcard-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 4px 10px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--charcoal);
+        letter-spacing: 0.3px;
+      }
+      .mcard-body {
+        padding: 20px;
+      }
+      .mcard-title {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .mcard-desc {
+        font-size: 13px;
+        color: var(--mid);
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+      .mcard-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .mcard-price {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .mcard-price span {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--light);
+      }
+      .btn-card {
+        padding: 9px 18px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-card:hover {
+        background: var(--accent-dark);
+      }
+      .mcard.hidden {
+        display: none;
+      }
+      /* BENEFITS */
+      #ben {
+        background: #fff;
+      }
+      .bgrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-top: 56px;
+      }
+      .benefit {
+        padding: 32px 24px;
+        background: var(--cream);
+        border-radius: var(--r);
+        border: 1px solid var(--border);
+      }
+      .ben-ico {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+      .benefit h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .benefit p {
+        font-size: 14px;
+        color: var(--mid);
+        line-height: 1.6;
+      }
+      /* GROUP */
+      #group {
+        background: var(--cream);
+      }
+      .grp-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
+        align-items: center;
+      }
+      .grp-flow {
+        background: #fff;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
+      }
+      .gft {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--mid);
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .fstep {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        background: var(--cream);
+        border-radius: 10px;
+        margin-bottom: 8px;
+      }
+      .fsico {
+        font-size: 22px;
+        width: 40px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .fstxt {
+        font-size: 14px;
+        color: var(--charcoal);
+        font-weight: 500;
+      }
+      .farr {
+        text-align: center;
+        color: var(--light);
+        font-size: 20px;
+        padding: 2px 0;
+      }
+      /* TRUST */
+      #trust {
+        background: var(--charcoal);
+      }
+      #trust .s-tag {
+        background: rgba(200, 135, 58, 0.2);
+        color: #f5c989;
+      }
+      .tgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 48px;
+      }
+      .tcard {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--r);
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .stars {
+        color: #f5c989;
+        font-size: 15px;
+        margin-bottom: 14px;
+        letter-spacing: 2px;
+      }
+      .ttext {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+      .tauthor {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .tav {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .tname {
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .ttitle {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 2px;
+      }
+      .logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 56px;
+        flex-wrap: wrap;
+      }
+      .lp {
+        padding: 14px 28px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 1px;
+      }
+      /* REPEAT */
+      #repeat {
+        background: var(--accent-light);
+      }
+      .rinner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
+        align-items: center;
+      }
+      .rcard {
+        background: #fff;
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
+      }
+      .rcardtitle {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+      }
+      .oitem {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: var(--cream);
+        margin-bottom: 8px;
+      }
+      .oinfo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .oemo {
+        font-size: 22px;
+      }
+      .oname {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .odet {
+        font-size: 12px;
+        color: var(--light);
+        margin-top: 2px;
+      }
+      .btn-ro {
+        padding: 7px 14px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      /* CTA */
+      #cta {
+        background: var(--accent);
+        text-align: center;
+        padding: 96px 24px;
+      }
+      #cta h2 {
+        font-size: clamp(32px, 5vw, 52px);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -1px;
+        margin-bottom: 16px;
+      }
+      #cta p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 40px;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-cw {
+        padding: 16px 36px;
+        background: #fff;
+        color: var(--accent);
+        border: none;
+        border-radius: 12px;
+        font-size: 17px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-cw:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      }
+      .btn-co {
+        padding: 16px 36px;
+        background: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
+        font-size: 17px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-co:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      /* FOOTER */
+      footer {
+        background: var(--dark);
+        padding: 60px 24px 36px;
+      }
+      .ft {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .ftop {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+      .fbrand p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.7;
+        margin-top: 14px;
+        max-width: 260px;
+      }
+      .fcol h5 {
+        font-size: 13px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+      }
+      .fcol a {
+        display: block;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.35);
+        margin-bottom: 10px;
+        transition: color 0.2s;
+      }
+      .fcol a:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .fbot {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .fbot p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.25);
+      }
+      /* TOAST */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        background: var(--dark);
+        color: #fff;
+        padding: 16px 24px;
+        border-radius: 14px;
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .toast-btn {
+        padding: 8px 16px;
+        background: var(--accent);
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+      }
+      .cart-ct {
+        position: fixed;
+        top: 18px;
+        right: 90px;
+        z-index: 1001;
+        background: var(--accent);
+        color: #fff;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        font-size: 12px;
+        font-weight: 700;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .cart-ct.vis {
+        display: flex;
+      }
+      /* MODAL */
+      .moverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        backdrop-filter: blur(4px);
+      }
+      .moverlay.open {
+        display: flex;
+      }
+      .modal {
+        background: #fff;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 540px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 40px;
+        position: relative;
+      }
+      .mclose {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        background: var(--cream);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal h3 {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .modal p.sub {
+        font-size: 15px;
+        color: var(--mid);
+        margin-bottom: 28px;
+      }
+      .fg {
+        margin-bottom: 18px;
+      }
+      .flabel {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--charcoal);
+        margin-bottom: 6px;
+        display: block;
+      }
+      .finput {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .finput:focus {
+        border-color: var(--accent);
+      }
+      .frow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .qty-sel {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .qbtn {
+        width: 36px;
+        height: 36px;
+        border: 2px solid var(--border);
+        background: #fff;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+      .qval {
+        font-size: 18px;
+        font-weight: 700;
+        min-width: 24px;
+        text-align: center;
+      }
+      .mtotal {
+        background: var(--cream);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 20px 0;
+      }
+      .mtr {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .mtr.tot {
+        font-size: 17px;
+        font-weight: 800;
+        margin-bottom: 0;
+        border-top: 1px solid var(--border);
+        padding-top: 12px;
+        margin-top: 8px;
+      }
+      .prow {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+      .pbtn {
+        padding: 12px;
+        border: 2px solid var(--border);
+        background: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .pbtn.active,
+      .pbtn:hover {
+        border-color: var(--accent);
+        background: var(--accent-light);
+        color: var(--accent);
+      }
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+        .steps {
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+        .step-arr {
+          display: none;
+        }
+        .mgrid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .bgrid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .grp-inner {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .tgrid {
+          grid-template-columns: 1fr;
+        }
+        .rinner {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .ftop {
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+      }
+      @media (max-width: 600px) {
+        section {
+          padding: 64px 16px;
+        }
+        .mgrid {
+          grid-template-columns: 1fr;
+        }
+        .bgrid {
+          grid-template-columns: 1fr;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .ftop {
+          grid-template-columns: 1fr;
+        }
+        .pc-group {
+          flex-direction: column;
+        }
+        .frow {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <div class="logo">
+          <div class="logo-icon">🍲</div>
+          <div class="logo-text">One <span>Pot</span> Catering</div>
+        </div>
+        <div class="nav-links">
+          <a href="#menu">Menu</a>
+          <a href="#hiw">How It Works</a>
+          <a href="#trust">Clients</a>
+          <a href="#group">Group Orders</a>
+        </div>
+        <div class="nav-ctas">
+          <div class="loc-badge" id="navBadge">
+            📍 <span id="navCity">Sydney</span>
+          </div>
+          <button class="btn-ghost" onclick="openM('login')">Login</button>
+          <button class="btn-primary" onclick="scrollTo('home')">
+            Order Now
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="cart-ct" id="cartCt">0</div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="hero-ov"></div>
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag">
+            🏆 #1 Corporate Catering — Sydney & Melbourne
+          </div>
+          <h1>Corporate Catering,<br /><em>Made Effortless</em></h1>
+          <p class="hero-sub">
+            Chef-prepared meals delivered to your office on time — every time.
+            Order for 5 or 500 people in minutes.
+          </p>
+          <div class="hero-ctas">
+            <button
+              class="btn-hero btn-hp"
+              onclick="document.getElementById('pcInput').focus()"
+            >
+              Order Now →
+            </button>
+            <button class="btn-hero btn-hs" onclick="scrollTo('menu')">
+              View Menu
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="h-stat-n">98%</div>
+              <div class="h-stat-l">On-time delivery</div>
+            </div>
+            <div>
+              <div class="h-stat-n">5,000+</div>
+              <div class="h-stat-l">Corporate clients</div>
+            </div>
+            <div>
+              <div class="h-stat-n">2 cities</div>
+              <div class="h-stat-l">Sydney & Melbourne</div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-card">
+          <h3>Where are you ordering to?</h3>
+          <p>
+            Enter your office postcode to see your local menu and delivery
+            times.
+          </p>
+          <div class="pc-group">
+            <input
+              type="text"
+              class="pc-input"
+              id="pcInput"
+              placeholder="e.g. 2000"
+              maxlength="4"
+              inputmode="numeric"
+            />
+            <button class="pc-btn" onclick="detectLoc()">Check →</button>
+          </div>
+          <div class="loc-result" id="locResult">
+            <span>✅</span
+            ><span id="locText">You're ordering from our Sydney kitchen</span>
+          </div>
+          <div class="loc-err" id="locErr">
+            We don't deliver here yet. Try a Sydney (2000–2999) or Melbourne
+            (3000–3999) postcode.
+          </div>
+          <p class="pc-hint">
+            We deliver to Sydney CBD & metro and Melbourne CBD & metro.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="hiw">
+      <div class="container">
+        <div class="s-tag">⚡ Simple Process</div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 0;
+          "
+        >
+          <h2 class="s-title" style="color: #fff; margin-bottom: 0">
+            Catering ordered in<br />under 3 minutes
+          </h2>
+          <p class="s-sub" style="color: rgba(255, 255, 255, 0.55); margin: 0">
+            No calls, no quotes. Just fresh food where you need it.
+          </p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">Step 01</div>
+            <div class="step-ico">📍</div>
+            <h4>Enter Postcode</h4>
+            <p>
+              We detect your city and route you to the right kitchen with
+              accurate delivery times.
+            </p>
+            <div class="step-arr">›</div>
+          </div>
+          <div class="step">
+            <div class="step-n">Step 02</div>
+            <div class="step-ico">🍽️</div>
+            <h4>Choose Your Menu</h4>
+            <p>
+              Browse breakfast, lunch, and platters. Filter by dietary needs.
+              Order for any team size.
+            </p>
+            <div class="step-arr">›</div>
+          </div>
+          <div class="step">
+            <div class="step-n">Step 03</div>
+            <div class="step-ico">🕐</div>
+            <h4>Select Delivery Time</h4>
+            <p>
+              Pick same-day or schedule ahead. We confirm within minutes and
+              prepare fresh.
+            </p>
+            <div class="step-arr">›</div>
+          </div>
+          <div class="step">
+            <div class="step-n">Step 04</div>
+            <div class="step-ico">🚀</div>
+            <h4>Delivered On Time</h4>
+            <p>
+              Your food arrives hot, fresh, and ready to serve. Tracking link
+              included.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu">
+      <div class="container">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+          "
+        >
+          <div>
+            <div class="s-tag">🍴 The Menu</div>
+            <h2 class="s-title">Fresh food for<br />every occasion</h2>
+          </div>
+          <div
+            id="menuCity"
+            style="
+              font-size: 14px;
+              font-weight: 700;
+              color: var(--mid);
+              padding: 10px 18px;
+              background: #fff;
+              border-radius: 30px;
+              border: 1.5px solid var(--border);
+            "
+          >
+            📍 Enter postcode to see your menu
+          </div>
+        </div>
+        <div class="mfilters">
+          <button class="fbtn active" onclick="filterM('all', this)">
+            All Items
+          </button>
+          <button class="fbtn" onclick="filterM('breakfast', this)">
+            🌅 Breakfast
+          </button>
+          <button class="fbtn" onclick="filterM('lunch', this)">
+            ☀️ Lunch
+          </button>
+          <button class="fbtn" onclick="filterM('platter', this)">
+            🍱 Platters
+          </button>
+        </div>
+        <div class="mgrid" id="mgrid">
+          <div class="mcard" data-cat="breakfast">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&q=80"
+                alt="Gourmet Breakfast Box"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Breakfast</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Gourmet Breakfast Box</div>
+              <div class="mcard-desc">
+                Pastries, seasonal fruit, greek yoghurt, and barista coffee.
+                Perfect for morning meetings.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$18.50 <span>/ person</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Gourmet Breakfast Box', 18.5)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="breakfast">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80"
+                alt="Acai Bowls"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Breakfast</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Açaí & Granola Bowls</div>
+              <div class="mcard-desc">
+                Individually portioned bowls with fresh toppings, honey, and
+                seeds. Gluten-free option.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$14.00 <span>/ person</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Açaí & Granola Bowls', 14.0)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="breakfast">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80"
+                alt="Breakfast Wraps"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Breakfast</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Hot Breakfast Wraps</div>
+              <div class="mcard-desc">
+                Scrambled eggs, grilled halloumi, roasted capsicum in warm
+                tortillas. Vegetarian-friendly.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$12.50 <span>/ person</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Hot Breakfast Wraps', 12.5)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="lunch">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80"
+                alt="Grain Bowls"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Lunch</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Build-Your-Own Grain Bowls</div>
+              <div class="mcard-desc">
+                Quinoa, roasted veg, your choice of protein, and house dressing.
+                Individually packed.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$22.00 <span>/ person</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Build-Your-Own Grain Bowls', 22.0)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="lunch">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"
+                alt="Sandwich Boxes"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Lunch</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Premium Sandwich Boxes</div>
+              <div class="mcard-desc">
+                Artisan bread, quality fillings, side salad, and a cookie. Mix
+                of dietary options included.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$19.00 <span>/ person</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Premium Sandwich Boxes', 19.0)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="lunch">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80"
+                alt="Hot Lunch"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Lunch</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Chef's Hot Lunch Boxes</div>
+              <div class="mcard-desc">
+                Rotating seasonal hot meals from our in-house chef. Today:
+                Butter Chicken & Basmati Rice.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$24.50 <span>/ person</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Chef\'s Hot Lunch Boxes', 24.5)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="platter">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+                alt="Grazing Platter"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Platter</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Mezze & Grazing Platter</div>
+              <div class="mcard-desc">
+                Dips, artisan cheese, charcuterie, olives, crackers, and fresh
+                fruit. Serves 8–10.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$145.00 <span>/ platter</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Mezze & Grazing Platter', 145.0)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="platter">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600&q=80"
+                alt="Sushi Platter"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Platter</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Japanese Sushi Platter</div>
+              <div class="mcard-desc">
+                Assorted nigiri, rolls, and sashimi with ginger, wasabi, and
+                soy. Serves 6–8.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$168.00 <span>/ platter</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Japanese Sushi Platter', 168.0)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mcard" data-cat="platter">
+            <div class="mcard-img">
+              <img
+                src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80"
+                alt="Dessert Platter"
+                loading="lazy"
+              />
+              <div class="mcard-badge">Platter</div>
+            </div>
+            <div class="mcard-body">
+              <div class="mcard-title">Dessert & Sweets Platter</div>
+              <div class="mcard-desc">
+                Brownies, macarons, petit fours, fruit tarts. Beautiful
+                presentation. Serves 10.
+              </div>
+              <div class="mcard-foot">
+                <div class="mcard-price">$120.00 <span>/ platter</span></div>
+                <button
+                  class="btn-card"
+                  onclick="openOrder('Dessert & Sweets Platter', 120.0)"
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="ben">
+      <div class="container">
+        <div style="text-align: center">
+          <div class="s-tag" style="margin: 0 auto 16px">✨ Why One Pot</div>
+          <h2 class="s-title" style="margin: 0 auto 14px">
+            Built for the modern<br />corporate kitchen
+          </h2>
+        </div>
+        <div class="bgrid">
+          <div class="benefit">
+            <div class="ben-ico">⏰</div>
+            <h4>On-Time Guarantee</h4>
+            <p>
+              Guaranteed delivery within your chosen window or your delivery fee
+              is refunded — no questions asked.
+            </p>
+          </div>
+          <div class="benefit">
+            <div class="ben-ico">👨‍🍳</div>
+            <h4>Freshly Prepared Daily</h4>
+            <p>
+              Every meal is prepared fresh on the day of delivery. No frozen or
+              pre-packaged shortcuts, ever.
+            </p>
+          </div>
+          <div class="benefit">
+            <div class="ben-ico">📦</div>
+            <h4>Easy Bulk Ordering</h4>
+            <p>
+              Order for 5 to 500 people in the same number of clicks. Quantity
+              selectors scale automatically.
+            </p>
+          </div>
+          <div class="benefit">
+            <div class="ben-ico">🏢</div>
+            <h4>Office-First Design</h4>
+            <p>
+              Individual packaging, dietary labelling, and setup-ready platters
+              — designed for professional environments.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROUP ORDERING -->
+    <section id="group">
+      <div class="container">
+        <div class="grp-inner">
+          <div>
+            <div class="s-tag">👥 Group Orders</div>
+            <h2 class="s-title">Everyone picks<br />their own meal</h2>
+            <p
+              style="
+                font-size: 17px;
+                color: var(--mid);
+                line-height: 1.7;
+                margin: 16px 0 32px;
+              "
+            >
+              Send a single link to your team. Each person chooses their own
+              meal. You approve and pay in one click.
+            </p>
+            <ul
+              style="
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+              "
+            >
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  font-size: 15px;
+                  font-weight: 500;
+                "
+              >
+                <span style="color: var(--green); font-size: 20px">✓</span> No
+                spreadsheets or email chains
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  font-size: 15px;
+                  font-weight: 500;
+                "
+              >
+                <span style="color: var(--green); font-size: 20px">✓</span>
+                Dietary preferences handled automatically
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  font-size: 15px;
+                  font-weight: 500;
+                "
+              >
+                <span style="color: var(--green); font-size: 20px">✓</span> One
+                consolidated invoice for finance
+              </li>
+              <li
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  font-size: 15px;
+                  font-weight: 500;
+                "
+              >
+                <span style="color: var(--green); font-size: 20px">✓</span> All
+                meals delivered together, on time
+              </li>
+            </ul>
+            <button
+              class="btn-primary"
+              style="
+                margin-top: 28px;
+                padding: 14px 28px;
+                font-size: 15px;
+                border-radius: 10px;
+              "
+              onclick="openOrder('Group Order', 0)"
+            >
+              Start a Group Order →
+            </button>
+          </div>
+          <div class="grp-flow">
+            <div class="gft">Group Order Flow</div>
+            <div class="fstep">
+              <div class="fsico">🔗</div>
+              <div class="fstxt">
+                <strong>You</strong> create an order and share a link with your
+                team
+              </div>
+            </div>
+            <div class="farr">↓</div>
+            <div class="fstep">
+              <div class="fsico">🧑‍💻</div>
+              <div class="fstxt">
+                <strong>Team members</strong> click the link and pick their own
+                meals
+              </div>
+            </div>
+            <div class="farr">↓</div>
+            <div class="fstep">
+              <div class="fsico">✅</div>
+              <div class="fstxt">
+                <strong>You</strong> review the full order and confirm with one
+                click
+              </div>
+            </div>
+            <div class="farr">↓</div>
+            <div class="fstep">
+              <div class="fsico">🚀</div>
+              <div class="fstxt">
+                <strong>All meals</strong> arrive together, individually
+                labelled with names
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 20px;
+                padding: 14px;
+                background: var(--green-light);
+                border-radius: 10px;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--green);
+                text-align: center;
+              "
+            >
+              ✅ Orders consolidated into one invoice
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section id="trust">
+      <div class="container">
+        <div style="text-align: center">
+          <div class="s-tag">⭐ Client Stories</div>
+          <h2 class="s-title" style="color: #fff">
+            Trusted by Australia's<br />leading companies
+          </h2>
+        </div>
+        <div class="tgrid">
+          <div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p class="ttext">
+              "We've used One Pot for every board lunch for 18 months. The food
+              quality is consistently outstanding and they've never once been
+              late. Our CEO specifically requests their grazing platters."
+            </p>
+            <div class="tauthor">
+              <div class="tav">S</div>
+              <div>
+                <div class="tname">Sarah Mitchell</div>
+                <div class="ttitle">
+                  Office Manager · Macquarie Group, Sydney
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p class="ttext">
+              "The group ordering feature alone saves me 2 hours every week. No
+              more chasing dietary requirements via email — everyone just picks
+              what they want. Brilliant system."
+            </p>
+            <div class="tauthor">
+              <div class="tav">J</div>
+              <div>
+                <div class="tname">James Chen</div>
+                <div class="ttitle">
+                  Executive Assistant · Atlassian, Sydney
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p class="ttext">
+              "We relocated from Sydney to Melbourne and One Pot was already
+              there. Same quality, same process, same reliability. Our entire
+              team was relieved."
+            </p>
+            <div class="tauthor">
+              <div class="tav">A</div>
+              <div>
+                <div class="tname">Amara Okafor</div>
+                <div class="ttitle">
+                  People & Culture Lead · Canva, Melbourne
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="logos">
+          <div class="lp">MACQUARIE</div>
+          <div class="lp">ATLASSIAN</div>
+          <div class="lp">CANVA</div>
+          <div class="lp">KPMG</div>
+          <div class="lp">DELOITTE</div>
+          <div class="lp">ANZ BANK</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPEAT ORDER -->
+    <section id="repeat">
+      <div class="container">
+        <div class="rinner">
+          <div>
+            <div class="s-tag">🔁 Repeat Orders</div>
+            <h2 class="s-title">Reorder your favourites<br />in seconds</h2>
+            <p
+              style="
+                font-size: 17px;
+                color: var(--mid);
+                line-height: 1.7;
+                margin: 16px 0 28px;
+              "
+            >
+              Your most ordered items are saved. Office managers love this —
+              weekly catering done in under 60 seconds.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  font-size: 15px;
+                  font-weight: 500;
+                "
+              >
+                <span
+                  style="
+                    background: var(--accent-light);
+                    color: var(--accent);
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    font-weight: 700;
+                    font-size: 13px;
+                  "
+                  >SAVES TIME</span
+                >
+                Full order history saved to your account
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  font-size: 15px;
+                  font-weight: 500;
+                "
+              >
+                <span
+                  style="
+                    background: var(--accent-light);
+                    color: var(--accent);
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    font-weight: 700;
+                    font-size: 13px;
+                  "
+                  >PAY LATER</span
+                >
+                Monthly invoicing for approved accounts
+              </div>
+            </div>
+            <button
+              class="btn-primary"
+              style="
+                margin-top: 32px;
+                padding: 14px 28px;
+                font-size: 15px;
+                border-radius: 10px;
+              "
+              onclick="openM('login')"
+            >
+              Create Account →
+            </button>
+          </div>
+          <div class="rcard">
+            <div class="rcardtitle">Your Recent Orders</div>
+            <div class="oitem">
+              <div class="oinfo">
+                <div class="oemo">🍱</div>
+                <div>
+                  <div class="oname">Premium Sandwich Boxes</div>
+                  <div class="odet">×25 people · Mon 16 Jun · $475.00</div>
+                </div>
+              </div>
+              <button
+                class="btn-ro"
+                onclick="openOrder('Premium Sandwich Boxes', 19.0)"
+              >
+                Reorder
+              </button>
+            </div>
+            <div class="oitem">
+              <div class="oinfo">
+                <div class="oemo">🫙</div>
+                <div>
+                  <div class="oname">Mezze & Grazing Platter ×3</div>
+                  <div class="odet">×3 platters · Fri 13 Jun · $435.00</div>
+                </div>
+              </div>
+              <button
+                class="btn-ro"
+                onclick="openOrder('Mezze & Grazing Platter', 145.0)"
+              >
+                Reorder
+              </button>
+            </div>
+            <div class="oitem">
+              <div class="oinfo">
+                <div class="oemo">🌅</div>
+                <div>
+                  <div class="oname">Gourmet Breakfast Box</div>
+                  <div class="odet">×30 people · Mon 9 Jun · $555.00</div>
+                </div>
+              </div>
+              <button
+                class="btn-ro"
+                onclick="openOrder('Gourmet Breakfast Box', 18.5)"
+              >
+                Reorder
+              </button>
+            </div>
+            <div style="margin-top: 16px; text-align: center">
+              <a
+                href="#"
+                style="font-size: 13px; font-weight: 600; color: var(--accent)"
+                >View full order history →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="cta">
+      <div class="container">
+        <h2>Ready to simplify your<br />office catering?</h2>
+        <p>Join 5,000+ corporate clients. Order in minutes, not hours.</p>
+        <div class="cta-btns">
+          <button class="btn-cw" onclick="scrollTo('home')">
+            Order Catering Now
+          </button>
+          <button class="btn-co" onclick="scrollTo('menu')">
+            Explore the Menu
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="ft">
+        <div class="ftop">
+          <div class="fbrand">
+            <div class="logo">
+              <div class="logo-icon">🍲</div>
+              <div class="logo-text" style="color: #fff">
+                One <span>Pot</span> Catering
+              </div>
+            </div>
+            <p>
+              Premium corporate catering for Sydney and Melbourne offices.
+              Freshly prepared, reliably delivered, effortlessly ordered.
+            </p>
+          </div>
+          <div class="fcol">
+            <h5>Menu</h5>
+            <a href="#">Breakfast</a><a href="#">Lunch Boxes</a
+            ><a href="#">Platters</a><a href="#">Group Orders</a>
+          </div>
+          <div class="fcol">
+            <h5>Company</h5>
+            <a href="#">About Us</a><a href="#">Our Kitchens</a
+            ><a href="#">Sustainability</a><a href="#">Careers</a>
+          </div>
+          <div class="fcol">
+            <h5>Support</h5>
+            <a href="#">Contact Us</a><a href="#">Delivery Info</a
+            ><a href="#">FAQs</a><a href="#">Corporate Accounts</a>
+          </div>
+        </div>
+        <div class="fbot">
+          <p>© 2025 One Pot Catering Pty Ltd. All rights reserved.</p>
+          <p>ABN 12 345 678 901 · Sydney & Melbourne, Australia</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- CART TOAST -->
+    <div class="toast" id="toast">
+      <span style="font-size: 22px">🛒</span>
+      <div style="font-size: 14px; font-weight: 600" id="toastTxt">
+        Item added
+      </div>
+      <button class="toast-btn" onclick="openM('checkout')">Checkout</button>
+      <button
+        onclick="document.getElementById('toast').classList.remove('show')"
+        style="
+          background: none;
+          border: none;
+          color: rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+          font-size: 18px;
+          margin-left: 4px;
+        "
+      >
+        ×
+      </button>
+    </div>
+
+    <!-- ORDER MODAL -->
+    <div class="moverlay" id="orderModal">
+      <div class="modal">
+        <button class="mclose" onclick="closeM('orderModal')">×</button>
+        <h3 id="mTitle">Order Item</h3>
+        <p class="sub" id="mSub">Customise your order below</p>
+        <div class="fg">
+          <label class="flabel">Number of people</label>
+          <div class="qty-sel">
+            <button class="qbtn" onclick="chgQty(-1)">−</button>
+            <span class="qval" id="qval">10</span>
+            <button class="qbtn" onclick="chgQty(1)">+</button>
+            <span style="font-size: 14px; color: var(--mid); margin-left: 8px"
+              >people</span
+            >
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label class="flabel">Delivery Date</label
+            ><input type="date" class="finput" id="dDate" />
+          </div>
+          <div class="fg">
+            <label class="flabel">Delivery Time</label
+            ><select class="finput" id="dTime">
+              <option>7:00 AM</option>
+              <option>8:00 AM</option>
+              <option>9:00 AM</option>
+              <option selected>12:00 PM</option>
+              <option>1:00 PM</option>
+              <option>2:00 PM</option>
+              <option>6:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="flabel">Dietary notes (optional)</label
+          ><textarea
+            class="finput"
+            rows="2"
+            placeholder="e.g. 3 vegetarian, 1 gluten-free, 2 halal..."
+          ></textarea>
+        </div>
+        <div class="fg">
+          <label class="flabel">Special delivery instructions</label
+          ><textarea
+            class="finput"
+            rows="2"
+            placeholder="e.g. Level 12, ring reception, leave at front desk..."
+          ></textarea>
+        </div>
+        <div class="mtotal">
+          <div class="mtr">
+            <span>Items</span><span id="subT">$185.00</span>
+          </div>
+          <div class="mtr">
+            <span>Delivery fee</span><span id="delFee">$18.00</span>
+          </div>
+          <div class="mtr tot">
+            <span>Total</span><span id="totT">$203.00</span>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="flabel">Payment method</label>
+          <div class="prow">
+            <button class="pbtn active" onclick="selPay(this)">💳 Card</button>
+            <button class="pbtn" onclick="selPay(this)">🍎 Apple Pay</button>
+            <button class="pbtn" onclick="selPay(this)">🔵 Invoice</button>
+          </div>
+        </div>
+        <button
+          class="btn-primary"
+          style="
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            border-radius: 12px;
+          "
+          onclick="placeOrder()"
+        >
+          Confirm Order →
+        </button>
+      </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="moverlay" id="loginModal">
+      <div class="modal">
+        <button class="mclose" onclick="closeM('loginModal')">×</button>
+        <h3>Welcome back</h3>
+        <p class="sub">
+          Sign in to access your order history, saved favourites, and corporate
+          account.
+        </p>
+        <div class="fg">
+          <label class="flabel">Work email</label
+          ><input
+            type="email"
+            class="finput"
+            placeholder="you@company.com.au"
+          />
+        </div>
+        <div class="fg">
+          <label class="flabel">Password</label
+          ><input type="password" class="finput" placeholder="••••••••" />
+        </div>
+        <button
+          class="btn-primary"
+          style="
+            width: 100%;
+            padding: 14px;
+            font-size: 15px;
+            border-radius: 10px;
+            margin-top: 6px;
+          "
+        >
+          Sign In
+        </button>
+        <div
+          style="
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--mid);
+          "
+        >
+          Don't have an account?
+          <a href="#" style="color: var(--accent); font-weight: 700"
+            >Create one free →</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div class="moverlay" id="successModal">
+      <div class="modal" style="text-align: center">
+        <button class="mclose" onclick="closeM('successModal')">×</button>
+        <div style="font-size: 60px; margin-bottom: 16px">🎉</div>
+        <h3 style="margin-bottom: 12px">Order Confirmed!</h3>
+        <p class="sub">
+          Your catering order has been placed. You'll receive a confirmation
+          email and SMS shortly.
+        </p>
+        <div
+          style="
+            background: var(--green-light);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+          "
+        >
+          <div
+            style="
+              font-size: 13px;
+              font-weight: 700;
+              color: var(--green);
+              margin-bottom: 12px;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            "
+          >
+            Order Summary
+          </div>
+          <div
+            id="succSumm"
+            style="font-size: 14px; color: var(--charcoal); line-height: 1.8"
+          ></div>
+        </div>
+        <button
+          class="btn-primary"
+          style="padding: 14px 32px; font-size: 15px; border-radius: 10px"
+          onclick="closeM('successModal')"
+        >
+          Done
+        </button>
+      </div>
+    </div>
+
+    <script>
+      var city = null,
+        qty = 10,
+        curItem = { name: "", price: 0 },
+        cartN = 0;
+      function scrollTo(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+      function detectLoc() {
+        var pc = parseInt(document.getElementById("pcInput").value);
+        var rEl = document.getElementById("locResult"),
+          eEl = document.getElementById("locErr");
+        rEl.classList.remove("show");
+        eEl.classList.remove("show");
+        if (!pc || isNaN(pc)) {
+          eEl.classList.add("show");
+          eEl.textContent = "Please enter a valid 4-digit postcode.";
+          return;
+        }
+        if (pc >= 2000 && pc <= 2999) {
+          city = "Sydney";
+        } else if (pc >= 3000 && pc <= 3999) {
+          city = "Melbourne";
+        } else {
+          eEl.classList.add("show");
+          eEl.textContent =
+            "We don't deliver here yet. Try a Sydney (2000–2999) or Melbourne (3000–3999) postcode.";
+          return;
+        }
+        sessionStorage.setItem("op_city", city);
+        document.getElementById("locText").textContent =
+          "You're ordering from our " + city + " kitchen 🎉";
+        rEl.classList.add("show");
+        document.getElementById("navBadge").classList.add("vis");
+        document.getElementById("navCity").textContent = city;
+        document.getElementById("menuCity").innerHTML =
+          "📍 Showing menu for <strong>" + city + "</strong>";
+        setTimeout(function () {
+          document
+            .getElementById("menu")
+            .scrollIntoView({ behavior: "smooth" });
+        }, 800);
+      }
+      document
+        .getElementById("pcInput")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter") detectLoc();
+        });
+      window.addEventListener("load", function () {
+        var c = sessionStorage.getItem("op_city");
+        if (c) {
+          city = c;
+          document.getElementById("navBadge").classList.add("vis");
+          document.getElementById("navCity").textContent = c;
+          document.getElementById("menuCity").innerHTML =
+            "📍 Showing menu for <strong>" + c + "</strong>";
+        }
+        var today = new Date().toISOString().split("T")[0];
+        document.getElementById("dDate").min = today;
+        document.getElementById("dDate").value = today;
+      });
+      function filterM(cat, btn) {
+        document.querySelectorAll(".fbtn").forEach(function (b) {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        document.querySelectorAll(".mcard").forEach(function (c) {
+          if (cat === "all" || c.dataset.cat === cat)
+            c.classList.remove("hidden");
+          else c.classList.add("hidden");
+        });
+      }
+      function openM(t) {
+        if (t === "login")
+          document.getElementById("loginModal").classList.add("open");
+        if (t === "checkout")
+          document.getElementById("orderModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeM(id) {
+        document.getElementById(id).classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      document.querySelectorAll(".moverlay").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+          if (e.target === el) {
+            el.classList.remove("open");
+            document.body.style.overflow = "";
+          }
+        });
+      });
+      function openOrder(name, price) {
+        curItem = { name: name, price: price };
+        qty = 10;
+        document.getElementById("mTitle").textContent = name;
+        document.getElementById("mSub").textContent =
+          price > 0
+            ? "$" + price.toFixed(2) + " per person"
+            : "Configure your group order";
+        document.getElementById("qval").textContent = qty;
+        updTotal();
+        document.getElementById("orderModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function chgQty(d) {
+        qty = Math.max(1, qty + d);
+        document.getElementById("qval").textContent = qty;
+        updTotal();
+      }
+      function updTotal() {
+        var fee = city === "Melbourne" ? 22 : 18;
+        var sub = curItem.price * qty;
+        document.getElementById("subT").textContent = "$" + sub.toFixed(2);
+        document.getElementById("delFee").textContent =
+          "$" + fee.toFixed(2) + " (" + (city || "Sydney") + ")";
+        document.getElementById("totT").textContent =
+          "$" + (sub + fee).toFixed(2);
+      }
+      function selPay(btn) {
+        document.querySelectorAll(".pbtn").forEach(function (b) {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+      }
+      function placeOrder() {
+        closeM("orderModal");
+        var date = document.getElementById("dDate").value || "Today";
+        var time = document.getElementById("dTime").value;
+        var fee = city === "Melbourne" ? 22 : 18;
+        var sub = curItem.price * qty;
+        document.getElementById("succSumm").innerHTML =
+          "<strong>" +
+          curItem.name +
+          "</strong><br>" +
+          qty +
+          " people · " +
+          date +
+          " at " +
+          time +
+          "<br>" +
+          (city || "Sydney") +
+          " kitchen<br><br><strong>Total: $" +
+          (sub + fee).toFixed(2) +
+          "</strong>";
+        cartN++;
+        document.getElementById("cartCt").textContent = cartN;
+        document.getElementById("cartCt").classList.add("vis");
+        document.getElementById("successModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+    </script>
+  </body>
+</html>

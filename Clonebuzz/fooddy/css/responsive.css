@@ -1,0 +1,43 @@
+@media only screen and (min-width: 200px) and (max-width: 575px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px;
+  }
+  .header-left {
+    justify-content: center;
+  }
+  .logo {
+    padding: 20px 10px;
+  }
+  .header-address {
+    padding: 20px 10px;
+  }
+  .header-address h3 {
+    font-size: 16px;
+  }
+  .header-address p {
+    font-size: 10px;
+  }
+  .header-btn {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    background: var(--color-bg);
+  }
+  .header-btn button {
+    padding: 10px 30px;
+  }
+  .orderBanner {
+    flex-direction: column;
+  }
+
+  .category-items {
+    flex-basis: 25%;
+  }
+  .product-items {
+    flex-basis: 45%;
+  }
+}

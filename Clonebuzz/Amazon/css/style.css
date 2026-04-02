@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 /* =====================
 ==================== RESET + BASE =============================
 ===================== */
@@ -9,20 +10,19 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+:root {
+  --color-primary: #131921;
+  --color-white: #ffffff;
+  --color-gray: #d4d4d4;
+  --color-accent: #f3a847;
+  --color-secoundary: #232f3e;
+}
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-  font-size: 1.6rem;
-  line-height: 1.5;
-  color: #222;
-  background-color: #fff;
+  font-family: "Poppins", sans-serif;
 }
 
 /* =====================
@@ -78,36 +78,164 @@ ol {
 ===================== */
 
 .container {
-  width: 100%;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
 }
-
-/* =====================
-   7. FLEX HELPERS
-===================== */
-
-/* =====================
-   8. GRID HELPER
-===================== */
-
-/* =====================
-   9. SPACING UTILITIES
-===================== */
-
-/* =====================
-   10. TYPOGRAPHY
-===================== */
-
-/* =====================
-   11. BUTTON BASE
-===================== */
 
 .btn:hover {
   opacity: 0.85;
 }
 
 /* =====================
-===================== RESPONSIVE =========================
+===================== START CODE FROM HERE =========================
 ===================== */
+
+/* Header style  */
+
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.header-wrapper p {
+  color: var(--color-white);
+  padding: 10px;
+}
+.header-top {
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background: var(--color-primary);
+}
+.header-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+.address-selection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.address-selection p {
+  font-size: 14px;
+}
+.address {
+  font-size: 16px;
+  font-weight: bold;
+}
+.address-selection p,
+i {
+  color: var(--color-white);
+}
+
+.header-search-box {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+}
+.header-search-box p {
+  color: var(--color-primary);
+  background: var(--color-gray);
+}
+.search-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.header-search-box i {
+  margin-top: -10px;
+  color: var(--color-primary);
+}
+.header-search-box input {
+  flex-grow: 1;
+  outline: none;
+  border: none;
+  padding: 0px 10px;
+}
+.header-search-box input:focus {
+  border: none;
+  outline: none;
+}
+.header-search-box button {
+  background: var(--color-accent);
+  padding: 10px;
+}
+.header-btn-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.header-btn-box p {
+  font-size: 14px;
+}
+.language-header {
+  display: flex;
+  align-items: center;
+}
+.header-cart {
+  display: flex;
+  align-items: center;
+}
+.header-cart i {
+  font-size: 20px;
+}
+.header-bold {
+  font-size: 16px;
+  font-weight: bold;
+}
+.header-bottom {
+  background: var(--color-secoundary);
+  padding: 6px 40px;
+  display: flex;
+  align-items: center;
+}
+.header-hum-bottm {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.header-bottom ul {
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+}
+.header-bottom ul > li {
+  font-size: 14px;
+  color: var(--color-white);
+  padding-right: 40px;
+}
+
+/* Hero Style  */
+.hero-section {
+  max-width: 1420px;
+  margin: auto;
+}
+.hero-cards {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -300px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.hero-card-one {
+  flex-basis: 24%;
+  padding: 10px;
+  background: var(--color-white);
+}
+.items-parent {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+.items-hero {
+  flex-basis: 47%;
+}

@@ -1,0 +1,357 @@
+/* =========================
+   CSS RESET / BASE
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+:root {
+  --color-primary: #1a1a2e;
+  --color-accent: #e63946;
+  --color-text: #222;
+  --color-muted: #666;
+  --color-bg: #ffffff;
+  --color-border: #ddd;
+
+  --radius: 8px;
+  --transition: 0.3s ease;
+
+  --font-family: "Poppins", sans-serif;
+}
+
+/* =========================
+   HTML / BODY
+========================= */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-family);
+}
+button {
+  font-family: inherit;
+}
+/* ================== 
+Start From here 
+===================== */
+
+/* Header style  */
+header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  gap: 35px;
+  padding: 0px 15px;
+  margin-bottom: 20px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  padding: 24px 30px;
+  border-right: 1px solid var(--color-border);
+}
+.header-address {
+  padding: 20px 30px;
+}
+.header-address h3 {
+  font-size: 1.2rem;
+}
+.header-address p {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.search-box {
+  flex-grow: 1;
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: 0.4rem;
+  background: var(--color-border);
+}
+.search-box button {
+  padding: 15px;
+  background: transparent;
+  border: none;
+}
+.search-box input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+}
+.search-box input:focus {
+  outline: none;
+}
+.header-btn {
+  padding: 15px;
+  display: flex;
+  gap: 20px;
+}
+.header-btn button {
+  padding: 20px 40px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.header-btn button:last-child {
+  color: #ffffff;
+  background: #0c831f;
+}
+
+/* Banner section style  */
+
+.banner-section {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0px 20px;
+}
+.banner-section img {
+  width: 100%;
+  border-radius: 10px;
+}
+.orderBanner {
+  padding: 0px 20px;
+  display: flex;
+  max-width: 1280px;
+  margin: 10px auto;
+  gap: 10px;
+}
+.orderItems img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Category Section style  */
+.category-banner {
+  max-width: 1280px;
+  margin: 10px auto;
+  padding: 0px 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.category-items {
+  flex-basis: 10%;
+}
+.category-items img {
+  width: 100%;
+}
+
+/* Product showcase  */
+.product-section {
+  max-width: 1280px;
+  margin: 10px auto;
+}
+.product-row {
+  margin: 10px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.product-items {
+  flex-basis: 15%;
+}
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+}
+.heading-row a {
+  font-family: inherit;
+  text-decoration: none;
+  color: #0c831f;
+  font-weight: bold;
+}
+.product-card {
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-card img {
+  width: 100%;
+}
+.product-card .hot-deal {
+  display: flex;
+  align-items: center;
+  background: var(--color-border);
+  width: max-content;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.product-card h3 {
+  font-size: 10px;
+}
+.product-card small {
+  font-size: 8px;
+}
+.hot-deal p {
+  font-size: 8px;
+  font-weight: bold;
+}
+.hot-deal img {
+  width: 16px;
+}
+.price-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price-box p {
+  font-weight: bold;
+  font-size: 12px;
+}
+.price-box button {
+  font-family: inherit;
+  font-weight: bold;
+  outline: none;
+  color: #0c831f;
+  text-transform: uppercase;
+  background: #f7fff9;
+  border: 1px solid #0c831f;
+  border-radius: 6px;
+  padding: 5px 15px;
+}
+
+/* Footer style  */
+/* Footer main container */
+footer {
+  max-width: 1280px;
+  margin: auto;
+
+  padding: 100px 60px;
+  color: #555;
+}
+
+/* Top layout (links + categories) */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Left section */
+.footer-links {
+  display: flex;
+  gap: 60px;
+}
+
+/* Each column */
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+}
+
+.footer-column a:hover {
+  color: #000;
+}
+
+/* Categories grid */
+.categories {
+  flex: 1;
+}
+
+.categories-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.categories-header span {
+  color: green;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Grid layout for categories */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px 40px;
+}
+
+.categories-grid a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #666;
+}
+
+.categories-grid a:hover {
+  color: #000;
+}
+
+/* Bottom section */
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* App buttons */
+.app-buttons img {
+  height: 40px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons div {
+  width: 35px;
+  height: 35px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Disclaimer text */
+.footer-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #777;
+}
