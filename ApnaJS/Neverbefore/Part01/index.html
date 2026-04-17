@@ -1,0 +1,2039 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Ensures proper scaling on all mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shajgoj – Beauty Redefined</title>
+
+    <!-- ─── Google Fonts ─── -->
+    <!-- Playfair Display: elegant serif for logo/headings -->
+    <!-- DM Sans: clean, modern sans-serif for body/nav -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ═══════════════════════════════════════════════════
+       1. CSS CUSTOM PROPERTIES (Design Tokens)
+       Centralised variables – change once, update everywhere.
+    ═══════════════════════════════════════════════════ */
+      :root {
+        --clr-bg: #ffffff;
+        --clr-text: #111111;
+        --clr-muted: #666666;
+        --clr-accent: #e8194b; /* Shajgoj pink-red */
+        --clr-accent-2: #ff6b9d; /* lighter pink */
+        --clr-tag-purple: #7c3aed;
+        --clr-tag-pink: #db2777;
+        --clr-tag-cyan: #0891b2;
+        --clr-tag-green: #16a34a;
+        --clr-tag-gold: #d97706;
+        --clr-dark: #0d0d0d;
+
+        --ff-display: "Playfair Display", serif;
+        --ff-body: "DM Sans", sans-serif;
+
+        --nav-h: 64px; /* desktop nav height */
+        --subnav-h: 44px; /* category bar height */
+        --header-h: calc(var(--nav-h) + var(--subnav-h));
+
+        --transition-fast: 0.18s ease;
+        --transition-medium: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.14);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ═══════════════════════════════════════════════════
+       2. CSS RESET & BASE
+    ═══════════════════════════════════════════════════ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box; /* border-box prevents width overflow */
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%; /* prevent iOS font-size inflation */
+      }
+
+      body {
+        font-family: var(--ff-body);
+        background: var(--clr-bg);
+        color: var(--clr-text);
+        overflow-x: hidden; /* kill horizontal scroll on mobile */
+        line-height: 1.5;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: inherit;
+      }
+
+      /* ═══════════════════════════════════════════════════
+       3. UTILITY CLASSES
+    ═══════════════════════════════════════════════════ */
+
+      /* Visually hidden but accessible to screen readers */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      /* ═══════════════════════════════════════════════════
+       4. HEADER WRAPPER
+       position: sticky keeps header fixed while scrolling.
+       z-index: 1000 keeps it above hero and all content.
+    ═══════════════════════════════════════════════════ */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--clr-bg);
+        box-shadow: var(--shadow-sm);
+
+        /* CSS custom property used by JS to set --scrolled class styles */
+        transition: box-shadow var(--transition-medium);
+      }
+
+      /* JS adds this class when user scrolls > 10px */
+      .site-header.scrolled {
+        box-shadow: var(--shadow-md);
+      }
+
+      /* ═══════════════════════════════════════════════════
+       5. TOP NAV BAR
+    ═══════════════════════════════════════════════════ */
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: var(--nav-h);
+        padding: 0 clamp(16px, 4vw, 48px); /* fluid horizontal padding */
+        gap: 16px;
+      }
+
+      /* ── Logo ── */
+      .nav__logo {
+        font-family: var(--ff-display);
+        font-size: clamp(20px, 3vw, 26px); /* fluid font size */
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        color: var(--clr-text);
+        flex-shrink: 0; /* don't let logo shrink on small screens */
+      }
+
+      .nav__logo span {
+        color: var(--clr-accent);
+      }
+
+      /* ── Brands link (desktop only) ── */
+      .nav__brands {
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: var(--clr-muted);
+        transition: color var(--transition-fast);
+        flex-shrink: 0;
+      }
+
+      .nav__brands:hover {
+        color: var(--clr-accent);
+      }
+
+      /* ── Search Bar ── */
+      .nav__search {
+        flex: 1; /* takes all remaining space */
+        max-width: 480px;
+        position: relative;
+        margin: 0 auto;
+      }
+
+      .nav__search input {
+        width: 100%;
+        height: 40px;
+        padding: 0 16px 0 42px; /* left pad for icon */
+        border: 1.5px solid #e5e5e5;
+        border-radius: 999px; /* pill shape */
+        font-family: var(--ff-body);
+        font-size: 14px;
+        color: var(--clr-text);
+        background: #fafafa;
+        outline: none;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      /* Focus ring – important for accessibility */
+      .nav__search input:focus {
+        border-color: var(--clr-accent);
+        box-shadow: 0 0 0 3px rgba(232, 25, 75, 0.12);
+        background: #fff;
+      }
+
+      /* Search icon – absolutely positioned inside the input container */
+      .nav__search__icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: var(--clr-muted);
+        pointer-events: none; /* click passes through to input */
+      }
+
+      /* ── Right action icons ── */
+      .nav__actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+      /* Shared pill/icon button styles */
+      .nav__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        transition:
+          background var(--transition-fast),
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .nav__btn:hover {
+        transform: translateY(-1px);
+      }
+      .nav__btn:active {
+        transform: translateY(0);
+      }
+
+      /* Wishlist button – outlined */
+      .nav__btn--wishlist {
+        background: var(--clr-dark);
+        color: #fff;
+      }
+
+      .nav__btn--wishlist:hover {
+        background: #222;
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Login button – text style */
+      .nav__btn--login {
+        color: var(--clr-text);
+      }
+
+      .nav__btn--login:hover {
+        background: #f5f5f5;
+      }
+
+      /* Bag button – accent filled with badge */
+      .nav__btn--bag {
+        background: var(--clr-accent);
+        color: #fff;
+        position: relative;
+      }
+
+      .nav__btn--bag:hover {
+        background: #c8103e;
+        box-shadow: 0 4px 14px rgba(232, 25, 75, 0.35);
+      }
+
+      /* Circular badge showing item count */
+      .bag-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--clr-accent);
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      /* ── Hamburger (mobile only – hidden on desktop) ── */
+      .nav__hamburger {
+        display: none; /* hidden by default */
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        border-radius: 8px;
+        transition: background var(--transition-fast);
+      }
+
+      .nav__hamburger:hover {
+        background: #f5f5f5;
+      }
+
+      /* Each bar of the hamburger icon */
+      .nav__hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--clr-text);
+        border-radius: 2px;
+        transition:
+          transform var(--transition-medium),
+          opacity var(--transition-fast);
+        transform-origin: center;
+      }
+
+      /* Animate hamburger → X when .open is applied by JS */
+      .nav__hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav__hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .nav__hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* ═══════════════════════════════════════════════════
+       6. CATEGORY / SUB-NAV BAR
+    ═══════════════════════════════════════════════════ */
+      .subnav {
+        border-top: 1px solid #f0f0f0;
+        height: var(--subnav-h);
+        overflow: hidden; /* clip for mobile slide animation */
+      }
+
+      /* Inner scrollable row – allows overflow scroll on small screens */
+      .subnav__inner {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        height: 100%;
+        padding: 0 clamp(16px, 4vw, 48px);
+        overflow-x: auto; /* horizontal scroll on mobile */
+        scrollbar-width: none; /* hide scrollbar Firefox */
+        -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+      }
+
+      /* Hide webkit scrollbar */
+      .subnav__inner::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Each nav link / pill */
+      .subnav__link {
+        white-space: nowrap; /* prevent text wrapping */
+        font-size: 13.5px;
+        font-weight: 500;
+        padding: 5px 12px;
+        border-radius: 999px;
+        color: var(--clr-muted);
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .subnav__link:hover {
+        color: var(--clr-text);
+        background: #f5f5f5;
+      }
+
+      /* Active / current category */
+      .subnav__link.active {
+        color: var(--clr-accent);
+        font-weight: 600;
+      }
+
+      /* Coloured pill tags for special categories */
+      .subnav__tag {
+        white-space: nowrap;
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 5px 14px;
+        border-radius: 999px;
+        color: #fff;
+        letter-spacing: 0.2px;
+        transition:
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .subnav__tag:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Individual tag colours */
+      .subnav__tag--purple {
+        background: var(--clr-tag-purple);
+      }
+      .subnav__tag--pink {
+        background: var(--clr-tag-pink);
+      }
+      .subnav__tag--cyan {
+        background: var(--clr-tag-cyan);
+      }
+      .subnav__tag--red {
+        background: var(--clr-accent);
+      }
+      .subnav__tag--green {
+        background: var(--clr-tag-green);
+      }
+
+      /* Divider bar separating plain links from coloured tags */
+      .subnav__divider {
+        width: 1px;
+        height: 20px;
+        background: #e0e0e0;
+        margin: 0 8px;
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════════════════════════
+       7. MOBILE DRAWER MENU
+       Slides down when hamburger is clicked.
+       max-height animation trick = CSS-only slide toggle.
+    ═══════════════════════════════════════════════════ */
+      .mobile-menu {
+        background: #fff;
+        max-height: 0; /* collapsed by default */
+        overflow: hidden;
+        transition: max-height var(--transition-slow);
+        border-top: 1px solid #f0f0f0;
+      }
+
+      /* JS sets this class to expand the drawer */
+      .mobile-menu.open {
+        max-height: 500px; /* generous max to accommodate content */
+      }
+
+      .mobile-menu__inner {
+        padding: 16px clamp(16px, 4vw, 32px) 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .mobile-menu__link {
+        font-size: 15px;
+        font-weight: 500;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: var(--clr-text);
+        transition:
+          background var(--transition-fast),
+          color var(--transition-fast);
+      }
+
+      .mobile-menu__link:hover {
+        background: #fef2f4;
+        color: var(--clr-accent);
+      }
+
+      /* Search input inside drawer (mobile only) */
+      .mobile-menu__search {
+        position: relative;
+        margin-bottom: 8px;
+      }
+
+      .mobile-menu__search input {
+        width: 100%;
+        height: 44px;
+        padding: 0 16px 0 44px;
+        border: 1.5px solid #e5e5e5;
+        border-radius: 12px;
+        font-size: 15px;
+        font-family: var(--ff-body);
+        outline: none;
+        background: #fafafa;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .mobile-menu__search input:focus {
+        border-color: var(--clr-accent);
+        box-shadow: 0 0 0 3px rgba(232, 25, 75, 0.1);
+      }
+
+      .mobile-menu__search svg {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--clr-muted);
+      }
+
+      /* Row of action buttons in drawer */
+      .mobile-menu__actions {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+
+      .mobile-menu__actions .nav__btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      /* ═══════════════════════════════════════════════════
+       8. HERO SLIDER
+       Full-width, aspect-ratio-driven, keyboard/touch aware.
+    ═══════════════════════════════════════════════════ */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        /* Responsive height using aspect ratio:
+         16:5 on desktop, 16:7 on mobile → fluid */
+        aspect-ratio: 16 / 5;
+        background: var(--clr-dark);
+        /* ARIA landmark for screen readers */
+        aria-label: "Featured promotions";
+      }
+
+      /* Track holds all slides side by side */
+      .hero__track {
+        display: flex;
+        height: 100%;
+        /* translateX is driven by JS via CSS custom property */
+        transform: translateX(var(--slide-offset, 0%));
+        transition: transform 0.72s cubic-bezier(0.77, 0, 0.175, 1); /* cinematic ease */
+        will-change: transform; /* GPU compositing hint */
+      }
+
+      /* Each individual slide */
+      .hero__slide {
+        flex: 0 0 100%; /* each slide takes full width */
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Slide background – gradient overlay for text readability */
+      .hero__slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* Layered gradient: dark left & right, transparent centre */
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.55) 0%,
+          rgba(0, 0, 0, 0.1) 38%,
+          rgba(0, 0, 0, 0.1) 62%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+        pointer-events: none; /* let clicks pass through */
+      }
+
+      /* Slide image – object-fit covers without distortion */
+      .hero__slide-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        /* Ken Burns zoom effect – subtle scale animation */
+        animation: kenBurns 8s ease-in-out infinite alternate;
+      }
+
+      /* Ken Burns subtle zoom for visual energy */
+      @keyframes kenBurns {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.06);
+        }
+      }
+
+      /* Only animate the active slide's image */
+      .hero__slide:not(.active) .hero__slide-bg {
+        animation: none;
+      }
+
+      /* ── Slide content text ── */
+      .hero__content {
+        position: absolute;
+        inset: 0;
+        z-index: 2; /* above ::after overlay */
+        display: flex;
+        align-items: center;
+        padding: 0 clamp(24px, 6vw, 80px);
+      }
+
+      .hero__text {
+        max-width: 420px;
+        /* Staggered entrance animation triggered by .active class */
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s ease 0.3s,
+          /* delay after slide transition */ transform 0.6s ease 0.3s;
+      }
+
+      /* Active slide text becomes visible */
+      .hero__slide.active .hero__text {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero__eyebrow {
+        font-size: clamp(11px, 1.5vw, 13px);
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--clr-accent-2);
+        margin-bottom: 10px;
+      }
+
+      .hero__title {
+        font-family: var(--ff-display);
+        font-size: clamp(28px, 5vw, 62px); /* fluid type scale */
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.05;
+        margin-bottom: 14px;
+        /* Text shadow for legibility on any background */
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .hero__title em {
+        font-style: normal;
+        color: var(--clr-accent-2);
+      }
+
+      .hero__subtitle {
+        font-size: clamp(13px, 1.8vw, 16px);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+
+      /* CTA button inside hero */
+      .hero__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 28px;
+        border-radius: 999px;
+        background: var(--clr-accent);
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+        transition:
+          background var(--transition-fast),
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast);
+        box-shadow: 0 4px 20px rgba(232, 25, 75, 0.4);
+      }
+
+      .hero__cta:hover {
+        background: #c8103e;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(232, 25, 75, 0.5);
+      }
+
+      .hero__cta:active {
+        transform: translateY(0);
+      }
+
+      /* Arrow icon inside CTA button */
+      .hero__cta svg {
+        transition: transform var(--transition-fast);
+      }
+
+      .hero__cta:hover svg {
+        transform: translateX(4px);
+      }
+
+      /* ── Right-side tagline (like "UNLEASH YOUR TRUE COLOR") ── */
+      .hero__tagline {
+        position: absolute;
+        right: clamp(24px, 6vw, 80px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        text-align: right;
+        opacity: 0;
+        transition: opacity 0.6s ease 0.5s;
+      }
+
+      .hero__slide.active .hero__tagline {
+        opacity: 1;
+      }
+
+      .hero__tagline-word {
+        display: block;
+        font-family: var(--ff-display);
+        font-size: clamp(22px, 4.5vw, 56px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+        /* Each word staggers using custom --i variable set inline */
+        animation: wordReveal 0.5s ease calc(0.4s + var(--i) * 0.12s) both;
+      }
+
+      @keyframes wordReveal {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Prev / Next arrow buttons ── */
+      .hero__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px); /* frosted glass effect */
+        -webkit-backdrop-filter: blur(8px);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background var(--transition-fast),
+          transform var(--transition-fast);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      .hero__arrow:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .hero__arrow:active {
+        transform: translateY(-50%) scale(0.97);
+      }
+
+      .hero__arrow--prev {
+        left: clamp(12px, 2vw, 24px);
+      }
+      .hero__arrow--next {
+        right: clamp(12px, 2vw, 24px);
+      }
+
+      /* ── Dot indicators ── */
+      .hero__dots {
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .hero__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.45);
+        transition:
+          width var(--transition-medium),
+          background var(--transition-fast);
+        cursor: pointer;
+      }
+
+      /* Active dot expands to a pill */
+      .hero__dot.active {
+        width: 24px;
+        border-radius: 999px;
+        background: #fff;
+      }
+
+      /* ── Autoplay progress bar (top edge of hero) ── */
+      .hero__progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--clr-accent);
+        z-index: 4;
+        width: 0%;
+        /* JS drives the animation via CSS custom property */
+        transition: none; /* progress is set by JS, not CSS transition */
+      }
+
+      /* When autoplay runs, this class triggers the CSS animation */
+      .hero__progress.running {
+        animation: progressBar var(--autoplay-duration, 5s) linear forwards;
+      }
+
+      @keyframes progressBar {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      /* ── Pause indicator on hover ── */
+      .hero__pause-hint {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        opacity: 0;
+        transition: opacity var(--transition-medium);
+        pointer-events: none;
+      }
+
+      .hero:hover .hero__pause-hint {
+        opacity: 1;
+      }
+
+      /* ═══════════════════════════════════════════════════
+       9. RESPONSIVE BREAKPOINTS
+       Mobile-first adjustments using max-width queries.
+    ═══════════════════════════════════════════════════ */
+
+      /* ── Tablet: ≤ 900px ── */
+      @media (max-width: 900px) {
+        /* Hide desktop brands link */
+        .nav__brands {
+          display: none;
+        }
+
+        /* Shrink search slightly */
+        .nav__search {
+          max-width: 280px;
+        }
+
+        /* Hero aspect ratio: slightly taller on tablet */
+        .hero {
+          aspect-ratio: 16 / 6;
+        }
+      }
+
+      /* ── Mobile: ≤ 640px ── */
+      @media (max-width: 640px) {
+        /* Reduce nav height */
+        :root {
+          --nav-h: 56px;
+        }
+
+        /* Show hamburger */
+        .nav__hamburger {
+          display: flex;
+        }
+
+        /* Hide desktop search and action buttons */
+        .nav__search,
+        .nav__actions {
+          display: none;
+        }
+
+        /* Hero becomes portrait-friendly */
+        .hero {
+          aspect-ratio: 4 / 3;
+        }
+
+        /* Right-side tagline hides on very small screens (overlap risk) */
+        .hero__tagline {
+          display: none;
+        }
+
+        /* Smaller arrows */
+        .hero__arrow {
+          width: 36px;
+          height: 36px;
+        }
+
+        /* Subnav stays scrollable – no change needed */
+      }
+
+      /* ── Very small phones: ≤ 380px ── */
+      @media (max-width: 380px) {
+        .hero {
+          aspect-ratio: 1 / 1;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════
+       10. REDUCED MOTION SUPPORT
+       Users who prefer no animation get a clean experience.
+    ═══════════════════════════════════════════════════ */
+      @media (prefers-reduced-motion: reduce) {
+        /* Remove Ken Burns zoom */
+        .hero__slide-bg {
+          animation: none !important;
+        }
+
+        /* Instant transitions */
+        .hero__track {
+          transition: none;
+        }
+        .hero__progress {
+          animation: none !important;
+        }
+        .hero__tagline-word {
+          animation: none !important;
+        }
+
+        /* Keep opacity transitions but much faster */
+        .hero__text,
+        .hero__tagline {
+          transition: opacity 0.1s ease;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ═══════════════════════════════════════════════════
+       HEADER
+       role="banner" is the ARIA landmark for the site header.
+  ═══════════════════════════════════════════════════ -->
+    <header class="site-header" role="banner" id="site-header">
+      <!-- ─── Top Navigation Bar ─── -->
+      <nav class="nav" aria-label="Main navigation">
+        <!-- Logo -->
+        <a href="/" class="nav__logo" aria-label="Shajgoj home">
+          SHAJ<span>GOJ</span>
+        </a>
+
+        <!-- Brands link (desktop) -->
+        <a href="/brands" class="nav__brands">Brands</a>
+
+        <!-- Search bar -->
+        <div class="nav__search" role="search">
+          <!-- SVG search icon -->
+          <svg
+            class="nav__search__icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input
+            type="search"
+            placeholder="Search products, brands…"
+            aria-label="Search"
+            autocomplete="off"
+            id="main-search"
+          />
+        </div>
+
+        <!-- Desktop action buttons -->
+        <div class="nav__actions" role="group" aria-label="Account actions">
+          <!-- Wishlist -->
+          <a
+            href="/wishlist"
+            class="nav__btn nav__btn--wishlist"
+            aria-label="Wishlist"
+          >
+            <!-- Heart icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              />
+            </svg>
+            Wishlist
+          </a>
+
+          <!-- Login -->
+          <a href="/login" class="nav__btn nav__btn--login">Login</a>
+
+          <!-- Bag with badge -->
+          <a
+            href="/bag"
+            class="nav__btn nav__btn--bag"
+            aria-label="Shopping bag, 1 item"
+          >
+            <!-- Bag icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            BAG
+            <span class="bag-badge" aria-label="1 item">1</span>
+          </a>
+        </div>
+
+        <!-- Hamburger button (mobile only) -->
+        <button
+          class="nav__hamburger"
+          id="hamburger"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+      <!-- ─── Category Sub-Navigation Bar ─── -->
+      <div class="subnav" role="navigation" aria-label="Product categories">
+        <div class="subnav__inner">
+          <a href="/makeup" class="subnav__link active">Makeup</a>
+          <a href="/skin" class="subnav__link">Skin</a>
+          <a href="/hair" class="subnav__link">Hair</a>
+          <a href="/personal-care" class="subnav__link">Personal care</a>
+          <a href="/mom-baby" class="subnav__link">Mom &amp; Baby</a>
+          <a href="/fragrance" class="subnav__link">Fragrance</a>
+
+          <!-- Visual divider between plain links and coloured tags -->
+          <div class="subnav__divider" aria-hidden="true"></div>
+
+          <!-- Coloured promotional tag pills -->
+          <a href="/undergarments" class="subnav__tag subnav__tag--purple"
+            >Undergarments</a
+          >
+          <a href="/rongin" class="subnav__tag subnav__tag--pink"
+            >Rongin Noboborsho</a
+          >
+          <a href="/jewellery" class="subnav__tag subnav__tag--cyan"
+            >Jewellery</a
+          >
+          <a href="/clearance" class="subnav__tag subnav__tag--red"
+            >Clearance Sale</a
+          >
+          <a href="/men" class="subnav__tag subnav__tag--green">Men</a>
+        </div>
+      </div>
+
+      <!-- ─── Mobile Drawer Menu ─── -->
+      <!-- aria-hidden toggles with JS for screen readers -->
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu__inner">
+          <!-- Search inside drawer -->
+          <div class="mobile-menu__search">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              type="search"
+              placeholder="Search products…"
+              aria-label="Mobile search"
+            />
+          </div>
+
+          <!-- Action buttons in drawer -->
+          <div class="mobile-menu__actions">
+            <a href="/wishlist" class="nav__btn nav__btn--wishlist">Wishlist</a>
+            <a href="/login" class="nav__btn nav__btn--bag">Login</a>
+            <a href="/bag" class="nav__btn nav__btn--bag"
+              >Bag <span class="bag-badge">1</span></a
+            >
+          </div>
+
+          <!-- Category links -->
+          <a href="/makeup" class="mobile-menu__link">Makeup</a>
+          <a href="/skin" class="mobile-menu__link">Skin</a>
+          <a href="/hair" class="mobile-menu__link">Hair</a>
+          <a href="/personal-care" class="mobile-menu__link">Personal care</a>
+          <a href="/mom-baby" class="mobile-menu__link">Mom &amp; Baby</a>
+          <a href="/fragrance" class="mobile-menu__link">Fragrance</a>
+          <a href="/undergarments" class="mobile-menu__link">Undergarments</a>
+          <a href="/jewellery" class="mobile-menu__link">Jewellery</a>
+          <a href="/men" class="mobile-menu__link">Men</a>
+        </div>
+      </div>
+    </header>
+    <!-- /site-header -->
+
+    <!-- ═══════════════════════════════════════════════════
+       HERO SLIDER
+       role="region" + aria-label identifies this as a landmark.
+       aria-roledescription="carousel" for screen readers.
+  ═══════════════════════════════════════════════════ -->
+    <section
+      class="hero"
+      id="hero-slider"
+      role="region"
+      aria-label="Featured promotions"
+      aria-roledescription="carousel"
+    >
+      <!-- Progress bar at the top edge of the hero -->
+      <div class="hero__progress" id="hero-progress" aria-hidden="true"></div>
+
+      <!-- Hover pause hint -->
+      <div class="hero__pause-hint" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5"
+          />
+        </svg>
+        Paused
+      </div>
+
+      <!-- ── Slide Track ── -->
+      <!-- JS sets --slide-offset on this element to drive translateX -->
+      <div class="hero__track" id="hero-track" aria-live="polite">
+        <!-- ─ SLIDE 1 ─ Nirvana / Makeup Brand -->
+        <div
+          class="hero__slide active"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide 1 of 6: Nirvana Makeup"
+        >
+          <!-- Gradient-based background (no external image needed) -->
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background:
+                radial-gradient(ellipse at 55% 50%, #1a0a0e 0%, #0d0d0d 60%),
+                linear-gradient(135deg, #2d0a15 0%, #0d0d0d 100%);
+              /* Decorative ring pattern mimicking the screenshot */
+              overflow: hidden;
+            "
+          >
+            <!-- Decorative SVG rings – purely visual -->
+            <svg
+              style="
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 70%;
+                height: 100%;
+                opacity: 0.25;
+              "
+              viewBox="0 0 600 500"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <circle
+                cx="350"
+                cy="250"
+                r="440"
+                stroke="#fff"
+                stroke-width="0.5"
+              />
+              <circle
+                cx="350"
+                cy="250"
+                r="370"
+                stroke="#fff"
+                stroke-width="0.5"
+              />
+              <circle
+                cx="350"
+                cy="250"
+                r="300"
+                stroke="#fff"
+                stroke-width="0.5"
+              />
+              <circle
+                cx="350"
+                cy="250"
+                r="230"
+                stroke="#fff"
+                stroke-width="0.5"
+              />
+              <circle
+                cx="350"
+                cy="250"
+                r="165"
+                stroke="#fff"
+                stroke-width="0.5"
+              />
+              <circle
+                cx="350"
+                cy="250"
+                r="100"
+                stroke="#fff"
+                stroke-width="0.5"
+              />
+            </svg>
+          </div>
+
+          <!-- Slide content -->
+          <div class="hero__content">
+            <div class="hero__text">
+              <!-- Brand identifier -->
+              <p class="hero__eyebrow">Featured Brand</p>
+              <!-- Main headline -->
+              <h2 class="hero__title">
+                <em>NIRVANA</em><br />
+                #1 Makeup Brand<br />from Bangladesh
+              </h2>
+              <p class="hero__subtitle">
+                Proudly made in Bangladesh · Long-wear, vibrant formulas
+              </p>
+              <!-- CTA button -->
+              <a href="/brands/nirvana" class="hero__cta">
+                Shop Now
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right-side tagline -->
+          <div class="hero__tagline" aria-hidden="true">
+            <!-- Each span gets a CSS --i variable for stagger timing -->
+            <span class="hero__tagline-word" style="--i: 0">UNLEASH</span>
+            <span class="hero__tagline-word" style="--i: 1">YOUR</span>
+            <span class="hero__tagline-word" style="--i: 2">TRUE COLOR</span>
+          </div>
+        </div>
+        <!-- /slide 1 -->
+
+        <!-- ─ SLIDE 2 ─ Skincare -->
+        <div
+          class="hero__slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide 2 of 6: Skincare Essentials"
+        >
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                135deg,
+                #0f2027 0%,
+                #203a43 50%,
+                #2c5364 100%
+              );
+            "
+          ></div>
+
+          <div class="hero__content">
+            <div class="hero__text">
+              <p class="hero__eyebrow">New Arrivals</p>
+              <h2 class="hero__title">
+                Glow Up<br />Your <em>Skincare</em><br />Routine
+              </h2>
+              <p class="hero__subtitle">
+                Expert-curated serums, moisturisers &amp; sunscreens
+              </p>
+              <a href="/skin" class="hero__cta">
+                Explore Skincare
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__tagline" aria-hidden="true">
+            <span class="hero__tagline-word" style="--i: 0">HYDRATE</span>
+            <span class="hero__tagline-word" style="--i: 1">&amp;</span>
+            <span class="hero__tagline-word" style="--i: 2">RADIATE</span>
+          </div>
+        </div>
+        <!-- /slide 2 -->
+
+        <!-- ─ SLIDE 3 ─ Clearance Sale -->
+        <div
+          class="hero__slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide 3 of 6: Clearance Sale"
+        >
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(135deg, #1a0533 0%, #6b0f1a 100%);
+            "
+          ></div>
+
+          <div class="hero__content">
+            <div class="hero__text">
+              <p class="hero__eyebrow" style="color: #fbbf24">Limited Time</p>
+              <h2 class="hero__title">
+                Clearance<br /><em style="color: #fbbf24">Sale</em><br />Up to
+                70% Off
+              </h2>
+              <p class="hero__subtitle">
+                Hundreds of products, massive discounts
+              </p>
+              <a
+                href="/clearance"
+                class="hero__cta"
+                style="
+                  background: #d97706;
+                  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.45);
+                "
+              >
+                Shop the Sale
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__tagline" aria-hidden="true">
+            <span class="hero__tagline-word" style="--i: 0; color: #fbbf24"
+              >DON'T</span
+            >
+            <span class="hero__tagline-word" style="--i: 1; color: #fbbf24"
+              >MISS</span
+            >
+            <span class="hero__tagline-word" style="--i: 2; color: #fbbf24"
+              >OUT</span
+            >
+          </div>
+        </div>
+        <!-- /slide 3 -->
+
+        <!-- ─ SLIDE 4 ─ Hair -->
+        <div
+          class="hero__slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide 4 of 6: Hair Care"
+        >
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                135deg,
+                #064e3b 0%,
+                #065f46 50%,
+                #047857 100%
+              );
+            "
+          ></div>
+
+          <div class="hero__content">
+            <div class="hero__text">
+              <p class="hero__eyebrow" style="color: #6ee7b7">Trending</p>
+              <h2 class="hero__title">
+                Beautiful<br /><em style="color: #6ee7b7">Hair</em><br />Every
+                Day
+              </h2>
+              <p class="hero__subtitle">
+                Premium shampoos, conditioners &amp; treatments
+              </p>
+              <a
+                href="/hair"
+                class="hero__cta"
+                style="
+                  background: #059669;
+                  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.45);
+                "
+              >
+                Explore Hair Care
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__tagline" aria-hidden="true">
+            <span class="hero__tagline-word" style="--i: 0; color: #6ee7b7"
+              >STRONG</span
+            >
+            <span class="hero__tagline-word" style="--i: 1; color: #6ee7b7"
+              >&amp;</span
+            >
+            <span class="hero__tagline-word" style="--i: 2; color: #6ee7b7"
+              >SHINY</span
+            >
+          </div>
+        </div>
+        <!-- /slide 4 -->
+
+        <!-- ─ SLIDE 5 ─ Fragrance -->
+        <div
+          class="hero__slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide 5 of 6: Fragrance"
+        >
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                135deg,
+                #1e1b4b 0%,
+                #312e81 50%,
+                #4c1d95 100%
+              );
+            "
+          ></div>
+
+          <div class="hero__content">
+            <div class="hero__text">
+              <p class="hero__eyebrow" style="color: #c4b5fd">Exclusive</p>
+              <h2 class="hero__title">
+                Signature<br /><em style="color: #c4b5fd">Scents</em><br />For
+                You
+              </h2>
+              <p class="hero__subtitle">
+                Curated perfumes for every mood &amp; occasion
+              </p>
+              <a
+                href="/fragrance"
+                class="hero__cta"
+                style="
+                  background: #7c3aed;
+                  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
+                "
+              >
+                Discover Fragrance
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__tagline" aria-hidden="true">
+            <span class="hero__tagline-word" style="--i: 0; color: #c4b5fd"
+              >YOUR</span
+            >
+            <span class="hero__tagline-word" style="--i: 1; color: #c4b5fd"
+              >SIGNATURE</span
+            >
+            <span class="hero__tagline-word" style="--i: 2; color: #c4b5fd"
+              >SCENT</span
+            >
+          </div>
+        </div>
+        <!-- /slide 5 -->
+
+        <!-- ─ SLIDE 6 ─ Men -->
+        <div
+          class="hero__slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide 6 of 6: Men's Collection"
+        >
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                135deg,
+                #0c0c0c 0%,
+                #1c1c2e 50%,
+                #16213e 100%
+              );
+            "
+          ></div>
+
+          <div class="hero__content">
+            <div class="hero__text">
+              <p class="hero__eyebrow" style="color: #93c5fd">New Collection</p>
+              <h2 class="hero__title">
+                Grooming<br />for the<br /><em style="color: #93c5fd"
+                  >Modern Man</em
+                >
+              </h2>
+              <p class="hero__subtitle">
+                Face wash, beard care, deodorants &amp; more
+              </p>
+              <a
+                href="/men"
+                class="hero__cta"
+                style="
+                  background: #1d4ed8;
+                  box-shadow: 0 4px 20px rgba(29, 78, 216, 0.45);
+                "
+              >
+                Shop Men's
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__tagline" aria-hidden="true">
+            <span class="hero__tagline-word" style="--i: 0; color: #93c5fd"
+              >LOOK</span
+            >
+            <span class="hero__tagline-word" style="--i: 1; color: #93c5fd"
+              >YOUR</span
+            >
+            <span class="hero__tagline-word" style="--i: 2; color: #93c5fd"
+              >BEST</span
+            >
+          </div>
+        </div>
+        <!-- /slide 6 -->
+      </div>
+      <!-- /hero__track -->
+
+      <!-- ── Previous arrow button ── -->
+      <button
+        class="hero__arrow hero__arrow--prev"
+        id="hero-prev"
+        aria-label="Previous slide"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <!-- ── Next arrow button ── -->
+      <button
+        class="hero__arrow hero__arrow--next"
+        id="hero-next"
+        aria-label="Next slide"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
+      <!-- ── Dot indicators ── -->
+      <!-- Generated dynamically by JS; static fallback here for SEO -->
+      <div
+        class="hero__dots"
+        id="hero-dots"
+        role="tablist"
+        aria-label="Slide controls"
+      >
+        <!-- JS will populate these -->
+      </div>
+    </section>
+    <!-- /hero -->
+
+    <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT
+       All functionality in one <script> block.
+       Structured as self-contained modules using IIFEs
+       and clearly commented.
+  ═══════════════════════════════════════════════════ -->
+    <script>
+      /* ─────────────────────────────────────────────────
+       MODULE 1: HEADER SCROLL BEHAVIOUR
+       Adds a 'scrolled' class to the header when the
+       user scrolls past 10px – enhances box-shadow depth.
+    ───────────────────────────────────────────────── */
+      (function initScrollHeader() {
+        const header = document.getElementById("site-header");
+
+        // IntersectionObserver is more performant than scroll events
+        // because it runs off the main thread.
+        // We observe a tiny sentinel element at the top of the page.
+        const sentinel = document.createElement("div");
+        sentinel.style.cssText =
+          "position:absolute;top:0;height:10px;pointer-events:none";
+        document.body.prepend(sentinel);
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            // Not intersecting means we've scrolled past it → add class
+            header.classList.toggle("scrolled", !entry.isIntersecting);
+          },
+          { threshold: 0 }, // fire as soon as sentinel exits viewport
+        );
+
+        observer.observe(sentinel);
+      })();
+
+      /* ─────────────────────────────────────────────────
+       MODULE 2: MOBILE HAMBURGER MENU
+       Toggles the drawer menu open/closed.
+       Also manages ARIA attributes for accessibility.
+    ───────────────────────────────────────────────── */
+      (function initMobileMenu() {
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (!hamburger || !mobileMenu) return; // guard: elements must exist
+
+        hamburger.addEventListener("click", function () {
+          // Determine new state by checking current aria-expanded value
+          const isOpen = this.getAttribute("aria-expanded") === "true";
+          const willOpen = !isOpen;
+
+          // Toggle classes for animation
+          this.classList.toggle("open", willOpen);
+          mobileMenu.classList.toggle("open", willOpen);
+
+          // Update ARIA attributes so screen readers announce the state
+          this.setAttribute("aria-expanded", String(willOpen));
+          mobileMenu.setAttribute("aria-hidden", String(!willOpen));
+        });
+
+        // Close menu when a link inside it is clicked
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            hamburger.classList.remove("open");
+            mobileMenu.classList.remove("open");
+            hamburger.setAttribute("aria-expanded", "false");
+            mobileMenu.setAttribute("aria-hidden", "true");
+          });
+        });
+
+        // Close menu when user presses Escape key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && mobileMenu.classList.contains("open")) {
+            hamburger.click();
+            hamburger.focus(); // return focus to trigger element
+          }
+        });
+      })();
+
+      /* ─────────────────────────────────────────────────
+       MODULE 3: HERO SLIDER
+       Full-featured carousel with:
+         • Autoplay with pause-on-hover
+         • Touch/swipe support
+         • Keyboard navigation (← →)
+         • Dot indicators (generated dynamically)
+         • Progress bar animation
+         • ARIA live region updates
+    ───────────────────────────────────────────────── */
+      (function initHeroSlider() {
+        /* ── 3.1 DOM references ── */
+        const track = document.getElementById("hero-track");
+        const prevBtn = document.getElementById("hero-prev");
+        const nextBtn = document.getElementById("hero-next");
+        const dotsWrapper = document.getElementById("hero-dots");
+        const progressBar = document.getElementById("hero-progress");
+        const heroSection = document.getElementById("hero-slider");
+
+        // All slide elements as an Array (NodeList doesn't have array methods)
+        const slides = Array.from(track.querySelectorAll(".hero__slide"));
+
+        /* ── 3.2 State variables ── */
+        let currentIndex = 0; // which slide is active
+        const TOTAL = slides.length;
+        const AUTOPLAY_MS = 5000; // milliseconds per slide
+        let autoplayTimer = null; // holds the setInterval id
+        let isPaused = false; // user-paused flag
+
+        // Touch state for swipe detection
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const SWIPE_THRESHOLD = 50; // px needed to register as swipe
+
+        /* ── 3.3 Dot generation ──
+         Build dot buttons dynamically so adding/removing slides
+         requires zero HTML changes.
+      ── */
+        slides.forEach((_, i) => {
+          const dot = document.createElement("button");
+
+          dot.className = "hero__dot" + (i === 0 ? " active" : "");
+          dot.setAttribute("role", "tab");
+          dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+          dot.setAttribute("aria-selected", i === 0 ? "true" : "false");
+          dot.setAttribute("tabindex", i === 0 ? "0" : "-1");
+
+          // Click dot → go to that slide
+          dot.addEventListener("click", () => goTo(i));
+
+          dotsWrapper.appendChild(dot);
+        });
+
+        // Cache the dot NodeList for quick access
+        const dots = Array.from(dotsWrapper.querySelectorAll(".hero__dot"));
+
+        /* ── 3.4 Core goTo function ──
+         The single source of truth for all slide changes.
+         Everything else calls this.
+      ── */
+        function goTo(index) {
+          // Wrap around: if index goes below 0, jump to last; past last, jump to first
+          index = ((index % TOTAL) + TOTAL) % TOTAL;
+
+          // Deactivate current slide
+          slides[currentIndex].classList.remove("active");
+          dots[currentIndex].classList.remove("active");
+          dots[currentIndex].setAttribute("aria-selected", "false");
+          dots[currentIndex].setAttribute("tabindex", "-1");
+
+          // Update current index
+          currentIndex = index;
+
+          // Activate new slide
+          slides[currentIndex].classList.add("active");
+          dots[currentIndex].classList.add("active");
+          dots[currentIndex].setAttribute("aria-selected", "true");
+          dots[currentIndex].setAttribute("tabindex", "0");
+
+          // Move the track using a CSS custom property.
+          // This keeps animation in CSS (GPU-accelerated), logic in JS.
+          track.style.setProperty("--slide-offset", `-${currentIndex * 100}%`);
+
+          // Update progress bar
+          restartProgressBar();
+        }
+
+        /* ── 3.5 Progress bar control ── */
+        function restartProgressBar() {
+          // Remove class to reset animation
+          progressBar.classList.remove("running");
+
+          // Set the CSS variable the animation reads
+          progressBar.style.setProperty(
+            "--autoplay-duration",
+            `${AUTOPLAY_MS}ms`,
+          );
+
+          // Force a browser reflow so removing and adding class causes a restart.
+          // void is intentional – we're triggering a layout read/write cycle.
+          void progressBar.offsetWidth;
+
+          // Re-add class to start the progress animation (unless paused)
+          if (!isPaused) {
+            progressBar.classList.add("running");
+          }
+        }
+
+        /* ── 3.6 Autoplay ── */
+        function startAutoplay() {
+          clearInterval(autoplayTimer); // clear any existing timer first
+          autoplayTimer = setInterval(() => {
+            if (!isPaused) {
+              goTo(currentIndex + 1); // advance to next slide
+            }
+          }, AUTOPLAY_MS);
+          restartProgressBar();
+        }
+
+        function stopAutoplay() {
+          clearInterval(autoplayTimer);
+          // Pause the CSS progress bar animation
+          progressBar.style.animationPlayState = "paused";
+        }
+
+        function pauseAutoplay() {
+          isPaused = true;
+          progressBar.style.animationPlayState = "paused";
+        }
+
+        function resumeAutoplay() {
+          isPaused = false;
+          progressBar.style.animationPlayState = "running";
+        }
+
+        /* ── 3.7 Button event listeners ── */
+
+        prevBtn.addEventListener("click", () => {
+          goTo(currentIndex - 1);
+          // Brief pause after manual nav so user can read the slide
+          pauseAutoplay();
+          setTimeout(resumeAutoplay, 3000);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          goTo(currentIndex + 1);
+          pauseAutoplay();
+          setTimeout(resumeAutoplay, 3000);
+        });
+
+        /* ── 3.8 Keyboard navigation ──
+         Arrow keys only work when focus is inside the slider.
+      ── */
+        heroSection.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault(); // stop page scroll
+            prevBtn.click();
+          }
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            nextBtn.click();
+          }
+        });
+
+        // Dots also support arrow key navigation between them
+        dotsWrapper.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") {
+            const next = (currentIndex + 1) % TOTAL;
+            goTo(next);
+            dots[next].focus();
+          }
+          if (e.key === "ArrowLeft") {
+            const prev = (currentIndex - 1 + TOTAL) % TOTAL;
+            goTo(prev);
+            dots[prev].focus();
+          }
+        });
+
+        /* ── 3.9 Hover pause ── */
+        heroSection.addEventListener("mouseenter", pauseAutoplay);
+        heroSection.addEventListener("mouseleave", resumeAutoplay);
+
+        // Also pause when the hero receives keyboard focus
+        heroSection.addEventListener("focusin", pauseAutoplay);
+        heroSection.addEventListener("focusout", resumeAutoplay);
+
+        /* ── 3.10 Touch / Swipe support ──
+         Records touchstart X position, compares with touchend X.
+         If difference exceeds threshold, it's a swipe.
+      ── */
+        heroSection.addEventListener(
+          "touchstart",
+          (e) => {
+            // pageX is the horizontal position of the first touch point
+            touchStartX = e.changedTouches[0].pageX;
+          },
+          { passive: true },
+        ); // passive: true = don't block scroll
+
+        heroSection.addEventListener(
+          "touchend",
+          (e) => {
+            touchEndX = e.changedTouches[0].pageX;
+
+            const delta = touchStartX - touchEndX; // positive = swiped left
+
+            if (Math.abs(delta) >= SWIPE_THRESHOLD) {
+              if (delta > 0) {
+                goTo(currentIndex + 1); // swipe left = next
+              } else {
+                goTo(currentIndex - 1); // swipe right = prev
+              }
+            }
+          },
+          { passive: true },
+        );
+
+        /* ── 3.11 Visibility API ──
+         Pause autoplay when user switches tabs or minimises window.
+         Saves battery and avoids disorienting the user.
+      ── */
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            stopAutoplay();
+          } else {
+            startAutoplay();
+          }
+        });
+
+        /* ── 3.12 Intersection Observer for autoplay ──
+         Only autoplay when the slider is visible in the viewport.
+         Stops animation when slider is scrolled out of view.
+      ── */
+        const sliderObserver = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              startAutoplay();
+            } else {
+              stopAutoplay();
+            }
+          },
+          { threshold: 0.3 }, // at least 30% of slider must be visible
+        );
+
+        sliderObserver.observe(heroSection);
+
+        /* ── 3.13 Initialise ── */
+        // Set initial slide offset (slide 0, no translation needed but
+        // CSS custom property must exist for the track transition to work)
+        track.style.setProperty("--slide-offset", "0%");
+
+        // Kick off autoplay
+        startAutoplay();
+      })(); // end initHeroSlider IIFE
+
+      /* ─────────────────────────────────────────────────
+       MODULE 4: SEARCH INPUT ENHANCEMENTS
+       Clears input on Escape, submits on Enter.
+    ───────────────────────────────────────────────── */
+      (function initSearch() {
+        const input = document.getElementById("main-search");
+        if (!input) return;
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            input.value = "";
+            input.blur(); // remove focus after clearing
+          }
+        });
+      })();
+
+      /* ─────────────────────────────────────────────────
+       MODULE 5: SUBNAV ACTIVE LINK HIGHLIGHT
+       Highlights the correct nav link based on the current
+       page path. Useful when this component is used across
+       multiple pages.
+    ───────────────────────────────────────────────── */
+      (function initSubnavActive() {
+        const links = document.querySelectorAll(".subnav__link");
+        const current = window.location.pathname; // e.g. "/skin"
+
+        links.forEach((link) => {
+          // Remove existing active class first
+          link.classList.remove("active");
+
+          // Match href to current path
+          if (link.getAttribute("href") === current) {
+            link.classList.add("active");
+            // Scroll the link into view within the subnav (mobile)
+            link.scrollIntoView({ block: "nearest", inline: "center" });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

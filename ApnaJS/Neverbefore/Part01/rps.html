@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RPS Pro</title>
+
+<style>
+/* =========================
+   1. DESIGN SYSTEM
+========================= */
+:root {
+  --color-bg: #0f172a;
+  --color-surface: rgba(255,255,255,0.05);
+  --color-primary: #6366f1;
+  --color-accent: #22c55e;
+  --color-danger: #ef4444;
+  --color-text: #e5e7eb;
+  --color-muted: #94a3b8;
+
+  --font-family: system-ui, sans-serif;
+
+  --fs-sm: 0.9rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.3rem;
+  --fs-xl: 1.8rem;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+
+  --radius: 12px;
+  --transition: 0.25s ease;
+}
+
+/* =========================
+   2. BASE
+========================= */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: linear-gradient(135deg,#020617,var(--color-bg));
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* =========================
+   3. CONTAINER
+========================= */
+.game {
+  width: 100%;
+  max-width: 520px;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+/* =========================
+   4. TYPOGRAPHY
+========================= */
+.title {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-3);
+}
+
+/* =========================
+   5. SCOREBOARD
+========================= */
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scoreboard h2 {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+
+.scoreboard p {
+  font-size: var(--fs-lg);
+  font-weight: bold;
+}
+
+/* =========================
+   6. RESULT
+========================= */
+.result {
+  margin: var(--space-3) 0;
+  min-height: 28px;
+}
+
+/* =========================
+   7. BUTTONS
+========================= */
+.choices {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.choice {
+  flex: 1;
+  padding: var(--space-2);
+  font-size: 2rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+  transition: var(--transition);
+}
+
+.choice:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: var(--color-primary);
+}
+
+.choice:active {
+  transform: scale(0.95);
+}
+
+/* =========================
+   8. MOVES
+========================= */
+.moves {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-3);
+}
+
+.moves span {
+  display: block;
+  font-size: var(--fs-lg);
+}
+
+/* =========================
+   9. RESET
+========================= */
+.reset {
+  margin-top: var(--space-3);
+  width: 100%;
+  padding: var(--space-2);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-danger);
+  color: white;
+  cursor: pointer;
+}
+
+.reset:hover {
+  background: #dc2626;
+}
+
+/* =========================
+   10. STATES
+========================= */
+.win { color: var(--color-accent); }
+.lose { color: var(--color-danger); }
+.draw { color: var(--color-muted); }
+
+/* =========================
+   11. RESPONSIVE
+========================= */
+@media (max-width:480px){
+  .choice { font-size: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+  <h1 class="title">Rock Paper Scissors</h1>
+
+  <div class="scoreboard">
+    <div>
+      <h2>You</h2>
+      <p id="playerScore">0</p>
+    </div>
+    <div>
+      <h2>Computer</h2>
+      <p id="computerScore">0</p>
+    </div>
+  </div>
+
+  <div class="result" id="result">Choose your move</div>
+
+  <div class="choices">
+    <button class="choice" data-choice="rock">✊</button>
+    <button class="choice" data-choice="paper">✋</button>
+    <button class="choice" data-choice="scissors">✌️</button>
+  </div>
+
+  <div class="moves">
+    <div>
+      <p>You</p>
+      <span id="playerMove">-</span>
+    </div>
+    <div>
+      <p>Computer</p>
+      <span id="computerMove">-</span>
+    </div>
+  </div>
+
+  <button class="reset" id="reset">Reset Game</button>
+</div>
+
+<script>
+/* =========================
+   1. STATE
+========================= */
+const state = {
+  playerScore: 0,
+  computerScore: 0
+};
+
+/* =========================
+   2. DOM CACHE
+========================= */
+const resultEl = document.getElementById("result");
+const playerScoreEl = document.getElementById("playerScore");
+const computerScoreEl = document.getElementById("computerScore");
+const playerMoveEl = document.getElementById("playerMove");
+const computerMoveEl = document.getElementById("computerMove");
+
+const buttons = document.querySelectorAll(".choice");
+const resetBtn = document.getElementById("reset");
+
+/* =========================
+   3. UTIL FUNCTIONS
+========================= */
+
+// Random computer move
+function getComputerChoice() {
+  const choices = ["rock","paper","scissors"];
+  return choices[Math.floor(Math.random() * choices.length)];
+}
+
+// Decide winner
+function getWinner(player, computer) {
+  if (player === computer) return "draw";
+
+  if (
+    (player === "rock" && computer === "scissors") ||
+    (player === "paper" && computer === "rock") ||
+    (player === "scissors" && computer === "paper")
+  ) return "win";
+
+  return "lose";
+}
+
+/* =========================
+   4. GAME LOGIC
+========================= */
+
+function playGame(playerChoice) {
+  const computerChoice = getComputerChoice();
+  const result = getWinner(playerChoice, computerChoice);
+
+  // Update moves UI
+  playerMoveEl.textContent = playerChoice;
+  computerMoveEl.textContent = computerChoice;
+
+  // Reset classes
+  resultEl.className = "result";
+
+  if (result === "win") {
+    state.playerScore++;
+    resultEl.textContent = "You Win 🎉";
+    resultEl.classList.add("win");
+  } 
+  else if (result === "lose") {
+    state.computerScore++;
+    resultEl.textContent = "You Lose 😢";
+    resultEl.classList.add("lose");
+  } 
+  else {
+    resultEl.textContent = "Draw 🤝";
+    resultEl.classList.add("draw");
+  }
+
+  // Update scores
+  playerScoreEl.textContent = state.playerScore;
+  computerScoreEl.textContent = state.computerScore;
+}
+
+/* =========================
+   5. EVENTS
+========================= */
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const choice = btn.dataset.choice;
+    playGame(choice);
+  });
+});
+
+resetBtn.addEventListener("click", () => {
+  state.playerScore = 0;
+  state.computerScore = 0;
+
+  playerScoreEl.textContent = 0;
+  computerScoreEl.textContent = 0;
+  playerMoveEl.textContent = "-";
+  computerMoveEl.textContent = "-";
+  resultEl.textContent = "Choose your move";
+  resultEl.className = "result";
+});
+</script>
+
+</body>
+</html>
