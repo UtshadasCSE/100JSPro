@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing - Bonsai Freelance Solution</title>
+    <!-- External CSS and JS  -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script src="js/main.js" defer></script>
+    <!-- Fontawesome CDN Link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- This container help to maintain the max-width  -->
+    <div class="container">
+      <!-- Header  -->
+      <header class="header">
+        <div class="logo">
+          <img src="assets/logo.png" alt="" />
+          <button id="menuHam"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="menu-items">
+          <ul>
+            <li><a href="">Product</a></li>
+            <li id="dropDown" class="drop-down">
+              <a href="">Tempalete</a><i class="fa-solid fa-caret-down"></i>
+              <ul class="dropDown-items">
+                <li><a href="">Template Ongling</a></li>
+                <li><a href="">Hello Calendar</a></li>
+                <li><a href="">Invoice Template</a></li>
+                <li><a href="">Contract Template</a></li>
+              </ul>
+            </li>
+            <li><a href="">Pricing</a></li>
+            <li><a href="">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="header-btns">
+          <button>Login</button>
+          <button>Start Free</button>
+        </div>
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+          <ul>
+            <li><a href="">Product</a></li>
+            <li><a href="">Template</a></li>
+            <li><a href="">Pricing</a></li>
+            <li><a href="">Reviews</a></li>
+          </ul>
+        </div>
+      </header>
+      <!-- Pricing Section  -->
+      <div class="pricing-section">
+        <!-- Pricing toggle  -->
+        <div class="pricing-toggle">
+          <h3>Plans & Pricing</h3>
+          <div class="pricing-toggle">
+            <span class="label">Monthly</span>
+            <label class="switch">
+              <input type="checkbox" id="billingToggle" />
+              <span class="slider"></span>
+            </label>
+            <span class="label">Yearly</span>
+            <span class="badge">2 months free!</span>
+          </div>
+        </div>
+        <!-- Pricing card  -->
+        <div class="pricing-container"></div>
+      </div>
+    </div>
+  </body>
+</html>

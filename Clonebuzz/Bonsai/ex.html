@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing</title>
+
+    <style>
+      :root {
+        --primary: #16a085;
+        --text: #2c3e50;
+        --muted: #7f8c8d;
+        --bg: #f4f7f9;
+        --card-bg: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+      }
+
+      .pricing {
+        padding: 60px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+      }
+
+      /* CARD */
+      .card {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 30px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: 0.3s ease;
+        border: 1px solid #eee;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+      }
+
+      /* POPULAR BADGE */
+      .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: var(--primary);
+        color: #fff;
+        padding: 8px 20px;
+        font-size: 12px;
+        transform: rotate(45deg) translate(30%, -50%);
+        transform-origin: top right;
+      }
+
+      /* TEXT */
+      .card h3 {
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+
+      .desc {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+
+      .price {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .price span {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      /* FEATURES */
+      .features {
+        list-style: none;
+        margin-bottom: 30px;
+      }
+
+      .features li {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      .features li::before {
+        content: "✔";
+        color: var(--primary);
+        margin-right: 8px;
+      }
+
+      /* BUTTON */
+      .btn {
+        background: var(--primary);
+        color: #fff;
+        text-align: center;
+        padding: 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #12876f;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 992px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="pricing">
+      <div class="container" id="pricingContainer"></div>
+    </section>
+
+    <script>
+      const pricingData = [
+        {
+          title: "Starter",
+          desc: "Ideal for freelancers and contractors just starting out.",
+          price: 24,
+          popular: false,
+          features: [
+            "All Templates",
+            "Unlimited Clients & Projects",
+            "Invoicing & Payments",
+            "Proposals & Contracts",
+            "Tasks & Time Tracking",
+            "Client CRM",
+            "Expense Tracking",
+            "Up to 5 Project Collaborators",
+          ],
+        },
+        {
+          title: "Professional",
+          desc: "Everything a growing independent business needs to thrive.",
+          price: 39,
+          popular: true,
+          features: [
+            "Everything in Starter plus...",
+            "Custom Branding",
+            "Forms & Questionnaires",
+            "Workflow Automations",
+            "Client Portal",
+            "QuickBooks Integration",
+            "Calendly Integration",
+            "Zapier Integration",
+            "Up to 15 Project Collaborators",
+          ],
+        },
+        {
+          title: "Business",
+          desc: "Perfect package for small businesses and agencies.",
+          price: 79,
+          popular: false,
+          features: [
+            "Everything in Starter and Professional plus...",
+            "Subcontractor Management",
+            "Hiring Agreement Templates",
+            "Subcontractor Onboarding",
+            "Talent Pool",
+            "3 Team Seats",
+            "Accountant Access",
+            "Multiple Bank Accounts",
+            "Unlimited Subcontractors",
+            "Unlimited Collaborators",
+          ],
+        },
+      ];
+
+      const container = document.getElementById("pricingContainer");
+
+      function createCard(plan) {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        let badge = plan.popular ? `<div class="badge">MOST POPULAR</div>` : "";
+
+        let featuresHTML = plan.features
+          .map((feature) => `<li>${feature}</li>`)
+          .join("");
+ 
+        card.innerHTML = `
+    ${badge}
+    <div>
+      <h3>${plan.title}</h3>
+      <p class="desc">${plan.desc}</p>
+      <div class="price">$${plan.price} <span>/month</span></div>
+      <ul class="features">${featuresHTML}</ul>
+    </div>
+    <a href="#" class="btn">START FREE</a>
+  `;
+
+        return card;
+      }
+
+      pricingData.forEach((plan) => {
+        container.appendChild(createCard(plan));
+      });
+    </script>
+  </body>
+</html>

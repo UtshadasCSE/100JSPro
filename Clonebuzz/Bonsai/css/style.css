@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* ========== 
+Reset & Base
+============= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --color-primary: #f2faff;
+  --color-secondary: #000000;
+  --color-text: #4c525a;
+  --color-accent: #00b289;
+  --radius: 0.5rem;
+}
+html {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(14px, 1.2vw, 16px);
+  scroll-behavior: smooth;
+}
+
+img,
+video,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul,
+ol {
+  list-style: none;
+}
+.container {
+  max-width: 1320px;
+  margin: auto;
+}
+/* === Header === */
+
+.header {
+  position: relative;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu-items ul {
+  display: flex;
+  gap: 1.5rem;
+}
+.menu-items ul a {
+  position: relative;
+}
+.menu-items ul a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.3s linear;
+}
+.menu-items a:hover::after {
+  width: 100%;
+}
+
+.header-btns button {
+  margin-left: 10px;
+  font-weight: 600;
+  border: 1px solid var(--color-accent);
+  outline: none;
+  padding: 12px 30px;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.header-btns button:last-child {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+.header-btns button:hover {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+/* Dropdown header  */
+.drop-down {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.dropDown-items {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 40px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  padding: 20px;
+  border-radius: var(--radius);
+  transition: 0.3s all;
+}
+.dropDown-items.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropDown-items a {
+  transition: 0.3s ease-in-out;
+}
+.dropDown-items a:hover {
+  color: var(--color-secondary);
+}
+.drop-down i.active {
+  transform: rotate(180deg);
+}
+.logo button {
+  display: none;
+}
+.mobile-menu {
+  z-index: 100;
+  position: fixed;
+  background: var(--color-primary);
+  top: -1000%;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  transition: 0.3s ease-in-out;
+}
+.mobile-menu.active {
+  top: 60px;
+}
+.mobile-menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.mobile-menu ul a {
+  font-weight: 500;
+}
+/* === Pricing === */
+.pricing-section {
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  flex-wrap: wrap;
+}
+/* LABEL */
+.label {
+  font-size: clamp(12px, 1.2vw, 16px);
+  color: #6b7280;
+  font-weight: 500;
+}
+.switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+}
+.switch input {
+  display: none;
+}
+.slider {
+  position: absolute;
+  inset: 0;
+  background: var(--color-secondary);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.slider::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 20px;
+  width: 20px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background: var(--color-accent);
+}
+input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+.pricing-container {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pricing-card {
+  background: var(--color-primary);
+  padding: 40px;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.card-content .price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-accent);
+}
+.card-content {
+  margin-bottom: 60px;
+}
+.btn {
+  color: var(--color-primary);
+  font-weight: 600;
+  border: 1px solid var(--color-accent);
+  outline: none;
+  padding: 12px 30px;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  display: inline-block;
+}

@@ -100,6 +100,11 @@
 //   console.log(Unmatched);
 // }
 
+// /*========================
+// problem 10
+// ==========================*/
+
+/*
 function rps(user, computer) {
   if (user === computer) return "It's a tie!";
 
@@ -114,3 +119,57 @@ function rps(user, computer) {
   }
 }
 console.log(rps("rock", "scissors"));
+*/
+
+// /*========================
+// problem 11 1-10
+// ==========================*/
+
+// for (let i = 1; i <= 10; i++) {
+//   console.log(i);
+// }
+
+// /*========================
+// problem 11 10-1
+// ==========================*/
+
+// let number = 10;
+// while (number >= 1) {
+//   console.log(number);
+//   number--;
+// }
+
+// /*========================
+// problem 11 even
+// ==========================*/
+
+// for (let i = 1; i <= 20; i++) {
+//   if (i % 2 == 0) console.log(i);
+// }
+
+// /*========================
+// problem 12 odd
+// ==========================*/
+
+// let number = 1;
+// while (number <= 15) {
+//   if (number % 2 === 1) {
+//     console.log(number);
+//   }
+//   number++;
+// }
+
+// /*========================
+// problem 13 odd
+// ==========================*/
+
+// for (let i = 1; i <= 10; i++) {
+//   console.log(`5 X ${i} = ` + 5 * i);
+// }
+
+// /*========================
+// problem 13 odd
+// ==========================*/
+
+let sum = 0;
+for (let i = 1; i <= 100; i++) {}

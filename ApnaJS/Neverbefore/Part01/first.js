@@ -260,6 +260,8 @@ if (isLoggedIn && isAdmin) {
 
 */
 
+/*
+
 function checkGrade(mark) {
   if (mark >= 90 && mark <= 100) return "A+";
   if (mark >= 80 && mark <= 89) return "A";
@@ -269,3 +271,56 @@ function checkGrade(mark) {
   return "MF try hard! Next time";
 }
 console.log(checkGrade(22));
+
+*/
+
+/* ===========================
+Loop is a programming construct that allows you to repeat a block of code multiple times. There are three types of loops in JavaScript:
+
+1. For loop
+2. While loop
+3. Do-while loop
+=============================== */
+
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+/*
+
+start 
+while(end){
+  CODE 
+change condition
+}
+
+*/
+
+let i = 1;
+while (i <= 5) {
+  console.log(i);
+  i++;
+}
+
+let j = 10;
+do {
+  console.log(j);
+  j++;
+} while (j <= 6);
+
+let user = [
+  "Mirza",
+  "Dev",
+  "Rafi",
+  "Sabbir",
+  "Shuvo",
+  "Shakil",
+  "Sabbir",
+  "Shuvo",
+  "Shakil",
+];
+
+for (let i = 0; i <= user.length - 1; i++) {
+  console.log(user[i]);
+  if (user[i] === "Dev") break;
+}
