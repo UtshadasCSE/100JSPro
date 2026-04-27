@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      input {
+        display: none;
+      }
+      .custom-file {
+        padding: 12px 20px;
+        font-size: 16px;
+        color: #000000;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(2555, 255, 255, 0.25);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+      .custom-file:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+        box-shadow: rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <input type="file" />
+      <div class="custom-file">Choose File</div>
+    </div>
+    <script>
+      let input = document.querySelector("input");
+      let customFileBtn = document.querySelector(".custom-file");
+      customFileBtn.addEventListener("click", () => {
+        input.click();
+      });
+      input.addEventListener("change", (e) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          customFileBtn.textContent = `${files[0].name}`;
+        }
+      });
+    </script>
+  </body>
+</html>

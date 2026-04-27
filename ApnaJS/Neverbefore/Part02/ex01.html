@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .highlight {
+        color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+        <li>Blog</li>
+      </ul>
+    </header>
+    <div class="container">
+      <h2>Hello World, I am from the Mars</h2>
+      <button disabled>Submit Now</button>
+    </div>
+
+    <main>
+      <input type="text" placeholder="Enter value" />
+      <br />
+      <br />
+      <h1 class="display">Select your size:</h1>
+      <select name="size" id="size">
+        <option selected disabled>Choose your zize</option>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+        <option value="excel">Excel</option>
+      </select>
+    </main>
+    <footer>
+      <p class="footer">Footer Me</p>
+      <p class="footer-copy">@copyright by utsha</p>
+    </footer>
+    <!-- **********JS code Start************ -->
+    <script>
+      // Catch from Item
+      let container = document.querySelector(".container");
+
+      let h2 = document.querySelector("h2");
+      let button = document.querySelector("button");
+
+      h2.setAttribute("title", "Know More");
+      button.removeAttribute("disabled");
+
+      let heading = document.createElement("h1");
+      heading.textContent = "Hello I am Heading from Dom";
+      container.appendChild(heading);
+      container.removeChild(heading);
+
+      let ul = document.querySelector("ul");
+      let li = document.createElement("li");
+      li.textContent = "Dynamic";
+      ul.appendChild(li);
+
+      let evenLi = document.querySelectorAll("ul li:nth-child(2n)");
+      evenLi.forEach((li) => {
+        li.classList.add("highlight");
+      });
+
+      let footer = document.querySelector(".footer");
+      footer.addEventListener("click", () => {
+        footer.style.color = "red";
+      });
+
+      let footerCopy = document.querySelector(".footer-copy");
+
+      function footerrCopy() {
+        footerCopy.style.color = "green";
+      }
+      footerCopy.addEventListener("dblclick", footerrCopy);
+      footerCopy.removeEventListener("dblclick", footerrCopy);
+
+      let input = document.querySelector("input");
+      input.addEventListener("input", (e) => {
+        const value = e.target.value.trim();
+        if (value.length > 0) {
+          console.log("Full Value: ", value);
+        }
+      });
+
+      let select = document.querySelector("select");
+      let display = document.querySelector(".display");
+      select.addEventListener("change", (e) => {
+        display.textContent = `Select your size: ${e.target.value}`;
+      });
+    </script>
+    <!-- **********JS code End************ -->
+  </body>
+</html>

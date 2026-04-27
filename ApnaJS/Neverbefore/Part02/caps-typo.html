@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        background: linear-gradient(to bottom, rgb(0, 0, 0), transparent);
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 4rem;
+        color: #ffffff;
+        width: 100%;
+        height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h2 id="display" class="display">a</h2>
+    </div>
+    <script>
+      let display = document.querySelector("#display");
+      window.addEventListener("keydown", (e) => {
+        if (e.key == " ") {
+          display.textContent = "Space";
+        } else {
+          display.textContent = e.key;
+        }
+      });
+    </script>
+  </body>
+</html>

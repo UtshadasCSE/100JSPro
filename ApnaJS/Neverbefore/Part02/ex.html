@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masonry Layout</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+      }
+
+      /* Container */
+      .masonry {
+        column-count: 4;
+        column-gap: 20px;
+      }
+
+      /* Responsive */
+      @media (max-width: 1200px) {
+        .masonry {
+          column-count: 3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .masonry {
+          column-count: 2;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .masonry {
+          column-count: 1;
+        }
+      }
+
+      /* Card */
+      .card {
+        background: white;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        padding: 15px;
+        display: inline-block; /* IMPORTANT */
+        width: 100%;
+        break-inside: avoid;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .title {
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .desc {
+        font-size: 14px;
+        color: #555;
+      }
+
+      .btn {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 6px 12px;
+        background: #7c3aed;
+        color: white;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="masonry" id="masonry"></div>
+
+    <script>
+      const data = [
+        { img: "https://picsum.photos/300/200", text: "Short content" },
+        {
+          img: "https://picsum.photos/300/250",
+          text: "A bit longer content here to simulate different heights.",
+        },
+        { img: "https://picsum.photos/300/180", text: "Small text" },
+        {
+          img: "https://picsum.photos/300/300",
+          text: "This is a longer paragraph to show how masonry adjusts automatically. Very useful for dynamic content.",
+        },
+        { img: "https://picsum.photos/300/220", text: "Medium size content." },
+        {
+          img: "https://picsum.photos/300/260",
+          text: "Another card with slightly more text to increase height.",
+        },
+        { img: "https://picsum.photos/300/190", text: "Small again." },
+        {
+          img: "https://picsum.photos/300/280",
+          text: "Longer description to simulate real UI cards like testimonials or posts.",
+        },
+      ];
+
+      const container = document.getElementById("masonry");
+
+      data.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+      <img src="${item.img}" />
+      <div class="title">User Name</div>
+      <div class="desc">${item.text}</div>
+      <div class="btn">LinkedIn</div>
+    `;
+
+        container.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
