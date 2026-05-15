@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100%;
+        height: 100dvh;
+        font-family: "Courier New", Courier, monospace;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 100%;
+      }
+      .container {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .form input {
+        padding: 6px 10px;
+      }
+      .card {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #ac19191f;
+        border-radius: 10px;
+
+        display: flex;
+        gap: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form action="" class="form">
+        <input type="text" placeholder="Enter your name" />
+        <input type="email" placeholder="Enter your email" />
+        <input type="tel" placeholder="Enter phone number" />
+        <div class="inputFileCustom">
+          <input type="file" placeholder="Enter profile" />
+        </div>
+        <input type="submit" />
+      </form>
+      <!-- card  -->
+    </div>
+    <script>
+      let form = document.querySelector("form");
+      let inputs = document.querySelectorAll("input");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(e);
+
+        let card = document.createElement("div");
+        card.classList.add("card");
+
+        let profileImg = document.createElement("img");
+        profileImg.setAttribute(
+          "src",
+          "https://images.unsplash.com/photo-1700557478311-715c43dbff21?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        );
+        profileImg.setAttribute("alt", "profile");
+
+        let cardDetails = document.createElement("div");
+        cardDetails.classList.add("card-deatils");
+
+        let name = document.createElement("h4");
+        name.textContent = inputs[0].value;
+        let email = document.createElement("p");
+        email.textContent = inputs[1].value;
+        let phone = document.createElement("p");
+        phone.textContent = inputs[2].value;
+
+        card.appendChild(profileImg);
+        card.appendChild(cardDetails);
+
+        cardDetails.appendChild(name);
+        cardDetails.appendChild(email);
+        cardDetails.appendChild(phone);
+
+        document.querySelector(".container").appendChild(card);
+
+        inputs.forEach((input) => {
+          if (input.type !== "sumit") {
+            input.value = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
