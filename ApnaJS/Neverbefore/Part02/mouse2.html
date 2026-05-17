@@ -30,9 +30,8 @@
     <script>
       let container = document.querySelector(".container");
 
-      window.addEventListener("mousemove", (details) => {
-        container.style.top = details.clientY + "px";
-        container.style.left = details.clientX + "px";
+      container.addEventListener("click", (details) => {
+        console.log(details);
       });
     </script>
   </body>

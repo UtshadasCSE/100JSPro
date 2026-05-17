@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        background: rgba(248, 54, 238, 0.253);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100dvh;
+      }
+      .container {
+        background: rgba(159, 223, 191, 0.973);
+        padding: 1.6rem;
+        border-radius: 0.4rem;
+        box-shadow: 1px 1px 1px #fff;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .container input {
+        padding: 0.6rem;
+        outline: none;
+        border: none;
+        border-radius: 0.2rem;
+      }
+      .container h2 {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" placeholder="Write anyting" />
+      <h2>Total Character:<span>20</span></h2>
+    </div>
+    <script>
+      let input = document.querySelector("input");
+      let span = document.querySelector("span");
+
+      input.addEventListener("input", (details) => {
+        let leftChar = 20 - input.value.length;
+        span.textContent = leftChar;
+
+        if (leftChar > 0) {
+          span.style.color = "Green";
+        } else {
+          span.style.color = "Red";
+        }
+      });
+    </script>
+  </body>
+</html>
