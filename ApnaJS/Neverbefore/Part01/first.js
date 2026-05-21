@@ -282,45 +282,207 @@ Loop is a programming construct that allows you to repeat a block of code multip
 3. Do-while loop
 =============================== */
 
-for (let i = 0; i < 5; i++) {
-  console.log(i);
-}
+// for (let i = 0; i < 5; i++) {
+//   console.log(i);
+// }
 
-/*
+// /*
 
-start 
-while(end){
-  CODE 
-change condition
-}
+// start
+// while(end){
+//   CODE
+// change condition
+// }
 
-*/
+// */
 
-let i = 1;
-while (i <= 5) {
-  console.log(i);
-  i++;
-}
+// let i = 1;
+// while (i <= 5) {
+//   console.log(i);
+//   i++;
+// }
 
-let j = 10;
-do {
-  console.log(j);
-  j++;
-} while (j <= 6);
+// let j = 10;
+// do {
+//   console.log(j);
+//   j++;
+// } while (j <= 6);
 
-let user = [
-  "Mirza",
-  "Dev",
-  "Rafi",
-  "Sabbir",
-  "Shuvo",
-  "Shakil",
-  "Sabbir",
-  "Shuvo",
-  "Shakil",
-];
+// let user = [
+//   "Mirza",
+//   "Dev",
+//   "Rafi",
+//   "Sabbir",
+//   "Shuvo",
+//   "Shakil",
+//   "Sabbir",
+//   "Shuvo",
+//   "Shakil",
+// ];
 
-for (let i = 0; i <= user.length - 1; i++) {
-  console.log(user[i]);
-  if (user[i] === "Dev") break;
-}
+// for (let i = 0; i <= user.length - 1; i++) {
+//   console.log(user[i]);
+//   if (user[i] === "Dev") break;
+// }
+
+/*===========================
+
+function reuse and modularity. There are three types of function in js
+
+1. Function declaration
+2. Function expression
+3. Arrow function
+
+============================= */
+
+// function add(...args) {
+//   let sum = 0;
+//   for (let i = 0; i < args.length; i++) {
+//     sum += args[i];
+//   }
+
+//   return sum;
+// }
+
+// console.log(add(1, 2, 3, 4, 5));
+
+// function hello(val) {
+//   val();
+// }
+// const greet = hello(() => {
+//   console.log("Hello");
+// });
+
+// function upper() {
+//   let a = 10;
+//   return function middle() {
+//     let b = 20;
+//     return function lower() {
+//       let c = 30;
+//       console.log(a, b, c);
+//     };
+//   };
+// }
+// let check = upper();
+// console.log(check);
+
+/* ===========================
+Array is a data structure that can hold a collection of values. It is a special type 
+of object that has a length property and a set of methods for manipulating the elements in the array.
+====================================*/
+
+// // Play with end of the array
+// arr.push(6);
+// console.log(arr);
+// arr.pop();
+// console.log(arr);
+
+// // Play with start of the array
+// arr.unshift(0);
+// console.log(arr);
+// arr.shift();
+// console.log(arr);
+
+/* ===========================
+Splice method -> The splice() method is used to add or remove elements from an array. 
+It takes three parameters: the starting index, the number of elements to remove, and the elements to add (optional). 
+The method modifies the original array and returns an array containing the removed elements.
+============================ */
+// arr.splice(2, 2);
+// console.log(arr);
+
+/* ===========================
+Slice method -> The slice() method is used to extract a portion of an array and return a new array.
+It takes two parameters: the starting index and the ending index (optional). The method does not modify the original array.
+============================ */
+// let arr = [1, 2, 3, 4, 5];
+// let newArr = arr.slice(1, 3);
+// console.log(newArr);
+
+/* ===========================
+Reverse method -> The reverse() method is used to reverse the order of the elements in an array. It modifies the original array and returns the reversed array.
+============================ */
+// let arr = [1, 2, 3, 4, 5];
+// arr.reverse();
+// console.log(arr);
+
+/* ===========================================
+Sort method -> The sort() method is used to sort the elements of an array in place and returns the sorted array. 
+By default, the sort() method sorts the elements as strings in alphabetical and ascending order. However, 
+you can provide a compare function to specify a different sorting order.
+============================================ */
+
+// let arr = [5, 2, 9, 1, 5, 6];
+// arr.sort((a, b) => a - b);
+// console.log(arr);
+
+/*==============================
+forEach method -> The forEach() method is used to execute a provided function once for each array element. It does not return a new array and does not modify the original array.
+=============================== */
+
+// let arr = [11, 2, 32, 42, 5, 45, 12, 43];
+// let newArr = [];
+// arr.forEach((val) => {
+//   newArr.push(val);
+// });
+// newArr.sort((a, b) => a - b);
+// console.log(newArr);
+
+/*======================
+Map method -> The map() method is used to create a new array by applying a provided 
+function to each element of the original array. It does not modify the original array. 
+=============================*/
+
+// let arr = [1, 2, 3, 4, 5];
+// let newArr = arr.map((val) => val < 0);
+// console.log(newArr);
+
+/*======================
+Filter method -> The filter() method is used to create a new array with all elements 
+that pass the test implemented by the provided function. It does not modify the original array.
+=============================*/
+
+// let newArr2 = arr.filter((val) => {
+//   if (val > 3) return true;
+// });
+// console.log(newArr2);
+
+// /*======================
+// Reduce method -> The reduce() method is used to apply a function against an accumulator and
+//  each element in the array (from left to right) to reduce it to a single value. It does not modify the original array.
+// =============================*/
+
+// let sum = arr.reduce((acc, val) => acc + val, 0);
+// console.log(sum);
+
+// /*======================
+// Find method -> The find() method is used to return the value of the
+// first element in the array that satisfies the provided testing function. It does not modify the original array.
+// =============================*/
+
+// let findVal = arr.find((val) => val > 3);
+// console.log(findVal);
+
+/*======================
+Destructuring assignment -> The destructuring assignment is a syntax that allows you to
+unpack values from arrays or properties from objects into distinct variables. It provides a 
+convenient way to extract data from complex structures and assign them to variables in a more concise and readable manner.
+=============================*/
+
+// Array destructuring
+// let arr = [1, 2, 3, 4, 5];
+// let [a, b] = arr;
+// console.log(a, b);
+
+/*======================
+Array spread operator -> The spread operator is a syntax that allows you to expand an iterable (like an array or object) 
+into individual elements. It is denoted by three dots (...). The spread operator can be used in various contexts, such 
+as function calls, array literals, and object literals, to create new arrays or objects by combining existing 
+ones or to pass elements as individual arguments to functions.
+=============================*/
+
+let marks = [85, 92, 78, 96, 88];
+let allMarks = [...marks];
+console.log(marks);
+
+console.log(allMarks);

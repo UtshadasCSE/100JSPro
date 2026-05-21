@@ -171,5 +171,221 @@ console.log(rps("rock", "scissors"));
 // problem 13 odd
 // ==========================*/
 
-let sum = 0;
-for (let i = 1; i <= 100; i++) {}
+// let sum = 0;
+// for (let i = 1; i <= 100; i++) {
+//   sum += i;
+// }
+// console.log(sum);
+
+// /*========================
+// problem 13 odd
+// ==========================*/
+
+// for (let i = 1; i <= 50; i++) {
+//   if (i % 3 === 0) {
+//     console.log(i);
+//   }
+// }
+
+// /*========================
+// problem 13 odd
+// ==========================*/
+
+// let numberOfUser = 34;
+
+// for (let i = 1; i <= numberOfUser; i++) {
+//   if (numberOfUser % 2 === 0) {
+//     console.log(`User ${i} is even`);
+//   } else {
+//     console.log(`User ${i} is odd`);
+//   }
+// }
+
+// /*========================
+// problem 13 odd
+// ==========================*/
+
+// for (let i = 1; i <= 105; i++) {
+//   if (i % 2 === 0) {
+//     console.log(i);
+//     break;
+//   }
+// }
+// window.location.href = "https://www.google.com";
+
+/* ============================================
+What is the difference between function declration and expression  in terms of hoisting?
+============================================= */
+
+// // Declration can be hoitinig
+// hoisting();
+// function hoisting() {}
+
+// // Expression can't be hoisting
+// greet();
+// let greet = function () {};
+
+// function add(a, b, c) {
+//   return a + b + c;
+// }
+// let sum = add(12, 12, 12);
+// console.log(sum);
+
+// function getScore(...scores) {
+//   let total = 0;
+//   scores.forEach(function (val) {
+//     total += val;
+//   });
+//   return total;
+// }
+// let total = getScore(12, 3, 4);
+// console.log(total);
+
+// let outer = function () {
+//   let counter = 0;
+//   return function inner() {
+//     counter++;
+//     console.log(counter);
+//   };
+// };
+// const increment = outer();
+// increment();
+// increment();
+// increment();
+
+// (function () {
+//   let score = 0;
+//   return {
+//     getScore: function () {
+//       console.log(score);
+//     },
+//     setScore: function (val) {
+//       score = val;
+//     },
+//   };
+// })();
+
+// function discount(discount) {
+//   return function (price) {
+//     return price - price * (discount / 100);
+//   };
+// }
+// let tenPercentDiscount = discount(10);
+// console.log(tenPercentDiscount(100));
+
+// let fruit = ["apple", "banana", "orange"];
+
+// fruit.pop();
+// fruit.push("grape");
+// console.log(fruit);
+
+// let toys = ["car", "doll", "puzzle"];
+// toys.forEach(function (toy) {
+//   console.log(toy);
+// });
+
+// let numbers = [1, 2, 3, 4, 5];
+// let doubled = numbers.map((num) => {
+//   return num * 2;
+// });
+// console.log(doubled);
+
+// let ages = [18, 22, 15, 30, 25];
+
+// let adults = ages.filter((age) => {
+//   return age >= 18;
+// });
+// console.log(adults);
+
+// let marks = [85, 92, 78, 90, 88];
+// let odd = marks.filter((mark) => {
+//   return mark % 2 === 1;
+// });
+// console.log(odd);
+
+// let finds = [1, 2, 3, 4, 5];
+// let firstEven = finds.find((num) => {
+//   return num % 2 === 0;
+// });
+// console.log(firstEven);
+
+// let sum = [1, 2, 3, 4, 5].reduce((acc, num) => {
+//   return acc + num;
+// }, 0);
+// console.log(sum);
+
+// let counts = [12, 34, 5, 67, 64, 33, 23, 45, 43];
+// let total = counts.reduce((total, count) => {
+//   return total + count;
+// }, 0);
+// console.log(total);
+
+// let colors = ["Blue", "Red", "Green", "White", "Pink"];
+
+// // let [first, second] = colors;
+// // console.log(first, second);
+
+// let findRed = colors.map((color) => {
+//   if (color === "Blue") return color;
+// });
+// console.log(findRed);
+
+// let fruits = ["apple", "banana", "grape", "cherry", "apple", "banana"];
+
+// let count = fruits.reduce((acc, fruit) => {
+//   acc[fruit] = (acc[fruit] || 0) + 1;
+//   return acc;
+// }, {});
+// console.log(count);
+
+let products = [
+  {
+    id: "sk001",
+    name: "Iphone 17 Pro Max",
+    price: 167000,
+    stock: 11,
+    category: "phone",
+  },
+  {
+    id: "sku002",
+    name: "Macbook Neo",
+    price: 840000,
+    stock: 20,
+    category: "laptop",
+  },
+  {
+    id: "sk003",
+    name: "Ipad Gen 6",
+    price: 70000,
+    stock: 25,
+    category: "ipad",
+  },
+  {
+    id: "sku004",
+    name: "Apple Series 7",
+    price: 67000,
+    stock: 30,
+    category: "watch",
+  },
+  {
+    id: "sku005",
+    name: "Airpods 4",
+    price: 25000,
+    stock: 50,
+    category: "earbuds",
+  },
+];
+
+// products.forEach((product) => {
+//   product.id === "sk003" ? console.log(product) : ""; 
+// });
+// products.map((product) => {
+//   return product.id === "sk003" ? console.log(product) : "";
+// });
+
+// let find = products.find((product) => {
+//   return product.id === "sk003";
+// });
+// console.log(find);
+
+let { name, price } = products[1];
